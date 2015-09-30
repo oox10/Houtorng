@@ -1,0 +1,3 @@
+conf/server_config.php
+program/*
+*.log

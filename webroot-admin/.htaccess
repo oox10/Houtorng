@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^fileget\/(.*?)\/(.*)$ fileget.php?act=fileget&target=$1&refer=$2
+RewriteRule ^fencode\/(.*?)\/(.*)$ fileget.php?act=fencode&target=$1&refer=$2
+RewriteRule ^checkset\/(.*)$ service.php?act=checkset&target=$1
+RewriteRule ^account\/(chpassw)\/(.*?)$ account.php?act=$1&refer=$2

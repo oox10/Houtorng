@@ -1,0 +1,484 @@
+<!DOCTYPE HTML>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>Finesse HTML Template Documentation</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p, table, hr, .box { 
+			margin-bottom: 25px; 
+		}
+		
+		.box p { 
+			margin-bottom: 10px; 
+		}
+		
+		h4 {
+			font-weight: bold;
+		}
+		
+		.red {
+			color: red;
+		}
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">Finesse HTML Template Documentation by Ixtendo v2.7</h3>
+		
+		<hr>
+		
+		<h1 class="center">Finesse HTML Template</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 28/11/2013<br>
+					By: Ixtendo<br>
+					Email: <a href="mailto:info@ixtendo.com">info@ixtendo.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing this theme. If you have any questions that are beyond the scope of this help file, please join us on our customer support forum <a href="http://ixtendo.com/forum/">here</a>.</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="top" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li><a href="#html-structure">HTML Structure</a></li>
+			<li><a href="#css-files">CSS Files and Structure</a></li>
+			<li><a href="#applying-styles">Applying the Styles Available in the Style Switcher</a></li>
+			<li><a href="#javascript">JavaScript</a></li>
+            <li><a href="#elements-customizations">Elements Customizations</a></li>
+            <li><a href="#twitter-configuration">Twitter Widget Configuration</a></li>
+            <li><a href="#php">Contact &amp; Administration Dashboard</a></li>
+            <li><a href="#php-template-version">PHP Template Version</a></li>
+			<li><a href="#psd-files">PSD Files</a></li>
+			<li><a href="#credits">Sources and Credits</a></li>
+		</ol>
+		
+		<hr>
+		
+		<h3 id="html-structure"><strong>HTML Structure</strong> - <a href="#top">top</a></h3>
+		<p>This theme comes with two liquid layouts: a wide layout and a boxed layout. </p>
+		<p>All of the major sections and essential elements in the HTML documents are well commented and named according to their purpose.</p>
+	  <hr>
+
+		<h3 id="css-files"><strong>CSS Files and Structure</strong> - <a href="#top">top</a></h3>
+
+		<p>I'm using several CSS files in this theme. Most of them were imported at the beginning of the master stylesheet, that is, &quot;style.css&quot;.</p>
+		<p>The master stylsheet, that is, &quot;style.css&quot;, is located in the root directory. It contains the stylings for the major elements of the website.</p>
+		<p>The other stylesheets are located in the &quot;css&quot; directory. These are:</p>
+		<ul>
+			<li>structural stylesheets: &quot;html5-reset.css&quot;;</li>
+			<li>a shortcode stylesheet: &quot;shortcodes.css&quot;;</li>
+			
+			<li>color stylesheets (located in the &quot;colors&quot; subdirectory);</li>
+			<li>plugin-specific stylesheets: &quot;flexslider.css&quot;, &quot;jquery.fancybox.css&quot;, &quot;mediaelementplayer.css&quot;, &quot;polyglot-language-switcher.css&quot;;</li>
+			<li>a browser-specific stylesheet: &quot;ie.css&quot; which contains fixes for the Internet Explorer browser.</li>
+		
+		</ul>
+		<p>All the CSS stylesheets that were created by me are prefaced by a table of contents and are separated into sections using comments. This allows an easy identification of their content.</p>
+
+		<hr>
+        
+      <h3 id="applying-styles"><strong>Applying the Styles Available in the Style Switcher</strong> - <a href="#top">top</a></h3>
+		
+	  <p>You can permanently apply the styles available in the style switcher by making a few modifications.</p>
+        <h4>Changing the Layout Style</h4>
+        <p>By default, both the HTML and PHP template versions use the wide layout version.</p>
+	  <p>The only difference between the wide and boxed layout versions is the &quot;style.css&quot; file.</p>
+		<p>To transform the website from wide to boxed, overwrite the &quot;style.css&quot; file from the HTML or PHP folder with the &quot;style.css&quot; file located in the &quot;boxed&quot; folder.</p>
+        <h4>Changing the Theme Color</h4>
+        <p>In the head of the HTML pages, you will find the link to the color stylesheet, that is, <code>&lt;link href=&quot;css/colors/<span class="red">orange.css</span>&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; id=&quot;color-style&quot;&gt;</code>. </p>
+        <p>Change  the name of the default color stylesheet, that is, orange.css,  to the name of  the stylesheet corresponding to your desired color. The color stylesheets are located at the following path: css/colors.</p>
+        
+        <h4>Changing the Background Color and/or Pattern</h4>
+        <p>Open the &quot;style.css&quot; stylesheet and go to this rule:</p>
+        <pre>
+body {
+	font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.5em; /* 18px */
+    color: #383838;
+    background-color: <span class="red">#fff;</span>
+    background-image: <span class="red">none;</span>
+    background-repeat: repeat;
+    background-position: left top;
+    /* Fix for webkit rendering */
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+		</pre>
+<p>Change the expressions highlighted in red to your desired color and/or the URL of your desired pattern respectively. The background patterns are located at the following path: images/background-patterns.</p>
+		<p>For example, you could have:</p>
+		<pre>
+background-color: <span class="red">#fcfcfc</span>;
+background-image: <span class="red">url(images/background-patterns/wide/subtle-dots.png)</span>;
+        </pre>
+      <hr>
+		
+		<h3 id="javascript"><strong>JavaScript</strong> - <a href="#top">top</a></h3>
+		
+		<p>Several scripts were used to add interactivity to the HTML pages. The Javascript files used by this theme are located in the &quot;js&quot; folder.</p>
+	  <p>The &quot;custom.js&quot; file contains the jQuery initialization functions for all the scripts used in the theme. It's here that you can customize the behaviour of the following elements:</p>
+			<ul>
+				<li>language switcher</li>
+				<li>homepage slider</li>
+				<li>carousels</li>
+				<li>scroll to top</li>
+				<li>lightbox</li>
+				<li>portfolio filter</li>
+				<li>notification boxes</li>
+				<li>tabs, toggle, accordion</li>
+				<li>form validation</li>
+				<li>Twitter widget</li>
+				<li>Flickr widget</li>
+				<li>self-hosted video and audio players</li>
+				<li>Google maps</li>
+			</ul>
+		<hr>
+
+        <h3 id="twitter-configuration"><strong>Twitter Configuration</strong> - <a href="#top">top</a></h3>
+        <p>To configure the Twitter Widget to display your tweets in your website, you must follow these steps:</p>
+        <ol>
+            <li><strong>Click on the following link: <a target="_blank" href="https://dev.twitter.com/">https://dev.twitter.com/</a> and log in with your Twitter <em>username</em> and <em>password</em></strong>.</li>
+            <li><strong>Navigate to My Applications to create a new Application</strong> <br> <img src="assets/images/twitter-step1.png"> <br></li>
+            <li><strong>Below, you can see the application details created for the <a href="http://www.ixtendo.com">www.ixtendo.com</a> website:</strong><br> <img src="assets/images/twitter-createapp.png"></li>
+            <li><strong>After you create the application, in your Twitter account page, click on the <em>OAuth Tool</em> tab and copy-paste those <em>4 tokens</em> in the fields, in the <em>settings.php</em> file (Twitter Settings section) .</strong> <br> <img src="assets/images/twitter-step2.png"></li>
+            <li><strong>Add your Twitter username in the <em>settings.php</em> file: </strong><br> <img src="assets/images/twitter-username-config1.jpg"></li>
+            <li><strong>Add your Twitter username in the <em>/js/custom.js</em> file: </strong> <img src="assets/images/twitter-username-config2.jpg"></li>
+        </ol>
+        <h4>Translating the Twitter Widget</h4>
+        <p>To translate the Twitter Widget relative time to different languages, you must follow these steps:</p>
+        <p>Search in all pages for: <strong>&lt;div class=&quot;tweet&quot;&gt;&lt;/div&gt;</strong> and use the following HTML5 data attributes to provide a new relative time translation:</p>
+        <ol>
+            <li><strong>data-just-now-text</strong></li>
+            <li><strong>data-seconds_ago-text</strong></li>
+            <li><strong>data-a-minutes-ago-text</strong></li>
+            <li><strong>data-minutes-ago-text</strong></li>
+            <li><strong>data-a-hours-ago-text</strong></li>
+            <li><strong>data-hours-ago-text</strong></li>
+            <li><strong>data-a-day-ago-text</strong></li>
+            <li><strong>data-days-ago-text</strong></li>
+        </ol>
+        <p>Example:</p>
+        <pre>&lt;div class=&quot;tweet&quot;<br/>        data-just-now-text=&quot;just now&quot;<br/>        data-seconds-ago-text=&quot;about %d seconds ago&quot;<br/>        data-a-minutes-ago-text=&quot;about a minute ago&quot;<br/>        data-minutes-ago-text=&quot;about %d minutes ago&quot;<br/>        data-a-hours-ago-text=&quot;about an hour ago&quot;<br/>        data-hours-ago-text=&quot;about %d hours ago&quot;<br/>        data-a-day-ago-text=&quot;about a day ago&quot;<br/>        data-days-ago-text=&quot;about %d days ago&quot;&gt;&lt;/div&gt;</pre>
+
+        <p><strong>ATENTION!!!</strong></p>
+        <ol>
+            <li>The value <strong>%d</strong> must not be removed from the translation text!</li>
+            <li>The data attributes values must be properly escaped. For the HTML version, you can use the following website for HTML escaping: <a href="http://www.htmlescape.net/htmlescape_tool.html">http://www.htmlescape.net/htmlescape_tool.html</a>. For the PHP version, you can do this by using the <strong>htmlspecialchars</strong> method.</li>
+        </ol>
+        <p>Example of escaping the data value using PHP:</p>
+        <pre>&lt;div class=&quot;tweet&quot;<br/>        data-just-now-text=&quot;&lt;?php echo htmlspecialchars('just now'); ?&gt;&quot;<br/>        data-seconds-ago-text=&quot;&lt;?php echo htmlspecialchars('about %d seconds ago'); ?&gt;&quot;<br/>        data-a-minutes-ago-text=&quot;&lt;?php echo htmlspecialchars('about a minute ago'); ?&gt;&quot;<br/>        data-minutes-ago-text=&quot;&lt;?php echo htmlspecialchars('about %d minutes ago'); ?&gt;&quot;<br/>        data-a-hours-ago-text=&quot;&lt;?php echo htmlspecialchars('about an hour ago'); ?&gt;&quot;<br/>        data-hours-ago-text=&quot;&lt;?php echo htmlspecialchars('about %d hours ago'); ?&gt;&quot;<br/>        data-a-day-ago-text=&quot;&lt;?php echo htmlspecialchars('about a day ago'); ?&gt;&quot;<br/>        data-days-ago-text=&quot;&lt;?php echo htmlspecialchars('about %d days ago'); ?&gt;&quot;&gt;&lt;/div&gt;</pre>
+     
+        <!-- begin elements customization -->
+        <h3 id="elements-customizations"><strong>Elements Customization</strong> - <a href="#top">top</a></h3>
+        <p>The following elements can be customized through the HTML5 attributes:</p>
+        <h4>Tabs</h4>
+        <ul>
+            <li><strong>data-active</strong> - specify the active tab. The value should be a number between 1 and n, where n is the number of tabs</li>
+            <li><strong>data-disabled</strong> - specify the disabled tabs. The value should be a number between 1 and n, where n is the number of tabs or a list of comma-separated numbers</li>
+            <li><strong>data-height-style</strong> - controls the height of the tabs widget and of each panel. Possible values:
+                <ol>
+                    <li><em>auto</em> - all panels will be set to the height of the tallest panel</li>
+                    <li><em>fill</em> - expand to the available height based on the tabs' parent height</li>
+                    <li><em>content</em> (default) - each panel will be only as tall as its content</li>
+                </ol>
+            </li>
+        </ul>
+        <h5>Example</h5>
+        <pre>&lt;div class=&quot;tabs&quot; data-active=&quot;2&quot; data-disabled=&quot;3,4&quot;&gt;<br/>    &lt;ul class=&quot;nav clearfix&quot;&gt;<br/>        &lt;li&gt;&lt;a href=&quot;#tab-1&quot;&gt;Tab 1&lt;/a&gt;&lt;/li&gt;<br/>        &lt;li&gt;&lt;a href=&quot;#tab-2&quot;&gt;Tab 2&lt;/a&gt;&lt;/li&gt;<br/>        &lt;li&gt;&lt;a href=&quot;#tab-3&quot;&gt;Tab 3&lt;/a&gt;&lt;/li&gt;<br/>        &lt;li&gt;&lt;a href=&quot;#tab-4&quot;&gt;Tab 4&lt;/a&gt;&lt;/li&gt;<br/>    &lt;/ul&gt;<br/>    &lt;div id=&quot;tab-1&quot; class=&quot;tab&quot;&gt;&lt;p&gt;Content 1&lt;/p&gt;&lt;/div&gt;<br/>    &lt;div id=&quot;tab-2&quot; class=&quot;tab&quot;&gt;&lt;p&gt;Content 2&lt;/p&gt;&lt;/div&gt;<br/>    &lt;div id=&quot;tab-3&quot; class=&quot;tab&quot;&gt;&lt;p&gt;Content 3&lt;/p&gt;&lt;/div&gt;<br/>    &lt;div id=&quot;tab-4&quot; class=&quot;tab&quot;&gt;&lt;p&gt;Content 4&lt;/p&gt;&lt;/div&gt;<br/>&lt;/div&gt;</pre>
+
+        <h4>Toggles</h4>
+        <ul>
+            <li><strong>data-active</strong> - specify an active section. The value should be true of false</li>
+            <li><strong>data-disabled</strong> - specify is the section is disabled. The value should be true of false</li>
+            <li><strong>data-height-style</strong> - controls the height of each panel. Possible values:
+                <ol>
+                    <li><em>auto</em> - all panels will be set to the height of the tallest panel</li>
+                    <li><em>fill</em> - expand to the available height based on the tabs' parent height</li>
+                    <li><em>content</em> (default) - each panel will be only as tall as its content</li>
+                </ol>
+            </li>
+        </ul>
+        <h5>Example</h5>
+        <pre>&lt;div class=&quot;toggle&quot;&gt;<br/>    &lt;span class=&quot;toggle-title&quot;&gt;Section 1&lt;/span&gt;<br/>    &lt;div class=&quot;toggle-inner&quot;&gt;&lt;p&gt;Content 1&lt;/p&gt;&lt;/div&gt;<br/>&lt;/div&gt;<br/>&lt;div data-active=&quot;true&quot; class=&quot;toggle&quot;&gt;<br/>    &lt;span class=&quot;toggle-title&quot;&gt;Section 2&lt;/span&gt;<br/>    &lt;div class=&quot;toggle-inner&quot;&gt;&lt;p&gt;Content 2&lt;/p&gt;&lt;/div&gt;<br/>&lt;/div&gt;<br/>&lt;div data-disabled=&quot;true&quot; class=&quot;toggle&quot;&gt;<br/>    &lt;span class=&quot;toggle-title&quot;&gt;Section 3&lt;/span&gt;<br/>    &lt;div class=&quot;toggle-inner&quot;&gt;&lt;p&gt;Content 3&lt;/p&gt;&lt;/div&gt;<br/>&lt;/div&gt;<br/>&lt;div data-active=&quot;true&quot; class=&quot;toggle&quot;&gt;<br/>    &lt;span class=&quot;toggle-title&quot;&gt;Section 4&lt;/span&gt;<br/>    &lt;div class=&quot;toggle-inner&quot;&gt;&lt;p&gt;Content 4&lt;/p&gt;&lt;/div&gt;<br/>&lt;/div&gt;</pre>
+
+        <h4>Accordion</h4>
+        <ul>
+            <li><strong>data-active</strong> - specify the opened section. The value should be a number between 1 and n, where n is the number of sections</li>
+            <li><strong>data-disabled</strong> - specify is the all accordion is disabled. The value should be true of false</li>
+            <li><strong>data-height-style</strong> - controls the height of each panel. Possible values:
+                <ol>
+                    <li><em>auto</em> - all panels will be set to the height of the tallest panel</li>
+                    <li><em>fill</em> - expand to the available height based on the tabs' parent height</li>
+                    <li><em>content</em> (default) - each panel will be only as tall as its content</li>
+                </ol>
+            </li>
+        </ul>
+        <h5>Example</h5>
+        <pre>&lt;div class=&quot;accordion&quot; data-active=&quot;2&quot;&gt;<br/>    &lt;div&gt;<br/>        &lt;span class=&quot;accordion-title&quot;&gt;Title 1&lt;/span&gt;<br/>        &lt;div class=&quot;accordion-inner&quot;&gt;&lt;p&gt;Content 1&lt;/p&gt;&lt;/div&gt;<br/>    &lt;/div&gt;<br/>    &lt;div&gt;<br/>        &lt;span class=&quot;accordion-title&quot;&gt;Title 2&lt;/span&gt;<br/>        &lt;div class=&quot;accordion-inner&quot;&gt;&lt;p&gt;Content 2&lt;/p&gt;&lt;/div&gt;<br/>    &lt;/div&gt;<br/>    &lt;div&gt;<br/>        &lt;span class=&quot;accordion-title&quot;&gt;Title 3&lt;/span&gt;<br/>        &lt;div class=&quot;accordion-inner&quot;&gt;&lt;p&gt;Content 3&lt;/p&gt;&lt;/div&gt;<br/>    &lt;/div&gt;<br/>    &lt;div&gt;<br/>        &lt;span class=&quot;accordion-title&quot;&gt;Title 4&lt;/span&gt;<br/>        &lt;div class=&quot;accordion-inner&quot;&gt;&lt;p&gt;Content 4&lt;/p&gt;&lt;/div&gt;<br/>    &lt;/div&gt;<br/>&lt;/div&gt;</pre>
+        <!-- end elements customization -->
+		
+		<h3 id="php"><strong>Contact &amp; Administration Dashboard</strong> - <a href="#top">top</a></h3>
+        <p>The Administration Dashboard allows you to manage the following features:</p>
+        <ol>
+        	<li>Website Search</li>
+            <li>Sending of Newsletters to the Subscribers</li>
+        </ol>
+        
+        <p>The settings regarding the above features are stored in a database. The supported databases are:</p>
+        <ol>
+        	<li>SQLite (v2.x and v3.x)</li>
+            <li>MySQL 5.x</li>
+        </ol>
+        
+        <p>By default, the type of database used by the Administration Dashboard is SQLite (its version doesn't matter). I chose this database because you don't have to do anything to configure it, so it is very simple to use. If your web hosting package doesn't support this database, then you can choose to switch to MySQL. (Go to the <a href="#configure-mysql-database">MySQL configuration</a>.)</p>
+        
+        <p>To access the Administration Dashboard and use the Contact Form, you must replace the &quot;abc@xyz.com&quot; email address in &quot;settings.php&quot; with your own email address. Please note that the domain of your email address must be the same as the domain of your website. In other words, don't use yahoo, google, msn, etc. emails. </p>
+        <p>This email address will be used in both the contact page and the newsletter page.</p>
+		
+		<ol>
+		  <li>
+				<p><strong>Unlock Access to the Admin Page</strong></p>
+				<p>The administration page is private and, first, you must unlock it by generating a private key.</p>
+				
+				<p>To do this, access the &quot;admin.php&quot; page (for example, &quot;www.yoursite.com/admin.php&quot;), click the &quot;Unlock&quot; button and verify your email. Here you will receive a link which will allow you to access the admin page.</p>
+			</li>
+			
+			<li>
+				<p><strong>Index Your Website for Search</strong></p>				
+				<p>To have a functional search mechanism, you must index your website. This can be done by clicking the &quot;Rebuild search indexes&quot; link on the right side of the admin page.</p>
+				
+				<p>The indexing process must be run each time you modify, add or delete a page of your website. By default, the folder where the indexes are kept is located in your &quot;tmp&quot; folder on your web server.</p>
+				<p><strong class="red">Note:</strong> During the website indexing process, don't click the &quot;Rebuild search indexes&quot; link until the success notification box is displayed.</p>
+                <div class="box">
+                	<p>Sometimes, after you click the &quot;Rebuild search indexes&quot; link, it is possible to get an error like</p>
+                    <pre>
+Fatal error: Call to a member function removeChild() on a non-object &hellip;                    
+                    </pre>
+                    <p>This happens when the HTML files that are going to be indexed aren’t properly formatted (for example, all tags weren’t closed).</p>
+                    <p>To fix this error, in the &quot;Zend/Search/Lucene/Document/Html.php&quot; file, go to line 117 and comment it by adding a double slash (//) at its beginning:</p>
+                    <pre>
+//$head->parentNode->removeChild($head);                    
+                    </pre>
+                    <p>After you do this, try to rebuild the search indexes again.</p>
+                </div>
+			</li>
+            
+            <li>
+            	<p id="configure-mysql-database"><strong>Configure your MySQL Database</strong></p>
+				<p>This step must be performed only if you choose to use the MySQL database instead of the SQLite database.</p>
+				<p>The type of database used by the Administration Dashboard if given by the value of the &quot;$db_type&quot; property in the &quot;settings.php&quot; file. This property accepts only two values: <strong>mysql</strong> for the MySQL database and <strong>sqlite</strong> for the SQLite database. For any value different from these two, an error message will be displayed and the Administration Dashboard will not work.</p>
+                <p>To use the MySQL database instead of the SQLite database, you must change the values of the following parameters in the &quot;settings.php&quot; file as follows:</p>
+                <pre>
+$db_type='mysql';
+$db_host='<span class="red">database_hostname</span>';
+$db_name='<span class="red">database_name</span>';
+$db_user='<span class="red">database_user</span>';
+$db_pass='<span class="red">database_user_password</span>';
+                </pre>
+                <p>Replace the values marked with red with your own values as follows:</p>
+                <p><strong>$db_host</strong> &ndash; must reflect the name of the server where your database is located. (This is provided by your web host.)</p>
+                <p><strong>$db_name</strong> &ndash; the database name (You must create an empty database.)</p>
+                <p><strong>$db_user</strong> &ndash; the name of the user associated with the database (You must associate a user with your database.)</p>
+                <p><strong>$db_pass</strong> &ndash; the password for the database user.</p>
+            </li>
+		</ol>
+		
+		<h4>Explanation of the Admin Configuration Parameters</h4>
+		
+		<ul>
+        	<li>
+				<p><strong>The name of the folder where the website is located</strong> &ndash; This is the name of the folder on the server where your website is located. It can have one of the following values (but not always): public_html, htdocs, httpdocs.</p>
+			</li>
+            
+		  <li>
+				<p><strong>Path to the folder that contains the website indexes</strong> &ndash; This is the folder location where the indexes are kept. I recommend not to change this property unless it is necessary.</p>
+			</li>
+			
+			<li>
+				<p><strong>Search results items per page</strong> &ndash; This is the number of result items displayed per page.</p>
+			</li>
+			
+			<li>
+                <p><strong>Search description length</strong> &ndash; When the search results are displayed, each result item provides, besides the page title and page link, a short description of that page. This parameter sets the length of this description.</p>
+			</li>
+			
+			<li>
+				<p><strong>List of dynamic pages (Enter one URL per line.)</strong> &ndash; By default, the indexing mechanism will index only the static pages of your website (that is, the HTML pages). If, beside static pages, you also have dynamic pages (that is, pages written in PHP, Perl, Python or CGI scripts), you must provide the links to these pages, one per line. (After each URL, press enter.)</p>
+			</li>
+		</ul>
+		
+		<h4><abbr title="Frequently Asked Questions">FAQ</abbr></h4>
+		<ul>
+			<li>
+				<p><strong>I didn't receive the email with the private key. What should I do?</strong></p>
+				<p>Go to your web hosting and open the &quot;settings.php&quot; file. It's there that your private key is kept. Copy the private key without the single quotes and paste it like in the following link:  &quot;www.yoursite.com/admin.php?pk=the-private-key&quot;.</p>
+			</li>
+			
+			<li>
+				<p><strong>I lost my private key. How can I recover it?</strong></p>
+				<p>Go to your web hosting and open the &quot;settings.php&quot; file. It's there that your private key is kept. Copy the private key without the single quotes and paste it like in the following link:  &quot;www.yoursite.com/admin.php?pk=the-private-key&quot;.</p>
+			</li>
+			
+			<li>
+				<p><strong>I want to generate another private key. What should I do?</strong></p>
+				<p>In the &quot;settings.php&quot; file, delete all the content bellow the dividing line. Follow the step no. 2. An email with a new private key will be sent to you.</p>
+			</li>
+			
+			<li>
+				<p><strong>I want to change the email subject of the newsletter. What should I do?</strong></p>
+				<p>Go to &quot;newsletter.php&quot; and modify the content of the &quot;$newsletter_email_subject&quot; variable as follows: $newsletter_email_subject = 'your custom subject';</p>
+				<p><strong class="red">Note:</strong> Your subject message must be enclosed in apostrophes.</p>
+			</li>
+		</ul>
+
+        <h4>ReCaptcha Activation</h4>
+        <p>By default, the ReCaptcha code is disabled. If you want to enable it, in the <em>settings.php</em> file, you must set the value of the <strong>ENABLE_CAPTCHA</strong> constant to true like this:</p>
+        <pre>define('ENABLE_CAPTCHA', true);</pre>
+        <p>After that, you must configure the ReCaptcha code generator by providing the Private and the Public keys following the instructions below.</p>
+        <h4>ReCaptcha Configuration</h4>
+        <ol>
+            <li><strong>Open the <a target="_blank" href="http://www.google.com/recaptcha">http://www.google.com/recaptcha</a> website and click on <em>My Account</em> link</strong> <br><br> <img src="assets/images/recaptcha-1.png"><br><br></li>
+            <li><strong>Create <em>ReCaptcha keys</em> for your website:  (the Private and the Public Keys)</strong> <br><br> <img src="assets/images/recaptcha-2.png"> <br> <img src="assets/images/recaptcha-3.png"><br><br></li>
+            <li><strong>Copy the <em>Private Key</em> and the <em>Public Key</em> in the <em>settings.php</em> file</strong></li>
+        </ol>
+        <p>If you are using the HTTPS protocol for your website, then, in the <em>setings.php</em> file, you must set the value of the <strong>USE_SSL</strong> constant to true like this:</p>
+        <pre>define('USE_SSL', true);</pre>
+
+		<hr>
+		
+        <h3 id="php-template-version"><strong>F) PHP Template Version</strong> - <a href="#top">top</a></h3>
+        <p>Every page includes a common header and footer located in the &quot;includes&quot; folder. This helps the user apply the changes regarding these parts in a single place.</p>
+        <h4>Defining the Menu</h4>
+        <p>In the &quot;menu.php&quot; file located in the &quot;includes&quot; folder, you will find an XML that defines the menu structure.</p>
+        <p>The XML contains only two types of tags:
+        	<ol>
+            	<li><strong>menu</strong> &ndash;  used to wrap the entire menu inside it</li>
+                <li><strong>menu_item</strong> &ndash; used to describe a menu item<br>
+                 This tag contains two attributes:
+                	<ul>
+                    	<li><strong>href</strong> &ndash; the page url</li>
+                        <li><strong>label</strong> &ndash; the menu item label</li>
+                    </ul>
+                </li>
+                <p>This tag can also contain children.</p>
+            </ol>
+        </p>
+        <h4>Predefined PHP Functions</h4>
+        <p>The menu.php contains two main functions:
+        	<ol>
+            	<li><strong>print_main_menu()</strong> &ndash; print the main navigation menu (this function is called in header.php)</li>
+                <li><strong>print_sitemap()</strong> &ndash; print the site map based on the menu structure (this function is called in sitemap.php)</li>
+            </ol>
+        </p>
+        
+		<h3 id="psd-files"><strong>G) PSD Files</strong> - <a href="#top">top</a></h3>
+		
+		<p>I've included the following PSD files with this theme:</p>
+		
+			<ol>
+				<li>The homepage layouts (wide and boxed)</li>
+				<li>The sliced website elements</li>
+			</ol>
+		
+		<p>I've also included a PAT file with a set of patterns, as well as the favicon sources.</p>
+		
+		<hr>
+		
+		<h3 id="credits"><strong>H) Sources and Credits</strong> - <a href="#top">top</a></h3>
+		
+		<p>I've used the following sources as listed.</p>
+		
+        <p><strong>Fonts</strong></p>
+        <ul>
+          <li>Google Web Fonts (<a href="http://www.google.com/webfonts#ChoosePlace:select">http://www.google.com/webfonts#ChoosePlace:select</a>)</li>
+        </ul>
+		
+		<p><strong>Icons</strong></p>
+		<ul>
+			<li>Picons Social: <a href="http://picons.me/" target="_blank">http://picons.me/</a></li>
+			<li>Famfamfam Flag Icons: <a href="http://www.famfamfam.com/lab/icons/flags/" target="_blank">http://www.famfamfam.com/lab/icons/flags/</a></li>
+<li>iconSweets2: <a href="http://iconsweets2.com/">http://iconsweets2.com/</a></li>
+		</ul>
+		
+		<p><strong>Images</strong></p>
+        <p>The license of each image used in this template can be read by accessing the links below and, then, by looking at the right-hand column, section License.</p>
+		<ul>
+			<li><a href="http://www.flickr.com/photos/jinkazamah/6281311719/">http://www.flickr.com/photos/jinkazamah/6281311719/</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/3401365869/">http://www.flickr.com/photos/jinkazamah/3401365869/</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/6197847947/">http://www.flickr.com/photos/jinkazamah/6197847947/</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/6281826084/in/photostream">http://www.flickr.com/photos/jinkazamah/6281826084/in/photostream</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/5936002825/in/photostream">http://www.flickr.com/photos/jinkazamah/5936002825/in/photostream</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/6734902133/">http://www.flickr.com/photos/jinkazamah/6734902133/</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/6734903399/">http://www.flickr.com/photos/jinkazamah/6734903399/</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/7156854769/">http://www.flickr.com/photos/jinkazamah/7156854769/</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/7095676525/">http://www.flickr.com/photos/jinkazamah/7095676525/</a></li>
+            <li><a href="http://www.flickr.com/photos/jinkazamah/5793507155/">http://www.flickr.com/photos/jinkazamah/5793507155/</a></li>
+		</ul>
+		
+		<p><strong>Libraries</strong></p>
+		<ul>
+			<li>jQuery: <a href="http://jquery.com/">http://jquery.com/</a></li>
+			<li>jQuery UI: <a href="http://jqueryui.com/">http://jqueryui.com/</a></li>
+			<li>Modernizr: <a href="http://www.modernizr.com/">http://www.modernizr.com/</a></li>
+		</ul>
+		
+		<p><strong>Plugins</strong></p>
+		<ul>
+			<li>Ddlevelsmenu: <a href="http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/index.htm">http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/index.htm</a></li>
+			<li>jFlickrFeed: <a href="http://www.gethifi.com/blog/a-jquery-flickr-feed-plugin">http://www.gethifi.com/blog/a-jquery-flickr-feed-plugin</a></li>
+			<li>jQuery Cycle: <a href="http://jquery.malsup.com/cycle/">http://jquery.malsup.com/cycle/</a></li>
+			<li>jQuery Easing: <a href="http://gsgd.co.uk/sandbox/jquery/easing/">http://gsgd.co.uk/sandbox/jquery/easing/</a></li>
+			<li>FitVids: <a href="http://fitvidsjs.com/">http://fitvidsjs.com/</a></li>
+			<li>Flexslider: <a href="http://www.woothemes.com/flexslider/">http://www.woothemes.com/flexslider/</a></li>
+			<li>gMap: <a href="http://www.smashinglabs.pl/gmap">http://www.smashinglabs.pl/gmap</a></li>
+			<li>jCarousel: <a href="http://sorgalla.com/jcarousel/">http://sorgalla.com/jcarousel/</a></li>
+			<li>Mediaelementjs: <a href="http://mediaelementjs.com/">http://mediaelementjs.com/</a></li>
+			<li>Polyglot Language Switcher: <a href="http://www.ixtendo.com/polyglot-language-switcher-jquery-plugin/">http://www.ixtendo.com/polyglot-language-switcher-jquery-plugin/</a></li>
+			<li>fancyBox: <a href="http://fancyapps.com/fancybox/">http://fancyapps.com/fancybox/</a></li>
+			<li>jQuery Quicksand: <a href="http://razorjack.net/quicksand/">http://razorjack.net/quicksand/</a></li>
+			<li>touchSwipe: <a href="http://labs.skinkers.com/touchSwipe/">http://labs.skinkers.com/touchSwipe/</a></li>
+			<li>Tweet: <a href="http://tweet.seaofclouds.com/">http://tweet.seaofclouds.com/</a></li>
+			<li>UItoTop: <a href="http://www.mattvarone.com/web-design/uitotop-jquery-plugin/">http://www.mattvarone.com/web-design/uitotop-jquery-plugin/</a></li>
+			<li>jQuery Validation: <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">http://bassistance.de/jquery-plugins/jquery-plugin-validation/</a></li>
+			<li>Respond: <a href="https://github.com/scottjehl/Respond">https://github.com/scottjehl/Respond</a></li>
+			<li>Responsive Tables: <a href="http://www.zurb.com/playground/responsive-tables">http://www.zurb.com/playground/responsive-tables</a></li>
+			<li>TinyNav: <a href="http://tinynav.viljamis.com/">http://tinynav.viljamis.com/</a></li>
+		</ul>
+		
+        <p><strong>Frameworks</strong></p>
+        <ul>
+          <li>Zend Framework: <a href="http://framework.zend.com/">http://framework.zend.com/</a></li>
+		</ul>
+        
+        <p><strong>Patterns</strong></p>
+        <ul>
+          <li>Subtle Patterns: <a href="http://subtlepatterns.com/">http://subtlepatterns.com/</a></li>
+		</ul>
+		
+		<hr>
+		
+		<p>Once again, thank you so much for purchasing this theme. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If you have a more general question relating to the themes on ThemeForest, you might consider visiting the forums and asking your question in the &quot;Item Discussion&quot; section.</p> 
+		
+		<p class="append-bottom alt large"><strong>Ixtendo</strong></p>
+		<p><a href="#top">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>

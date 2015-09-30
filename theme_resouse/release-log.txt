@@ -1,0 +1,69 @@
+Version 2.9
+- Fixed the Fancybox swipe on mobiles
+- New feature: added the possibly to include multiple Google maps in the same page using the class map
+- New feature: added responsiveness for Google map
+
+Version 2.8
+- Upgraded the jQuery library
+- Upgraded the Fancybox library
+
+Version 2.7
+- Changed the Twitter API protocol from HTTP to HTTPS
+
+Version 2.6
+-Removed BOM from files
+-Replaced the rel attributes with data HTML5 attribute (for W3C validation)
+-Removed the webkitAllowFullScreen, mozallowfullscreen and frameborder="0" attributes from iframes (for W3C validation)
+
+Version 2.5
+
+-New feature: added ReCaptcha for the contact form.
+-New feature: added the possibility of setting the relative time for the Twitter Widget through the HTML5 data attributes (useful in case of website translation).
+-Bug fix for the Twitter Feeds widget: when the tweets were very big, the answer sent by Twitter was read partially.
+-Updated the documentation.
+
+Version 2.4.1
+
+-Replaced the MailChimp PHP library with its latest version which is using the new API 2.x. 
+The MailChimp API 1.x was deprecated.
+
+Version 2.4
+
+-Fixed the indexing mechanism for the languages that contain special characters.
+-Added HTML5 customization attributes for the following elements: tabs, toggles and accordion.
+
+
+Version 2.3.1
+
+-Fixed a small Twitter JavaScript issue. File modified: custom.js
+
+
+Version 2.3.0
+
+-Fixed the Twitter plugin (see the 'twitter-patch' folders included in the download archive).
+
+
+Version 2.2.7
+
+
+-Fixed print preview layout overflow issue.
+
+How to apply this update:
+
+In the style.css file, replace this:
+
+.container {
+	width: 940px;
+	margin: 0 auto;
+}
+
+with this:
+
+.container {
+	width: 940px;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+
+-Integrated newsletter with MailChimp.
