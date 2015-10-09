@@ -12,7 +12,11 @@
 	<!-- end meta -->
 	
 	<!-- begin CSS -->
+	<?php if(isset($_SESSION['language'])&&$_SESSION['language']=='meta_cht'):?>
+	<link href="style-cht.css" type="text/css" rel="stylesheet">
+	<?php else: ?>
 	<link href="style.css" type="text/css" rel="stylesheet">
+	<?php endif; ?>
 	<!--[if IE]> <link href="css/ie.css" type="text/css" rel="stylesheet"> <![endif]-->
 	<link href="css/colors/orange.css" type="text/css" rel="stylesheet">
     <!-- end CSS -->
@@ -44,15 +48,13 @@
     <script src="js/custom.js" type="text/javascript"></script> <!-- jQuery initialization -->
     <!-- end JS -->
 	
-	
 	<!-- php variable-->
 	<?php
 	$products = isset($this->vars['system_data']['data']['product']) ?  $this->vars['system_data']['data']['product'] : array();
 	$classlv  = isset($this->vars['system_data']['data']['classlv']) ?  $this->vars['system_data']['data']['classlv'] : array();
 	?>
 	
-	
-	<title>HOU TORNG - Industrial Heat Treating Equipment Manufacturer</title>
+	<title>${HOU TORNG - Industrial Heat Treating Equipment Manufacturer}</title>
 </head>
 
 <body>
@@ -115,32 +117,32 @@
 
         <!-- begin services -->
         <section>
-            <h2>Why Choose Us</h2>
+            <h2>${Why Choose Us}</h2>
 
             <!-- begin iconbox carousel -->
             <ul class="iconbox-carousel">
                 <li>
                     <div class="iconbox cog">
-                        <h4><span class="iconbox-icon"></span>Professional</h4>
-                        <p>Our winning team consists of trained technicians, knowledgeable experts and dedicated product specialists.</p>
+                        <h4><span class="iconbox-icon"></span>${Professional}</h4>
+                        <p>${Our winning team consists of trained technicians, knowledgeable experts and dedicated product specialists.}</p>
                     </div>
                 </li>
 				<li>
                     <div class="iconbox globe">
-                        <h4><span class="iconbox-icon"></span>Stable and Dependable</h4>
-                        <p>We have over 20 years combined experience in the heat treating equipment industry.</p>
+                        <h4><span class="iconbox-icon"></span>${Stable and Dependable}</h4>
+                        <p>${We have over 20 years combined experience in the heat treating equipment industry.}</p>
                     </div>
                 </li>
                 <li>
                     <div class="iconbox write">
-                        <h4><span class="iconbox-icon"></span>Easy to Customize</h4>
-                        <p>We’re flexible and cost-effective. We have the ability to customize a furnace for any customer requirement.</p>
+                        <h4><span class="iconbox-icon"></span>${Easy to Customize}</h4>
+                        <p>${We’re flexible and cost-effective. We have the ability to customize a furnace for any customer requirement.}</p>
                     </div>
                 </li>
 				<li>
                     <div class="iconbox address-book">
-                        <h4><a href="contact.php"><span class="iconbox-icon"></span>Customer Support</a></h4>
-                        <p>Our world-wide technical support ensures customers a service they can depend on.</p>
+                        <h4><a href="contact.php"><span class="iconbox-icon"></span>${Customer Support}</a></h4>
+                        <p>${Our world-wide technical support ensures customers a service they can depend on.}</p>
                     </div>
                 </li>
             </ul>
@@ -150,7 +152,7 @@
 
         <!-- begin selected projects -->
         <section>
-            <h2>Our Products <span class="more">&ndash; <a href="index.php?act=product">View All Products &raquo;</a></span></h2>
+            <h2>${Our Products} <span class="more">&ndash; <a href="index.php?act=product">${View All Products} &raquo;</a></span></h2>
 
             <!-- begin project carousel -->
             <ul class="project-carousel">
@@ -168,7 +170,7 @@
 						<?php endforeach; ?>
 						</ul>
                     </div>
-                    <h4 class="entry-title"><a href="portfolio-item-slider.php"><?php echo $pd['title_product'];?></a></h4>
+                    <h4 class="entry-title"><a href="index.php?act=product/<?php echo rawurlencode($pd['title_product']);?>"><?php echo $pd['title_product'];?></a></h4>
                     <div class="entry-content">
                         <p><?php //echo $pd['title_product'];?></p>
                     </div>
@@ -176,113 +178,7 @@
 			
 			
 			<?php endforeach; ?>	
-			<?php 
-			/* List Sample
-                <li class="entry">
-                    <div class="entry-image">
-                        <a class="fancybox" href="images/entries/full-size/dining-white.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/dining-white-220x130.png" alt=""></a>
-                    </div>
-                    <h4 class="entry-title"><a href="portfolio-item-image.php">White Dining Room</a></h4>
-                    <div class="entry-content">
-                        <p>Image project with lightbox.</p>
-                    </div>
-                </li>
-                <li class="entry">
-                    <div class="entry-image">
-                        <a class="fancybox" data-fancybox-group="gallery-living-large-windows" href="images/entries/full-size/living-large-windows.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/living-large-windows-220x130.png" alt=""></a>
-                        <a class="fancybox invisible" data-fancybox-group="gallery-living-large-windows" href="images/entries/full-size/living-brown.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/living-brown-220x130.png" alt=""></a>
-                        <a class="fancybox invisible" data-fancybox-group="gallery-living-large-windows" href="images/entries/full-size/dining-and-living-cream.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/dining-and-living-cream-220x130.png" alt=""></a>
-                    </div>
-                    <h4 class="entry-title"><a href="portfolio-item-image.php">Living with Large Windows</a></h4>
-                    <div class="entry-content">
-                        <p>Gallery project with lightbox.</p>
-                    </div>
-                </li>
-                <li class="entry">
-                    <div class="entry-slider">
-                        <ul>
-                            <li><a class="fancybox" data-fancybox-group="gallery-living-brown" href="images/entries/full-size/living-brown.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/living-brown-220x130.png" alt=""></a></li>
-                            <li style="display: none;"><a class="fancybox" data-fancybox-group="gallery-living-brown" href="images/entries/full-size/dining-and-living-cream.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/dining-and-living-cream-220x130.png" alt=""></a></li>
-                            <li style="display: none;"><a class="fancybox" data-fancybox-group="gallery-living-brown" href="images/entries/full-size/living-white.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/living-white-220x130.png" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <h4 class="entry-title"><a href="portfolio-item-slider.php">Brown Living Room</a></h4>
-                    <div class="entry-content">
-                        <p>Gallery project with slider and lightbox.</p>
-                    </div>
-                </li>
-                <li class="entry">
-                    <div class="entry-video">
-                        <video width="220" height="130" style="width: 100%; height: 100%;" poster="images/entries/220x130/dining-and-living-cream-220x130.png" controls preload="none">
-                            <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
-                            <source type="video/mp4" src="media/echo-hereweare.mp4" />
-                            <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
-                            <source type="video/webm" src="media/echo-hereweare.webm" />
-                            <!-- Ogg/Vorbis for older Firefox and Opera versions -->
-                            <source type="video/ogg" src="media/echo-hereweare.ogv" />
-                            <!-- Optional: Add subtitles for each language -->
-                            <track kind="subtitles" src="media/mediaelement.srt" srclang="en" />
-                            <!-- Optional: Add chapters -->
-                            <track kind="chapters" src="#" srclang="en" />
-                            <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
-                            <object type="application/x-shockwave-flash" data="js/flashmediaelement.swf">
-                                <param name="movie" value="js/flashmediaelement.swf" />
-                                <param name="flashvars" value="controls=true&amp;file=media/echo-hereweare.mp4" />
-                                <!-- Image as a last resort -->
-                                <img src="images/entries/220x130/dining-and-living-cream-220x130.png" title="No video playback capabilities" alt="" />
-                            </object>
-                        </video>
-                    </div>
-                    <h4 class="entry-title"><a href="portfolio-item-self-hosted-video.php">Self-Hosted Video Project</a></h4>
-                    <div class="entry-content">
-                        <p>Self-hosted video project.</p>
-                    </div>
-                </li>
-                <!-- begin row 2 -->
-                <li class="entry">
-                    <div class="entry-image">
-                        <a class="fancybox" href="images/entries/full-size/living-white.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/living-white-220x130.png" alt=""></a>
-                    </div>
-                    <h4 class="entry-title"><a href="portfolio-item-image.php">White Living Room</a></h4>
-                    <div class="entry-content">
-                        <p>Image project with lightbox.</p>
-                    </div>
-                </li>
-                <li class="entry">
-                    <div class="entry-image">
-                        <a class="fancybox" data-fancybox-group="gallery-study" href="images/entries/full-size/study.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/study-220x130.png" alt=""></a>
-                        <a class="fancybox invisible" data-fancybox-group="gallery-study" href="images/entries/full-size/dining-white2.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/dining-white2-220x130.png" alt=""></a>
-                        <a class="fancybox invisible" data-fancybox-group="gallery-study" href="images/entries/full-size/dining-brown.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/dining-brown-220x130.png" alt=""></a>
-                    </div>
-                    <h4 class="entry-title"><a href="portfolio-item-image.php">Study</a></h4>
-                    <div class="entry-content">
-                        <p>Gallery project with lightbox.</p>
-                    </div>
-                </li>
-                <li class="entry">
-                    <div class="entry-slider">
-                        <ul>
-                            <li><a class="fancybox" data-fancybox-group="gallery-dining-white2" href="images/entries/full-size/dining-white2.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/dining-white2-220x130.png" alt=""></a></li>
-                            <li style="display: none;"><a class="fancybox" data-fancybox-group="gallery-dining-white2" href="images/entries/full-size/dining-brown.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/dining-brown-220x130.png" alt=""></a></li>
-                            <li style="display: none;"><a class="fancybox" data-fancybox-group="gallery-dining-white2" href="images/entries/full-size/dining-white.jpg" title="Project Title"><span class="overlay zoom"></span><img src="images/entries/220x130/dining-white-220x130.png" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <h4 class="entry-title"><a href="portfolio-item-slider.php">White Dining Room 2</a></h4>
-                    <div class="entry-content">
-                        <p>Gallery project with slider and lightbox.</p>
-                    </div>
-                </li>
-                <li class="entry">
-                    <div class="entry-video">
-                        <iframe src="http://player.vimeo.com/video/11624173?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" width="220" height="110" allowFullScreen></iframe>
-                    </div>
-                    <h4 class="entry-title"><a href="portfolio-item-embedded-video.php">Arhitectural Film &ndash; Interior</a></h4>
-                    <div class="entry-content">
-                        <p>Embedded video project.</p>
-                    </div>
-                </li>
-			*/
-			?>
+			
             </ul>
             <!-- end project carousel -->
         </section>
@@ -292,7 +188,7 @@
 
         <!-- begin clients -->
         <section>
-            <h2>Our Clients</h2>
+            <h2>${Our Clients}</h2>
             <div class="client-wrap">
                 <ul class="clients clearfix">
                     <li><a target="_blank" href="http://temp.net-pro.com.tw/profile.htm"><img src="images/client-logos/client001.png" alt="ITW" title="ITW"></li>

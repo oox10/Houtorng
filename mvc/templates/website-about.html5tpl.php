@@ -12,7 +12,11 @@
 	<!-- end meta -->
 	
 	<!-- begin CSS -->
+	<?php if(isset($_SESSION['language'])&&$_SESSION['language']=='meta_cht'):?>
+	<link href="style-cht.css" type="text/css" rel="stylesheet">
+	<?php else: ?>
 	<link href="style.css" type="text/css" rel="stylesheet">
+	<?php endif; ?>
 	<!--[if IE]> <link href="css/ie.css" type="text/css" rel="stylesheet"> <![endif]-->
 	<link href="css/colors/orange.css" type="text/css" rel="stylesheet">
     <!-- end CSS -->
@@ -45,7 +49,7 @@
 	$classlv  = isset($this->vars['system_data']['data']['classlv']) ?  $this->vars['system_data']['data']['classlv'] : array();
 	?>
     
-	<title>HOU TORNG - About Us</title>
+	<title>${HOU TORNG - About Us}</title>
 </head>
 
 <body>
@@ -57,7 +61,7 @@
     <section id="content" class="container clearfix">
         <!-- begin page header -->
         <header id="page-header">
-            <h1 id="page-title">About Us</h1>	
+            <h1 id="page-title">${About Us}</h1>	
         </header>
         <!-- end page header -->
         
@@ -67,16 +71,13 @@
 			is professional design manufacture and sale for metal heat-treatment equipment.</p>
         </div>
         
-        <p>內容還要修正與補充HOU TORNG ENGINEERING CO., LTD.had been established in 1994 is professional design manufacture 
-		and sale for metal heat-treatment equipment .
-		We provide high quality & high efficiency & high production industrial furnace for carburizing quenching harden 
-		and tempering or annealing for metal.<br><br>
+        <p>${內容還要修正與補充HOU TORNG ENGINEERING CO., LTD.had been established in 1994 is professional design manufacture and sale for metal heat-treatment equipment. We provide high quality & high efficiency & high production industrial furnace for carburizing quenching harden and tempering or annealing for metal.}<br><br>
 		
             <ul class="square">
-                    <li>Superintendent：Huang Yung Chun</li>
-                    <li>Phone：+886-3-427-1570．+886-3-427-1571</li>
-                    <li>Fax：+886-3-426-1570</li>
-                    <li>Address：No.36, Ln. 1274, Zhongzheng Rd., Zhongli Dist., Taoyuan City 320, Taiwan</li>
+                    <li>${Superintendent：Huang Yung Chun}</li>
+                    <li>${Phone：+886-3-427-1570．+886-3-427-1571}</li>
+                    <li>${Fax：+886-3-426-1570}</li>
+                    <li>${Address：No.36, Ln. 1274, Zhongzheng Rd., Zhongli Dist., Taoyuan City 320, Taiwan}</li>
 					<li>E-Mail：houtrung@ms58.hinet.net</li>
             </ul>
         
@@ -88,25 +89,25 @@
 			
 		<!-- 產品與服務 -->       
 	   <div class="two-thirds">
-            <h2>Products & Services</h2>
+            <h2>${Products & Services}</h2>
 			<p>
 			<ul class="square">
-                    <li>Heat-treatment Equipment、Furnace Hardwear</li>
-                    <li>Mesh Belt Type Continuous Heat-treatment Equipment</li>
-                    <li>Pit Type Carburizing and Nitriding Furnace</li>
-                    <li>Pit Type Spheroidizing and Annealing Furnace for Large Wire Rod</li>
-					<li>Batch Type Seal Quench Furnace for Carburizing and Bright Quenching</li>
-					<li>Rotary Carburizing Furnace</li>
-                    <li>Exothermic Gas Generator</li>
-                    <li>Bell Type Annealing Furnace</li>
-                    <li>Roller Hearth Furnace</li>
-					<li>Atmosphere Control System</li>
+                    <li>${Heat-treatment Equipment、Furnace Hardwear}</li>
+                    <li>${Mesh Belt Type Continuous Heat-treatment Equipment}</li>
+                    <li>${Pit Type Carburizing and Nitriding Furnace}</li>
+                    <li>${Pit Type Spheroidizing and Annealing Furnace for Large Wire Rod}</li>
+					<li>${Batch Type Seal Quench Furnace for Carburizing and Bright Quenching}</li>
+					<li>${Rotary Carburizing Furnace}</li>
+                    <li>${Exothermic Gas Generator}</li>
+                    <li>${Bell Type Annealing Furnace}</li>
+                    <li>${Roller Hearth Furnace}</li>
+					<li>${Atmosphere Control System}</li>
             </ul>
 			</p>
         </div>
         <div class="one-third column-last">
             <h2>留著放圖片?</h2>
-            <p> scelerisque tempus mauris ut placerat. Proin facilisis lacinia neque, aque tempus mauris ut placerat. Proin facilisis lacinia neque, ac euismod augue semper eu. Donec elit augue, imperd
+            <p> XXXXXX
 　         </p>
         </div>
 		
@@ -115,7 +116,7 @@
 		
 		<!-- begin clients -->
         <section>
-            <h2>Our Clients</h2>
+            <h2>${Our Clients}</h2>
             <div class="client-wrap " style='border-top:0px #FFFFFF solid;'>
                 <ul class="clients clearfix">
                    <li><a target="_blank" href="http://temp.net-pro.com.tw/profile.htm"><img src="images/client-logos/client001.png" alt="ITW" title="ITW"></li>

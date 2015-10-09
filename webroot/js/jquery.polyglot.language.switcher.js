@@ -312,7 +312,7 @@
                     href = href.substring(0, href.indexOf('?'));
                 }
                 href += toQueryString(params);
-                liElement = $("<li><a id=\"" + id + "\" href=\"" + href + "\">" + text + "</a></li>");
+                liElement = $("<li><a id=\"" + id + "\" href=\"#\">" + text + "</a></li>");
             }
             liElement.bind('click', function () {
                 triggerEvent({name:'onChange', selectedItem: $(this).children(":first").attr('id'), element:rootElement, instance:ls});

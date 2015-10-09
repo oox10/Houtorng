@@ -178,7 +178,6 @@ h4 {
 	font-weight: 600;
 	font-size: 1.166em; /* 14px */	
 	line-height: 1.428em; /* 20px/14px */
-    text-transform:capitalize;	
 }
 
 h5 {
@@ -345,6 +344,32 @@ mark {
 	background-image: url(images/contact/phone.png);
 	padding-left: 22px;
 }
+ #captcha_input{
+   display:inline-block;
+   width:120px;
+   border:1px #CDCDCD solid;
+   padding:7px 10px;
+   font-weight:bold;
+   font-size:18px;
+   color:blue;
+   vertical-align:middle;
+   letter-spacing:8px;
+ }
+ img#captcha{display:inline-block;vertical-align:middle;}
+ 
+ a.captcha_refresh{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background:url('images/System_refresh.png');
+	opacity:0.5;
+	vertical-align:middle;
+	cursor:pointer;
+}
+	a.captcha_refresh:hover{
+	  opacity:0.9;
+    }
+
 
 /* ---------------------------------------------------------------------- */
 /* Navigation Bar
@@ -1202,7 +1227,6 @@ ol.comment-list .comment-reply-link {
 .one-half {
 	width: 49%;	
 	max-width: 460px;
-	text-transform:capitalize;
 }
 
 .one-third {

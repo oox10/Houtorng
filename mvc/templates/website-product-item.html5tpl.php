@@ -12,7 +12,11 @@
 	<!-- end meta -->
 	
 	<!-- begin CSS -->
+	<?php if(isset($_SESSION['language'])&&$_SESSION['language']=='meta_cht'):?>
+	<link href="style-cht.css" type="text/css" rel="stylesheet">
+	<?php else: ?>
 	<link href="style.css" type="text/css" rel="stylesheet">
+	<?php endif; ?>
 	<!--[if IE]> <link href="css/ie.css" type="text/css" rel="stylesheet"> <![endif]-->
 	<link href="css/colors/orange.css" type="text/css" rel="stylesheet">
     <!-- end CSS -->
@@ -55,7 +59,7 @@
 	?>
 	
 	
-	<title>HOU TORNG - Products</title>
+	<title>${HOU TORNG - Products}</title>
 </head>
 
 <body>
@@ -67,17 +71,17 @@
     <section id="content" class="container clearfix">
         <!-- begin page header -->
         <header id="page-header">
-            <h1 id="page-title">Products & Services</h1>
+            <h1 id="page-title">${Products & Services}</h1>
         </header>
         <!-- end page header -->
 
         <!-- begin sidebar -->
         <aside id="sidebar" class="one-fourth">
             <div class="widget">
-                <h3>Product Navigation</h3>
+                <h3>${Product Navigation}</h3>
                 <nav>
                   <ul class="menu">
-                    <li class="<?php echo $product_index; ?>"><a class='product_type' href="index.php?act=product">Product Video</a></li>
+                    <li class="<?php echo $product_index; ?>"><a class='product_type' href="index.php?act=product">${Product Video}</a></li>
 					<?php foreach($classlv as $pdtype=>$pdlist): ?>    
 					  <?php if(count($pdlist)>1):  // 有子類別，設定為開關 ?>
 					  <li class='' ><a class='product_type product_level sublv-switch' ><?php echo $pdtype;?></a>
@@ -88,7 +92,7 @@
 					    </ul>
 					  </li>
 					  <?php else: // 無子類別，設定連結  ?>
-					  <li class='' ><a class='product_type' href="index.php?act=product/<?php echo rawurlencode($pdtype);?>" ><?php echo $pdtype;?></a></li>
+					  <li class='<?php echo ($pdtype==$target)?'current-menu-item':''; ?>' ><a class='product_type' href="index.php?act=product/<?php echo rawurlencode($pdtype);?>" ><?php echo $pdtype;?></a></li>
 					  <?php endif;?>
 					<?php endforeach; ?>
                   </ul>
@@ -100,9 +104,19 @@
         <!-- begin main content -->
         <section id="main" class="three-fourths column-last">
 		
-		    <!-- begin  產品照片slider-->
-            <section>
-                <h2><?php echo $result['title_product']?></h2>
+		    <!-- begin  單項產品名稱-->
+        
+			<section>
+            <div class="infobox">
+                <div class="infobox-inner">
+                    <div class="with-button">
+                        <h2><?php echo $result['title_product']?></h2>
+                    </div>                   
+                </div>
+            </div>
+			</section>
+			
+			<!-- begin  產品照片slider-->
                 <div class="entry-slider">
                     <ul>
 						<?php foreach($result['images'] as $key => $pimg): ?>
@@ -114,17 +128,17 @@
 						<?php endforeach; ?>
 					</ul>
                 </div>
-            </section>
+            
             <!-- end 產品照片slider-->
 
-			<!-- begin 特色與應用 -->
+			<!-- begin 特色 -->
 			<?php if($result['design']): ?>
 			<div class="one-half">
-				<h2>Features</h2>
-				<p>
-				<ul class="check">
+				<h2 class="indent">${Features}</h2>
+				<p >
+				<ul class="check indent">
 				<?php 
-				$designs = preg_split('/‧|，|、/',$result['design']);
+				$designs = preg_split('/‧|\n/',$result['design']);
 				foreach($designs as $d){
 				  if($d){ echo "<li>".$d."</li>"; }
                 }    
@@ -133,14 +147,16 @@
 				</p>
 			</div>
 			<?php endif;?>
+			<!-- end 特色 -->
 			
+			<!-- begin 應用 -->
 			<?php if($result['useto']): ?>
 			<div class="one-half column-last">
-				<h2>Applications</h2>
+				<h2>${Applications}</h2>
 				<p>
 				<ul class="square">
                 <?php 
-				$designs = preg_split('/‧|，|、/',$result['useto']);
+				$designs = preg_split('/‧|\n/',$result['useto']);
 				foreach($designs as $d){
 				  if($d){ echo "<li>".$d."</li>"; }
                 }    
@@ -149,13 +165,28 @@
 				</p>
 			</div>
 			<?php endif;?>
+			<!-- end 應用 -->
+			
+			<!-- begin 規格 -->
+			<?php if($result['specification']): ?>
+			<div class="one-half">
+				<h2 class="indent">${Specification}</h2>
+				<p>
+				<ul class="square indent">
+                <?php 
+				$designs = preg_split('/‧|\n/',$result['specification']);
+				foreach($designs as $d){
+				  if($d){ echo "<li>".$d."</li>"; }
+                }    
+				?>
+				</ul>
+				</p>
+			</div>
+			<?php endif;?>
+			<!-- end 規格 -->
+			
 			
 			<div class="clear"></div>
-			
-			<!-- end 特色與應用-->
-			
-			
-			
 			
         </section>
         <!-- end main content -->

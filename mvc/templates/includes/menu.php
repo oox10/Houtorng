@@ -3,10 +3,10 @@
 $product_level = '';
 if(count($classlv)){
   foreach($classlv as $pdtype=>$pdlist){
-	$product_level.='<menu_item href="index.php?act=product/'.$pdtype.'" label="'.$pdtype.'" count="'.count($pdlist).'">';
+	$product_level.='<menu_item href="index.php?act=product/'.rawurlencode($pdtype).'" label="'.$pdtype.'" count="'.count($pdlist).'">';
     if(count($pdlist)>1){
 	  foreach($pdlist as $pd){
-		$product_level.='<menu_item href="index.php?act=product/'.$pd.'" label="'.$pd.'" ></menu_item>';  
+		$product_level.='<menu_item href="index.php?act=product/'.rawurlencode($pd).'" label="'.$pd.'" ></menu_item>';  
 	  } 	
 	}    
 	$product_level.='</menu_item>';
@@ -15,18 +15,17 @@ if(count($classlv)){
 
 $menu_def = '<?xml version="1.0" encoding="UTF-8"?>
 <menu>
-  <menu_item href="index.php" label="Home">
+  <menu_item href="index.php" label="${Home}">
   </menu_item>
-  <menu_item href="index.php?act=aboutus" label="About Us">
+  <menu_item href="index.php?act=aboutus" label="${About Us}">
   </menu_item>
-  <menu_item href="index.php?act=product" label="Products">
+  <menu_item href="index.php?act=product" label="${Products}">
   '.$product_level.'  
   </menu_item>
-  <menu_item href="index.php?act=contact" label="Contact"></menu_item>
+  <menu_item href="index.php?act=contact" label="${Contact}"></menu_item>
 </menu>';
 
 
-$current_page_name = get_current_page_name();
 $menu = simplexml_load_string($menu_def);
 
 if(!function_exists('translate_menu_label')){
@@ -36,7 +35,7 @@ if(!function_exists('translate_menu_label')){
 }
 
 function has_selected_child($root){
-    global $current_page_name;
+    $current_page_name = get_current_page_name();
     $current_href = $root->attributes()->href;
 	if($current_href == $current_page_name){
         return true;
@@ -111,13 +110,22 @@ function render_sitemap($root) {
 }
 
 function get_current_page_name(){
+    /*
 	$page_name = substr(strrchr($_SERVER['REQUEST_URI'], "/"), 1);
-    if(strrpos($page_name, ".php") === false){
+	if(strrpos($page_name, ".php") === false){
         return 'index.php';
     }else{
         $page_name = substr($page_name, 0, strrpos($page_name, ".php")+4);
         return $page_name;
     }
+	*/
+	
+	if(preg_match('/((index.php)\?act=.*)$/',$_SERVER['REQUEST_URI'],$match )){
+	  $page_name = $match[1];
+	}else{
+	  $page_name = 'index.php';
+	}
+    return $page_name;
 }
 
 function print_main_menu($menu){

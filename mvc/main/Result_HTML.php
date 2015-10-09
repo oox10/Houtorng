@@ -31,10 +31,31 @@
 	     $this->vars['message'] = '找不到網頁，或瀏覽器版本不符'; 
 	     include _SYSTEM_ROOT_PATH.'mvc\\templates\\wrong.html5tpl.php';
 	   }
-	   
 	   $html = ob_get_contents();
        ob_end_clean();
-       return $html;
+       
+	    // 轉換翻譯
+	    $lang_pattern = array();
+	    $lang_conf = isset($_SESSION['language']) ? _SYSTEM_ROOT_PATH.'mvc\\lang\\'.$_SESSION['language'].'.conf' : _SYSTEM_ROOT_PATH.'mvc\\lang\\meta_eng.conf';
+	   
+	    if ($handle = fopen($lang_conf,'r')) {
+		  while (($buffer = fgets($handle, 4096)) !== false) {
+		    if(!preg_match('/^#/',$buffer) && trim($buffer)){
+			  list($lpatt,$lstring) = explode('=',$buffer);
+			  $lang_pattern['/'.preg_replace('/(\$|\{|\})/','\\\\\1',trim($lpatt)).'/'] = trim($lstring);
+			} 
+		  }
+          fclose($handle);
+		  
+		  $html_source = $html;
+	      if(count($lang_pattern)){
+		    $html = preg_replace(array_keys($lang_pattern),array_values($lang_pattern),$html_source);
+		  }else{
+		    $html = $html_source;
+		  }
+	    }
+		
+	    return preg_replace('/\$\{(.*?)\}/','\\1',$html);
 	}  
     
 	public function render(){

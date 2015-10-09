@@ -59,7 +59,8 @@ License URI: http://www.opensource.org/licenses/mit-license.php
 	width: 5.333em; /* 64px; total width: 100px */
 	background-color: #f7f7f7;
 	background-repeat: no-repeat;
-	background-position: 6px center; 
+	background-position: 6px center;
+	font-size: 12px;
 }
 
 #polyglotLanguageSwitcher a:hover {

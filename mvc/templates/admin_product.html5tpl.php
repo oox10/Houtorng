@@ -183,6 +183,13 @@
 				  <div class='data_col tr_like'> <span class='data_field'> 顯示於網頁 </span> 
 				    <span class='data_value'>
 					  關閉 <span class='active_option' id='_mask' pass=1><i class='active_switch'></i></span> 顯示
+					  ，
+					  排序:
+					  <select class='_variable' id='view_order' style='width:80px;'>
+					  <?php for($i=1;$i<50;$i++):?>
+					    <option value='<?php echo $i;?>'> <?php echo $i;?> </option>
+					  <?php endfor; ?>
+					  </select>(小排在前)
 					</span> 
 			      </div>
 				  <div class='data_col'> 

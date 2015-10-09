@@ -27,7 +27,7 @@
 	public function __construct(){
 	  $paser  = isset($_REQUEST['act']) ? explode('/',$_REQUEST['act']):array('index');
 	  $this->action = count($paser) ? strtolower(array_shift($paser)) : 'index' ;
-	  $this->second = count($paser) ? array_shift($paser) : '' ;
+	  $this->second = count($paser) ? array_shift($paser) : '' ; 
 	}
     
 	//-- 依據用途判別需要的條件

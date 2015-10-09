@@ -59,7 +59,7 @@
 	}
 	
 	
-	// PAGE: 系統資訊頁面
+	// PAGE: 系統首頁
 	protected function index(){
 	  self::data_output('html', $this->Model->WebSite_Get_Product_List($this->Language),'index');
 	}
@@ -77,12 +77,12 @@
 	
 	
 	
-	// PAGE: 系統資訊頁面
+	// PAGE: 系統錯誤頁面
 	protected function wrong($error_code=''){
 	  self::data_output('html',array('info'=>$this->Model->Get_Action_Message($error_code)),'wrong');
 	}
 	
-	// PAGE: 系統資訊頁面
+	// PAGE: 系統權限不足頁面
 	protected function denial($error_code=''){
 	  self::data_output('html',array('info'=>$this->Model->Get_Action_Message($error_code)),'index');
 	}
@@ -100,6 +100,15 @@
 	// PAGE: 聯繫我們
 	protected function contact($error_code=''){
 	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language),'website-contact');
+	}
+	
+	
+	// AJAX: 送出聯繫表單
+	protected function message(){
+	  $captcha_save = isset($_SESSION['turing_string']) ? $_SESSION['turing_string'] : false ;
+	  $captcha_user = isset($_REQUEST['captcha']) ? $_REQUEST['captcha'] : '';
+	  $message_data = isset($_REQUEST['message']) ? json_decode(rawurldecode($_REQUEST['message']),true) : array();
+	  self::data_output('json', $this->Model->Contact_Message_Submit($captcha_save,$captcha_user,$message_data),'');
 	}
 	
   }

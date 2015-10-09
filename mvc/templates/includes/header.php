@@ -5,8 +5,8 @@
     <section id="header-top" class="clearfix">
         <!-- begin header left -->
         <div class="one-half">
-            <h1 id="logo"><a href="index.php"><img src="images/logo.png" alt="Finesse"></a></h1>
-            <p id="tagline">Industrial Heat Treating Equipment Manufacturer</p>
+            <h1 id="logo"><a href="index.php"><img src="images/logo.png" alt="HouTorng"></a></h1>
+            <p id="tagline">${Industrial Heat Treating Equipment Manufacturer}</p>
         </div>
         <!-- end header left -->
 
@@ -14,7 +14,7 @@
         <div class="one-half column-last">
             <!-- begin language switcher 語言選單-->
             <div id="polyglotLanguageSwitcher">
-                <form action="#">
+                <form action="">
                     <select id="polyglot-language-options">
                         <option id="en" value="en" <?php echo isset($_SESSION['language'])&&$_SESSION['language']=='meta_eng'?'selected':'';?>>English</option>
  						<option id="tw" value="tw" <?php echo isset($_SESSION['language'])&&$_SESSION['language']=='meta_cht'?'selected':'';?>>中文</option>

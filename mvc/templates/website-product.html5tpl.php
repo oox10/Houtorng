@@ -12,7 +12,11 @@
 	<!-- end meta -->
 	
 	<!-- begin CSS -->
+	<?php if(isset($_SESSION['language'])&&$_SESSION['language']=='meta_cht'):?>
+	<link href="style-cht.css" type="text/css" rel="stylesheet">
+	<?php else: ?>
 	<link href="style.css" type="text/css" rel="stylesheet">
+	<?php endif; ?>
 	<!--[if IE]> <link href="css/ie.css" type="text/css" rel="stylesheet"> <![endif]-->
 	<link href="css/colors/orange.css" type="text/css" rel="stylesheet">
     <!-- end CSS -->
@@ -34,6 +38,7 @@
     </script>
     <script src="js/tinynav.min.js" type="text/javascript"></script> <!-- tiny nav -->
     <script src="js/jquery.ui.totop.min.js" type="text/javascript"></script> <!-- scroll to top -->
+	<script src="js/jquery.fitvids.js" type="text/javascript"></script> <!-- responsive video embeds -->
 	<script src="js/jquery.tweet.js" type="text/javascript"></script> <!-- Twitter widget -->
 	<script src="js/jquery.touchSwipe.min.js" type="text/javascript"></script> <!-- touchSwipe -->
     <script src="js/custom.js" type="text/javascript"></script> <!-- jQuery initialization -->
@@ -45,7 +50,7 @@
 	$classlv  = isset($this->vars['system_data']['data']['classlv']) ?  $this->vars['system_data']['data']['classlv'] : array();
 	?>
 	
-	<title>HOU TORNG - Products</title>
+	<title>${HOU TORNG - Products}</title>
 </head>
 
 <body>
@@ -57,17 +62,17 @@
     <section id="content" class="container clearfix">
         <!-- begin page header -->
         <header id="page-header">
-            <h1 id="page-title">Products & Services</h1>
+            <h1 id="page-title">${Products & Services}</h1>
         </header>
         <!-- end page header -->
 
         <!-- begin sidebar -->
         <aside id="sidebar" class="one-fourth">
             <div class="widget">
-                <h3>Product Navigation</h3>
+                <h3>${Product Navigation}</h3>
                 <nav>
                   <ul class="menu">
-                    <li class="current-menu-item"><a class='product_type' href="index.php?act=product">Product Video</a></li>
+                    <li class="current-menu-item"><a class='product_type' href="index.php?act=product">${Product Video}</a></li>
 					<?php foreach($classlv as $pdtype=>$pdlist): ?>    
 					  <?php if(count($pdlist)>1):  // 有子類別，設定為開關 ?>
 					  <li class='' ><a class='product_type product_level sublv-switch' ><?php echo $pdtype;?></a>
@@ -92,27 +97,28 @@
 		
 		    <!-- begin youtube video 嵌入Youtube影片-->
             <section>
-                <h2>Product Video</h2>
+                <h2>${Product Video}</h2>
                 <div class="entry-video">
-                    <iframe width="700" height="394" src="https://www.youtube.com/embed/ndcHlsA2LR0" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="700" height="394" src="https://www.youtube.com/embed/ndcHlsA2LR0?rel=0" frameborder="0" allowfullscreen></iframe>
                 </div>
             </section>
             <!-- end youtube video -->
+			
 			<p>為什麼這裡的產品種類和左方選單不同，和關於我們裡的產品項目也不同，和影片裏面的介紹也不一致</p>
-		    <p>
+		    
 			<ul class="square">
-                    <li>Mesh Belt Type Continuous Heat Treatment Equipment</li>
-                    <li>Mesh Belt Type Continuous Stainless Steel Heat Treatment Furnace.</li>
-                    <li>Full Set Batch Type All Case Heat-treatment Equipment</li>
-                    <li>Rotary Retort Carburizing Furnace</li>
-					<li>Pit Type Carburizing and Nitriding Furnace</li>
-					<li>Endothermic Gas Generator</li>
-                    <li>Exothermic Gas Generator</li>
-                    <li>Bell Type Annealing Furnace</li>
-                    <li>Mesh Belt Type Continuous Dehydrogen Furnace</li>
-					<li>Batch Type Aluminum Alloy T4、T6 Heat Treatment Equipment</li>
+                    <li>${Mesh Belt Type Continuous Heat Treatment Equipment}</li>
+                    <li>${Mesh Belt Type Continuous Stainless Steel Heat Treatment Furnace}</li>
+                    <li>${Full Set Batch Type All Case Heat-treatment Equipment}</li>
+                    <li>${Rotary Retort Carburizing Furnace}</li>
+					<li>${Pit Type Carburizing and Nitriding Furnace}</li>
+					<li>${Endothermic Gas Generator}</li>
+                    <li>${Exothermic Gas Generator}</li>
+                    <li>${Bell Type Annealing Furnace}</li>
+                    <li>${Mesh Belt Type Continuous Dehydrogen Furnace}</li>
+					<li>${Batch Type Aluminum Alloy T4、T6 Heat Treatment Equipment}</li>
             </ul>
-			</p>
+			
         </section>
         <!-- end main content -->
     </section>
