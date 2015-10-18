@@ -76,7 +76,7 @@
                 <div id="map"
                     data-address="No.36, Ln. 1274, Zhongzheng Rd., Zhongli Dist., Taoyuan City 320, Taiwan"
                     data-zoom="15"
-                    style="width: 100%; height: 400px;">
+					style="width: 100%; height: 400px;">
                 </div>
             </section>
             <!-- end google map -->

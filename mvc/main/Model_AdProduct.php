@@ -265,7 +265,11 @@
 		$new_upfile_no   = $this->DBLink->lastInsertId('product_obj');
 		$new_upfile_name = 'HT'.str_pad($ProductNo,3,'0',STR_PAD_LEFT).'-'.str_pad($new_upfile_no,2,'0',STR_PAD_LEFT).'.'.array_pop(explode('.',$UploadFile['name']));
 		
-		move_uploaded_file($UploadFile['tmp_name'], _SYSTEM_IMAGE_PATH.'product\\'.$new_upfile_name);
+		move_uploaded_file($UploadFile['tmp_name'], _SYSTEM_ADIMAGE_PATH.'product\\'.$new_upfile_name);
+		// copy to webroot
+		copy(_SYSTEM_ADIMAGE_PATH.'product\\'.$new_upfile_name, _SYSTEM_IMAGE_PATH.'product\\'.$new_upfile_name);
+		
+		
 		$DB_RENEW = $this->DBLink->prepare("UPDATE product_obj SET acc_name=:acc_name,file_keep=1 WHERE att_no=:att_no;");
 		if( !$DB_RENEW->execute(array('acc_name'=>'product/'.$new_upfile_name,'att_no'=>$new_upfile_no))){
 		  throw new Exception('_SYSTEM_ERROR_DB_ACCESS_FAIL');
@@ -307,6 +311,73 @@
         $this->ModelResult['message'][] = $e->getMessage();
       }
 	  return $this->ModelResult;  
+	}
+	
+	//-- Admin Product Re Sort Product Relate Object Display Order 
+	// [input] : ProductNo     	:  pno   - \d+
+	// [input] : AttachNoOrder    :  attnolist - \d+,\d+,\d+,...
+	// [input] : UserID         :  user login no from SESSION 
+	public function ADProduct_ReSort_Relate_Object($ProductNo, $AttachNoOrder = '' , $UserID=0 ){
+	  
+	  try{
+		
+		$att_list = explode(',',$AttachNoOrder);
+		
+		// 檢查附檔序號
+	    if(  !$ProductNo || count($att_list)<=1){
+		  throw new Exception('_SYSTEM_ERROR_PARAMETER_FAILS');
+		}
+	    
+		// 執行更新
+		$DB_SAVE = $this->DBLink->prepare($this->DBSql->ADMIN_PRODUCT_RESORT_ATTACHMENT());
+		
+		foreach($att_list as $key=>$attno){
+		  $DB_SAVE->bindValue(':order'	, ($key+1));
+		  $DB_SAVE->bindValue(':att_no'	, $attno);
+		  $DB_SAVE->bindValue(':pno'	, $ProductNo);
+		  if( !$DB_SAVE->execute()){
+		    throw new Exception('_SYSTEM_ERROR_DB_ACCESS_FAIL');
+		  }
+		}
+		// final 
+		$this->ModelResult['action'] = true;
+    	
+	  } catch (Exception $e) {
+        $this->ModelResult['message'][] = $e->getMessage();
+      }
+	  return $this->ModelResult;  
+	}
+	
+	/*[ Business Function Set ]*/ 
+	
+	//-- Admin Business Page Initial
+	// [input] : NULL;
+	public function ADProduct_Get_Business_List(){
+	  
+	  try{
+		// 查詢資料庫
+		$DB_OBJ = $this->DBLink->prepare($this->DBSql->ADMIN_PRODUCT_SELECT_ALL_BUSINESS());
+		if(!$DB_OBJ->execute()){
+		  throw new Exception('_SYSTEM_ERROR_DB_ACCESS_FAIL');  
+		}
+
+		// GET資料
+		$business_list = array();
+		
+		while($tmp = $DB_OBJ->fetch(PDO::FETCH_ASSOC)){
+		  if(!isset($business_list[$tmp['pdgroup']])){
+		    $business_list[$tmp['pdgroup']] = array();
+		  }
+		  $business_list[$tmp['pdgroup']][] = $tmp; 
+		}
+	    
+		$this->ModelResult['action'] = true;		
+		$this->ModelResult['data']   = $business_list;		
+	  
+	  } catch (Exception $e) {
+        $this->ModelResult['message'][] = $e->getMessage();
+      }
+	  return $this->ModelResult;
 	}
 	
 	

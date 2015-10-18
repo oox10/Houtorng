@@ -269,15 +269,19 @@
 				div.col2{ width:49%; min-width:400px; }
 				
 				  
-			      div.object-pool{
+			      ul.object-pool{
 					margin:10px 0px 10px 40px;
+					list-style-type: none;
 				  }
-			        div.relate_element{
-					  float:left;
+			        li.relate_element{ 
+					  float: left; 
+					  min-width: 80px; 
+					  height: 80px;
 					  margin:5px;
 					  position:relative;
 					  border:2px #FFFFFF solid;	
 					}
+					
 					div.delete_flag{
 					  border:2px red dashed;		
 					}

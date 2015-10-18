@@ -44,7 +44,11 @@
     <script src="js/jquery.fitvids.js" type="text/javascript"></script> <!-- responsive video embeds -->
 	<script src="js/jquery.tweet.js" type="text/javascript"></script> <!-- Twitter widget -->
 	<script src="js/jquery.touchSwipe.min.js" type="text/javascript"></script> <!-- touchSwipe -->
+	<script src="js/jquery.rwdImageMaps.min.js" type="text/javascript"></script> <!-- rwdImageMaps -->
+	
     <script src="js/custom.js" type="text/javascript"></script> <!-- jQuery initialization -->
+	
+	
     <!-- end JS -->
 	
 	<!-- php variable-->
@@ -103,19 +107,45 @@
 
         <!-- begin main content -->
         <section id="main" class="three-fourths column-last">
-		
-		    <!-- begin  單項產品名稱-->
+		  <!-- begin  單項產品名稱-->
         
-			<section>
+			<!--<section>
             <div class="infobox">
                 <div class="infobox-inner">
-                    <div class="with-button">
-                        <h2><?php echo $result['title_product']?></h2>
-                    </div>                   
+                    <div class="with-button">-->
+                        
+						<h2 class="hmark"><?php echo $result['title_product']; ?></h2>
+                    <!--</div>                   
                 </div>
             </div>
-			</section>
+			</section>-->
+		    
 			
+		    <?php if($result['title_product']=='流程圖'||$result['title_product']=='Flow Chart'): ?>
+		    <!-- begine flow chart -->
+			<div style='margin-bottom:50px;'>
+			  <div class='one-fourth'>
+			    <h2 style='margin:50px 0;'>點選方塊<br>可以檢視流程影片</h2>
+			  </div>	
+			  <div class="two-thirds column-last">
+			    <img id='product_chart' src="product/chart.gif" width="550" height="169" border="0" usemap="#Map">
+			    <map name="Map" id="Map">
+                  <area shape="rect" coords="26,127,94,160" 	 href="#IdewM6otyhg"   alt="REVERSING MACHINE">
+                  <area shape="rect" coords="88,6,160,48"		 href="#sReCYRs1tbk"   alt="MAGNETIC FEEDING MACHINE">
+                  <area shape="rect" coords="192,18,269,51" 	 href="#o-cb54Hp2Y8"   alt="HARDEN FURNACE">
+                  <area shape="rect" coords="345,127,431,161"  href="#AFxP6WgcYi4"   alt="REAR WASHING MACHINE">
+                  <area shape="rect" coords="402,21,488,48" 	 href="#hf5dqBwaMho"   alt="TEMPREING FURNACE">
+               </map>
+			  </div>
+              <div class='clear'></div> 			  
+			</div>
+			<div class="entry-video">
+              <iframe id='flowvideo' width="700" height="394" src="https://www.youtube.com/embed/sReCYRs1tbk?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+		    <img src='product/chart_nh.jpg' style='width:100%;'> 
+		  
+		  <?php else: ?>
+		   
 			<!-- begin  產品照片slider-->
                 <div class="entry-slider">
                     <ul>
@@ -134,7 +164,7 @@
 			<!-- begin 特色 -->
 			<?php if($result['design']): ?>
 			<div class="one-half">
-				<h2 class="indent">${Features}</h2>
+				<h2 class="indent hmark">${Features}</h2>
 				<p >
 				<ul class="check indent">
 				<?php 
@@ -152,9 +182,9 @@
 			<!-- begin 應用 -->
 			<?php if($result['useto']): ?>
 			<div class="one-half column-last">
-				<h2>${Applications}</h2>
+				<h2 class="indent hmark">${Applications}</h2>
 				<p>
-				<ul class="square">
+				<ul class="square indent">
                 <?php 
 				$designs = preg_split('/‧|\n/',$result['useto']);
 				foreach($designs as $d){
@@ -170,7 +200,7 @@
 			<!-- begin 規格 -->
 			<?php if($result['specification']): ?>
 			<div class="one-half">
-				<h2 class="indent">${Specification}</h2>
+				<h2 class="indent hmark">${Specification}</h2>
 				<p>
 				<ul class="square indent">
                 <?php 
@@ -184,10 +214,9 @@
 			</div>
 			<?php endif;?>
 			<!-- end 規格 -->
-			
-			
 			<div class="clear"></div>
-			
+		  
+		  <?php endif ;?>	
         </section>
         <!-- end main content -->
     </section>

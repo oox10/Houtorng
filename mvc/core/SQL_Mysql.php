@@ -43,6 +43,14 @@
 	}
 	
 	
+	//-- Web Site Contact : Get Business List
+	public static function WEBSITE_BUSINESS_GET_BUSINESS_LIST(){
+	  $SQL_String = "SELECT * FROM business WHERE _keep=1 AND _show=1 ORDER BY showOrder ASC,bid ASC; ";
+	  return $SQL_String;
+	}
+	
+	
+	
 	
 	/* [ Admin System function Set ] */ 	
 	
@@ -193,7 +201,7 @@
 	
 	//-- Admin Product : Get Product Relate Files
 	public static function ADMIN_PRODUCT_SELECT_PRODUCT_DISPLAY(){
-	  $SQL_String = "SELECT att_no,acc_name,file_size,time_upload FROM product_obj WHERE pno =:pno AND file_keep=1 ORDER BY att_no ASC";
+	  $SQL_String = "SELECT att_no,acc_name,file_size,time_upload FROM product_obj WHERE pno =:pno AND file_keep=1 ORDER BY display_order ASC,att_no ASC";
 	  return $SQL_String;
 	}
 	
@@ -209,6 +217,23 @@
 	  $SQL_String = "UPDATE product_obj SET file_keep=0 WHERE att_no=:att_no AND handler=:handler;";
 	  return $SQL_String;
 	}
+	
+	//-- Admin Product : Update attachment data order
+	public static function ADMIN_PRODUCT_RESORT_ATTACHMENT(){
+	  $SQL_String = "UPDATE product_obj SET display_order=:order WHERE att_no=:att_no AND pno=:pno;";
+	  return $SQL_String;
+	}
+	
+	/***-- Admin Business Function --***/
+	
+	//-- Admin Product : Get Product List
+	public static function ADMIN_PRODUCT_SELECT_ALL_BUSINESS(){
+	  $SQL_String = "SELECT * FROM business WHERE _keep=1 ORDER BY showOrder ASC,bid ASC; ";
+	  return $SQL_String;
+	}
+	
+	
+	
 	
 
 	

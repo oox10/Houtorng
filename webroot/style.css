@@ -31,7 +31,7 @@ Author URI: http://www.ixtendo.com
 
 
 /* ---------------------------------------------------------------------- */
-/* Finesse Styles
+/* HouTorng Styles
 /* ----------------------------------------------------------------------
 TABLE OF CONTENTS
 
@@ -80,7 +80,7 @@ TABLE OF CONTENTS
 }
 
 body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans', "Microsoft JhengHei",sans-serif;
 	font-size: 12px;
 	line-height: 1.5em; /* 18px */
 	color: #383838;
@@ -165,6 +165,15 @@ h2 {
 	font-size: 1.5em; /* 18px */
 	line-height: 1.333em; /* 24px/18px */
 }
+ h2.hmark::before{
+   content:" ";
+   display:inline-block;
+   background-color:#f25824;
+   width:8px;
+   height:0.9em;
+   margin-right:10px;
+ }
+
 
 h3 {
 	font-family: 'Open Sans', sans-serif;

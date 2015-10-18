@@ -18,6 +18,7 @@
 			</div>
 		    <ul class='group_manuel'>
 			  <li class='option func_activate ' id='product'> <span>產品維護</span> </li>
+			  <li class='option func_activate ' id='business'> <span>業務實績</span> </li>
 			</ul>
 		  </li>
 	    </ul>

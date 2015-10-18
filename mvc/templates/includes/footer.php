@@ -4,22 +4,7 @@
         <!-- begin footer top -->
         <div id="footer-top">
             
-            <div class="one-fourth">
-                <div class="widget latest-posts">
-                    <h3>Latest Posts</h3>
-                    <ul>
-                        <li>
-                            <a href="blog-post.php">How to Make Innovative Ideas Happen</a>
-                            <span>September 20, 2015</span>
-                        </li>
-                        <li>
-                            <a href="blog-post.php">Web Development for the iPhone and iPad</a>
-                            <span>September 10, 2015</span>
-                        </li>
-                    </ul>
-                </div>
-				
-            </div>
+
 			
 			<div class="one-fourth">
                 <div class="widget">
@@ -29,6 +14,21 @@
                 </div>
             </div>
 			
+			            <div class="one-fourth">
+                <div class="widget latest-posts">
+                    <h3>Latest Products</h3>
+                    <ul>
+                        <li>
+                            <a href="blog-post.php">Endothermic Gas Generator</a>
+                            <span>October 20, 2015</span>
+                        </li>
+                        <li>
+                            <a href="blog-post.php">Bell Type Annealing Furnace</a>
+                            <span>September 10, 2015</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="one-fourth">
                 <div class="widget">
                     <h3>${Map}</h3>

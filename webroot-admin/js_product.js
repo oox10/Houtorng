@@ -288,7 +288,7 @@
 		  if(response.action){
 			$('#product_display_object').empty();
 			$.each(response.data,function( num , contract ){
-			  var $column = $("<div/>").addClass('relate_element').attr('no',contract.att_no);
+			  var $column = $("<li/>").addClass('relate_element').attr('no',contract.att_no);
 			  $column.append("<div class='redisplay' ><img src='"+contract.acc_name+"'/></td>");
 			  $column.append("<div class='reoption'  ><span class='act_option act_reobj_del'><a class='mark16 pic_delete'></a></span><span class='info_size'>"+(contract.file_size/1000)+'KB'+"</span></div>");
 			  $column.appendTo("#product_display_object");
@@ -308,8 +308,8 @@
 	  
 	//-- 刪除產品顯示物件
 	$(document).on('click','.act_reobj_del',function(){
-	    var att_no   = $(this).parents('div.relate_element').attr('no');
-	    $(this).parents('div.relate_element').addClass('delete_flag');
+	    var att_no   = $(this).parents('li.relate_element').attr('no');
+	    $(this).parents('li.relate_element').addClass('delete_flag');
 	    
 		if(!att_no){ system_message_alert('error','尚未選擇附件') ;  return false; }
 	  
@@ -327,8 +327,8 @@
           error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
 	      success: 	function(response) {
 		    if(response.action){
-			  $("div.relate_element[no='"+att_no+"']").empty().remove();
-			  system_message_alert('', '附件已被刪除');
+			  $("li.relate_element[no='"+att_no+"']").empty().remove();
+			  system_message_alert('alert', '附件已被刪除');
 		    }else{
 			  system_message_alert('',response.info);
 	        }
@@ -337,15 +337,41 @@
         }).done(function(r) { system_loading();  });
 	});  
 	 
-
-
-
 	 //-- 讀取訂單附件檔案
 	  $(document).on('click','.act_contract_read',function(){
 	    var ach_no   = $(this).parents('tr.relate_element').attr('no');
         if(!ach_no){ system_message_alert('error','尚未選擇附件') ; return false; }
 	    var win = window.open('admain.php?act=adSellDoc&doc='+ach_no, '_blank');
 	  });
+	
+	  // 可排序
+      $( "#product_display_object" ).sortable({
+	    update: function( event, ui ) {
+		  var data_no   =  $('._target').length? $('._target').attr('no') : '';
+		  var element_order = $( "#product_display_object" ).find('li').map(function(){ return $(this).attr('no'); }).get().join(','); 
+		  
+		  $.ajax({
+            url: 'admain.php',
+	        type:'POST',
+	        dataType:'json',
+	        data: {act:'act_reobj_sort',target:data_no,refer:element_order},
+		    beforeSend: function(){  system_loading(); },
+            error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
+	        success: 	function(response) {
+		      if(response.action){
+			    system_message_alert('alert', '已重新排序');
+		      }else{
+			    system_message_alert('error',response.info);
+	          }
+	        },
+		    complete:	function(){  }
+          }).done(function(r) { system_loading();  });
+		}
+	  });
+      $( "#sortable" ).disableSelection();
+  
+	
+	
 	
 	  
 	

@@ -106,9 +106,7 @@
 			</p>
         </div>
         <div class="one-third column-last">
-            <h2>留著放圖片?</h2>
-            <p> XXXXXX
-　         </p>
+            <a><img src="images/about-us/office_300x300.jpg" alt="HouTorng" title="HouTorng"></a>
         </div>
 		
         <div class="clear"></div>

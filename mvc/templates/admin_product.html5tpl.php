@@ -196,11 +196,12 @@
  				    <div style='table-column'>
 				      <span class='data_field'> 上傳照片: </span>
 				      <span class='data_value'> <span class='sysbtn' id='act_open_upload' title='開啟上傳'  ><a class='mark16 pic_upload'></a></span></span>
-				    </div >
+					  <span class='data_value' > ( 拖曳可改變影像顯示排序 ) </span>
+					</div >
 					<div style='table-column'>
-					  <div class='object-pool tr_like _relative' id='product_display_object'>
+					  <ul class='object-pool tr_like _relative' id='product_display_object'>
 					    
-					  </div> 
+					  </ul> 
 					</div>
 				  </div>
 				 

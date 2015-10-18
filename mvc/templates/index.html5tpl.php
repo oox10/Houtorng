@@ -72,8 +72,8 @@
                         <li>
                             <img src="images/slider/slides/frontphoto-940x350.png" alt="Furnace">
                             <div class="flex-caption">
-                                <h2>Welcome to HouTorng !</h2>
-                                <p>You can describe your slides using captions. This is an example of a caption with. <a href="about-us.php">(see more)</a></p>
+                                <h2>${Welcome to HouTorng !}</h2>
+                                <p>${HOU TORNG ENGINEERING CO., LTD. is a manufacturer of standard & custom metal heat treating equipment.}<a href="index.php?act=aboutus">(see more)</a></p>
                             </div>
                         </li>
 						<li>
@@ -84,10 +84,10 @@
                             </div>
                         </li>
 						<li>
-                            <img src="images/slider/slides/cover.png" alt="Construction2">
+                            <img src="images/slider/slides/NMHG2-940x350.png" alt="NMHG">
                             <div class="flex-caption">
                                 <h2>Stable and Dependable</h2>
-                                <p>We have over 20 years combined experience in the heat treating equipment industry.</p>
+                                <p>We have over 20 years combined experience in the heat treating equipment industry.<a href="about-us.php">(see more)</a></p>
                             </div>
 						</li>	
                         <li>
@@ -188,7 +188,7 @@
 
         <!-- begin clients -->
         <section>
-            <h2>${Our Clients}</h2>
+            <h2>${Our Clients} <span class="more">&ndash; <a href="index.php?act=business">${View More Clients} &raquo;</a></span></h2>
             <div class="client-wrap">
                 <ul class="clients clearfix">
                     <li><a target="_blank" href="http://temp.net-pro.com.tw/profile.htm"><img src="images/client-logos/client001.png" alt="ITW" title="ITW"></li>

@@ -237,6 +237,29 @@
 	}
 	
 	
+	// AJAX: 刪除附件檔案
+	protected function act_reobj_sort(){
+	  $this->Model = new Model_AdProduct;
+	  $data_no  = isset($_REQUEST['target']) ? intval($_REQUEST['target']) : 0;
+	  $obj_sort = isset($_REQUEST['refer'])  ? $_REQUEST['refer'] : '';
+	  self::data_output('json',$this->Model->ADProduct_ReSort_Relate_Object( $data_no ,$obj_sort,$_SESSION['USER_ID']));
+	}
+	
+	/********************************************
+	*******  Admin Business Control Set  *********
+	******************************************/
+	 
+	// PAGE: 產品管理
+	protected function business(){
+	  $this->Model = new Model_AdProduct;
+	  $result = array('action'=>true,'data'=>array());
+	  $result['data']['record'] = $this->Model->ADProduct_Get_Business_List()['data'];
+	  self::data_output('html',$result,'admin_business');
+	}
+	
+	
+	
+	
 	
   }
   

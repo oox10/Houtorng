@@ -34,6 +34,7 @@
   define("_SYSTEM_ROOT_PATH",dirname(dirname(__FILE__)).'\\');
   define("_SYSTEM_FILE_PATH",dirname(dirname(__FILE__)).'\\docs\\');
   define("_SYSTEM_IMAGE_PATH",dirname(dirname(__FILE__)).'\\webroot\\');
+  define("_SYSTEM_ADIMAGE_PATH",dirname(dirname(__FILE__)).'\\webroot-admin\\');
   define("_SYSTEM_IP_BEN_LIST_LOGS",_SYSTEM_ROOT_PATH.'logs\\IPBanList.log');
   define("_SYSTEM_UPLOAD_TEMP_FOLDER",_SYSTEM_ROOT_PATH.'webroot-admin\\tool\\jQuery-File-Upload-9.3.0\\server\\php\\files\\');   // 資源暫存區域 
    

@@ -96,6 +96,17 @@ jQuery(document).ready(function ($) {
 	
 	
 	
+	/* ---------------------------------------------------------------------- */
+    /* Product LvClass Slider - by JJ
+    /* ---------------------------------------------------------------------- */
+	if($('#product_chart').length){
+	  $('img[usemap]').rwdImageMaps();
+	  $('area').on('click', function() {
+		var video_code = $(this).attr('href').replace(/^#/,'')
+		$('#flowvideo').attr('src','https://www.youtube.com/embed/'+video_code+'?rel=0&autoplay=1')
+	  });
+	}
+	
 	
 	
 
@@ -1480,8 +1491,8 @@ jQuery(document).ready(function ($) {
                 markers.latitude = lat;
                 markers.longitude = lng;
             }
-
-            $(this).gMap({markers: [markers], zoom: zoom});
+            
+            $(this).gMap({markers: [markers], zoom: zoom,scrollwheel: false});
         });
     }
 

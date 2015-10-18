@@ -97,14 +97,13 @@
 		
 		    <!-- begin youtube video 嵌入Youtube影片-->
             <section>
-                <h2>${Product Video}</h2>
+                <h2 class="hmark">${Product Video}</h2>
                 <div class="entry-video">
                     <iframe width="700" height="394" src="https://www.youtube.com/embed/ndcHlsA2LR0?rel=0" frameborder="0" allowfullscreen></iframe>
                 </div>
             </section>
             <!-- end youtube video -->
 			
-			<p>為什麼這裡的產品種類和左方選單不同，和關於我們裡的產品項目也不同，和影片裏面的介紹也不一致</p>
 		    
 			<ul class="square">
                     <li>${Mesh Belt Type Continuous Heat Treatment Equipment}</li>

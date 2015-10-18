@@ -74,6 +74,42 @@
 	  
 	}
 	
+	
+	//-- WebSite Page Initial 
+	// [input] : NULL;
+	public function WebSite_Get_Business_List(){
+	  
+	  try{
+	  
+		// 查詢資料庫
+		$DB_OBJ = $this->DBLink->prepare($this->DBSql->WEBSITE_BUSINESS_GET_BUSINESS_LIST());
+		if(!$DB_OBJ->execute()){
+		  throw new Exception('_SYSTEM_ERROR_DB_ACCESS_FAIL');  
+		}
+
+		// GET資料
+		$business_list = array();
+		
+		while($tmp = $DB_OBJ->fetch(PDO::FETCH_ASSOC)){
+		  if(!isset($business_list[$tmp['pdgroup']])){
+		    $business_list[$tmp['pdgroup']] = array();
+		  }
+		  $business_list[$tmp['pdgroup']][] = $tmp; 
+		}
+	    
+		$this->ModelResult['action'] = true;		
+		$this->ModelResult['data']['business']   = $business_list;		
+	  
+	  } catch (Exception $e) {
+        $this->ModelResult['message'][] = $e->getMessage();
+      }
+	  
+	  return $this->ModelResult;
+	  
+	}
+	
+	
+	
 	//-- Website Contact Message Sent  // 
 	// [input] : Captcha  :  server side chptcha code => from $_SESSION['turing_reset']
 	// [input] : UserCap  :  client side chptcha keyin

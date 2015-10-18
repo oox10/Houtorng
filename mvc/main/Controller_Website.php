@@ -92,6 +92,13 @@
 	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language,$targetProduct) , $targetProduct?'website-product-item':'website-product');
 	}
 	
+	// PAGE: 業務實績
+	protected function business(){
+	  $this->Model->WebSite_Get_Product_List($this->Language);
+	  self::data_output('html',$this->Model->WebSite_Get_Business_List(),'website-business');
+	}
+	
+	
 	// PAGE: 關於我們
 	protected function aboutus($error_code=''){
 	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language),'website-about');
