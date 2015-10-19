@@ -12,7 +12,7 @@
   //-- MySQL 設定檔
   define('_SYSTME_DB_NAME','houtorng_db');
   define('_SYSTEM_DB_USER','root');
-  define('_SYSTEM_DB_PASS','root');
+  define('_SYSTEM_DB_PASS','28eo5k2updu1;sai');
   define('_SYSTEM_DB_LOCA','localhost');
   
   
