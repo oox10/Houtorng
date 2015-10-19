@@ -25,7 +25,7 @@
 	
 	//-- Web Site Index : Get Product Data
 	public static function WEBSITE_INDEX_GET_PRODUCT_LISR($lang = 'meta_cht'){
-	  $SQL_String = "SELECT * FROM products LEFT JOIN ".$lang." ON pid=pno WHERE products._keep=1 ORDER BY pid ASC;";
+	  $SQL_String = "SELECT * FROM products LEFT JOIN ".$lang." ON pid=pno WHERE products._keep=1 ORDER BY view_order ASC,pid ASC;";
 	  return $SQL_String;
 	}
 	
@@ -167,6 +167,12 @@
 	  return $SQL_String;
 	}
 	
+	//-- Admin Product : Set Product Order
+	public static function ADMIN_PRODUCT_SET_PRODUCTS_ORDER(){
+	  $SQL_String = "UPDATE products SET view_order=:order WHERE pid=:pid; ";
+	  return $SQL_String;
+	}
+	
 	//-- Admin Product : Get Product Lang Meta
 	public static function ADMIN_PRODUCT_SELECT_PRODUCT_META($Table=NULL){
 	  $SQL_String = "SELECT * FROM ".$Table." WHERE pno=:pno;";
@@ -176,7 +182,7 @@
 	
 	//-- Admin Product : Insert Products Table
 	public static function ADMIN_PRODUCT_CREATC_NEW_PRODUCT(){
-	  $SQL_String = "INSERT INTO products VALUES(NULL,'',:client,:view_order,:temp,NULL,:_mask,1); ";
+	  $SQL_String = "INSERT INTO products VALUES(NULL,'',:client,:view_order,:view_index,NULL,:_view,1); ";
 	  return $SQL_String;
 	}
 	

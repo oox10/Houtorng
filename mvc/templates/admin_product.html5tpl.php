@@ -114,7 +114,7 @@
 				    <td field='title_product'  	><?php echo $data['title_product']; ?></td>
 				    <td field='editer'			><?php echo $data['editer']; ?></td>
 					<td field='time_edited'		><?php echo $data['time_edited']; ?></td>
-					<td ><i class='_status_option mark24 <?php echo $data['_mask'] ? 'pic_status_stop':'pic_status_start'; ?>' title='' ></i></td>
+					<td ><i class='_status_option mark24 <?php echo $data['_view'] ? 'pic_status_start':'pic_status_stop'; ?>' title='' ></i></td>
 				  </tr> 
 			    <?php endforeach; ?>
 			      <tr class='data_field'>
@@ -180,16 +180,26 @@
 				<div class='form_element' id='products' >
 				  <div class='data_col tr_like'> <span class='data_field '> 產品型號 </span> <span class='data_value'> <input type='text' class='_variable' id='product_id' readonly /> </span> </div>
 				  <div class='data_col tr_like'> <span class='data_field'> 購買客戶 </span> <span class='data_value'> <input type='text'  class='_variable' id='clients'  /> </span> </div>
-				  <div class='data_col tr_like'> <span class='data_field'> 顯示於網頁 </span> 
+				  <div class='data_col tr_like'> 
+				    <span class='data_field'> 產品排序 </span> 
 				    <span class='data_value'>
-					  關閉 <span class='active_option' id='_mask' pass=1><i class='active_switch'></i></span> 顯示
-					  ，
-					  排序:
 					  <select class='_variable' id='view_order' style='width:80px;'>
 					  <?php for($i=1;$i<50;$i++):?>
 					    <option value='<?php echo $i;?>'> <?php echo $i;?> </option>
 					  <?php endfor; ?>
 					  </select>(小排在前)
+					</span> 
+			      </div>
+				  <div class='data_col tr_like'> 
+				    <span class='data_field'> 顯示於網站 </span> 
+				    <span class='data_value'>
+					  關閉 <span class='active_option' id='_view' pass=1><i class='active_switch'></i></span> 顯示
+					</span> 
+			      </div>
+				  <div class='data_col tr_like'> 
+				    <span class='data_field'> 顯示於首頁 </span> 
+				    <span class='data_value'>
+					  關閉 <span class='active_option' id='view_index' pass=0><i class='active_switch'></i></span> 顯示
 					</span> 
 			      </div>
 				  <div class='data_col'> 
@@ -205,8 +215,6 @@
 					</div>
 				  </div>
 				 
-				  
-                  <div class='data_col tr_like'> <span class='data_field '> 資料備註 </span> <span class='data_value'> <input type='text' class='_variable' id='temp'  /> </span> </div>
 				  <div class='data_col tr_like action_col'> 
 				    <span class='data_field' > 其他功能 </span>
 				    <span class='data_value'> 

@@ -33,12 +33,14 @@ html,body{
 	left:30px;
 	right:30px;
 	top:20px;
-	background-color:#c53d43;
 	opacity:0.8;
 	font-size:15px;
 	
 	display:none;
   }
+    div.alert{ background-color:#47885e;}	
+	div.error{ background-color:#c53d43;}
+	
     div.message_block{
 	  position:relative;
 	  padding:10px 15px;

@@ -184,6 +184,13 @@
 	  self::data_output('html',$result,'admin_product');
 	}
 	
+	// AJAX: 排序產品檔案
+	protected function act_product_sort(){
+	  $this->Model = new Model_AdProduct;
+	  $obj_sort  = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';
+	  self::data_output('json',$this->Model->ADProduct_ReSort_Products( $obj_sort,$_SESSION['USER_ID']));
+	}
+	
 
 	// AJAX: 取得產品資料
 	protected function act_product_read(){
@@ -191,6 +198,9 @@
 	  $record_no = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';  
 	  self::data_output('json',$this->Model->ADProduct_Get_Target_Product($record_no,$_SESSION['lang']),'');
 	}
+	
+	
+	
 	
 	
 	// AJAX: 儲存產品資料
@@ -237,7 +247,7 @@
 	}
 	
 	
-	// AJAX: 刪除附件檔案
+	// AJAX: 排序附件檔案
 	protected function act_reobj_sort(){
 	  $this->Model = new Model_AdProduct;
 	  $data_no  = isset($_REQUEST['target']) ? intval($_REQUEST['target']) : 0;

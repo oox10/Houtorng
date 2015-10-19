@@ -15,6 +15,36 @@
 	
 	data_orl = {};
 	
+	//-- add drag sort function
+	$('tbody.data_result').sortable({
+	  placeholder: "ui-state-highlight",
+	  update: function( event, ui ) {
+		  
+        var element_order = $( ".data_record" ).map(function(){ return $(this).attr('no'); }).get().join(','); 
+		console.log(element_order);
+		  
+		$.ajax({
+            url: 'admain.php',
+	        type:'POST',
+	        dataType:'json',
+	        data: {act:'act_product_sort',target:element_order},
+		    beforeSend: function(){  system_loading(); },
+            error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
+	        success: 	function(response) {
+		      if(response.action){
+			    system_message_alert('alert', '已重新排序');
+		      }else{
+			    system_message_alert('error',response.info);
+	          }
+	        },
+		    complete:	function(){  }
+          }).done(function(r) { system_loading();  });
+	  }
+		
+	});
+	
+	
+
 	
 	//-- admin task get user data
 	$(document).on('click','._data_read',function(){
@@ -33,6 +63,8 @@
 		return false;
 	  }
 	  
+	  location.hash = data_no;
+	  
 	  
 	  if( data_no=='_addnew' ){  
 	  
@@ -50,7 +82,7 @@
 		
 		active_header_footprint_option('record_selecter','新增產品','_return_list');
 		reload_order_contract_list(0)
-		$('#_mask').attr('pass',0);
+		$('#_view,#view_index').attr('pass',0);
 		
 		
 	  }else{
@@ -76,7 +108,8 @@
 			    });
 			  });
 			  
-			  $('#_mask').attr('pass',response.data.products._mask);
+			  $('#_view').attr('pass',response.data.products._view);
+			  $('#view_index').attr('pass',response.data.products.view_index);
 			  
 			  $dom = dom_record.clone().removeClass('_data_read');
 			  $('#record_selecter').find('.record_control').hide();
@@ -119,7 +152,9 @@
 	    $tr.prependTo('tbody.data_result').trigger('click');
 	  }
 	  
-	  $('#_mask').attr('pass',0);
+	  $('#_view').attr('pass',0);
+	  $('#view_index').attr('pass',0);
+	  
 	  $('li.langsel:nth-child(1)').trigger('click');
 	  
 	});
@@ -161,7 +196,8 @@
 		
 		
 	  });
-	  modify_data['products']['_mask']  =  $('#_mask').attr('pass');
+	  modify_data['products']['_view']  =  $('#_view').attr('pass');
+	  modify_data['products']['view_index']  =  $('#view_index').attr('pass');
 	  
 	  // encode data
 	  var passer_data = encodeURIComponent(Base64.encode(JSON.stringify(modify_data)));
@@ -201,7 +237,8 @@
 				}
 			  });
 			});
-			$('#_mask').attr('pass',response.data.products._mask);
+			$('#_view').attr('pass',response.data.products._view);
+			$('#view_index').attr('pass',response.data.products.view_index);
 			
 			data_orl = response.data;
 		    if( data_no == '_addnew'){  
@@ -220,7 +257,7 @@
 	
 	
 	//-- 開關資料
-	$(document).on('click','#_mask',function(){
+	$(document).on('click','#_view,#view_index',function(){
 	  if(parseInt($(this).attr('pass'))){
 		$(this).attr('pass',0);
 	  }else{

@@ -57,6 +57,41 @@
 	
 	
 	
+	//-- Admin Product Re Sort Product Display Order 
+	// [input] : ProductOrder   :  attnolist - \d+,\d+,\d+,...
+	// [input] : UserID         :  user login no from SESSION 
+	public function ADProduct_ReSort_Products( $ProductNoOrder = '' , $UserID=0 ){
+	  
+	  try{
+		
+		$pdo_list = explode(',',$ProductNoOrder);
+		
+		// 檢查
+	    if( count($pdo_list)<=1){
+		  throw new Exception('_SYSTEM_ERROR_PARAMETER_FAILS');
+		}
+	    
+		// 執行更新
+		$DB_SAVE = $this->DBLink->prepare($this->DBSql->ADMIN_PRODUCT_SET_PRODUCTS_ORDER());
+		
+		foreach($pdo_list as $key=>$pid){
+		  $DB_SAVE->bindValue(':order'	, ($key+1));
+		  $DB_SAVE->bindValue(':pid'	, $pid);
+		  if( !$DB_SAVE->execute()){
+		    throw new Exception('_SYSTEM_ERROR_DB_ACCESS_FAIL');
+		  }
+		}
+		// final 
+		$this->ModelResult['action'] = true;
+    	
+	  } catch (Exception $e) {
+        $this->ModelResult['message'][] = $e->getMessage();
+      }
+	  return $this->ModelResult;  
+	}
+	
+	
+	
 	//-- Admin Product Get Target Data
 	// [input] : jobcode  :  md5 string;
 	public function ADProduct_Get_Target_Product($TargetId='',$LangSet=array('meta_cht')){
@@ -110,8 +145,8 @@
 		$DB_INSERT  = $this->DBLink->prepare($this->DBSql->ADMIN_PRODUCT_CREATC_NEW_PRODUCT());
 		$DB_INSERT->bindValue(':client'  	, isset($data_newa['products']['client']) ?  trim($data_newa['products']['client']) : '');
 		$DB_INSERT->bindValue(':view_order'	, isset($data_newa['products']['view_order']) ?  intval($data_newa['products']['view_order']) : 99 );
-		$DB_INSERT->bindValue(':temp'		, isset($data_newa['products']['temp']) ?  trim($data_newa['products']['temp'])  : '' );
-		$DB_INSERT->bindValue(':_mask'		, isset($data_newa['products']['_mask'])  ? intval($data_newa['products']['_mask'])  : 1 );
+		$DB_INSERT->bindValue(':view_index' , isset($data_newa['products']['view_index']) ?  intval($data_newa['products']['view_index'])  : 0 );
+		$DB_INSERT->bindValue(':_view'		, isset($data_newa['products']['_view'])  ? intval($data_newa['products']['_view'])  : 1 );
 		
 		if( !$DB_INSERT->execute() ){
 		  throw new Exception('_SYSTEM_ERROR_DB_UPDATE_FAIL');

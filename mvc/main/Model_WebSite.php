@@ -56,8 +56,9 @@
 		    }   
 		  }
 		  
-		  $product_show[str_pad($product['view_order'],2,'0',STR_PAD_LEFT).str_pad($product['pid'],3,'0',STR_PAD_LEFT)] = $product;
-		  
+		  if($product['view_index']){
+			$product_show[str_pad($product['view_order'],2,'0',STR_PAD_LEFT).str_pad($product['pid'],3,'0',STR_PAD_LEFT)] = $product;  
+		  }
 		}
 		ksort($product_show);
 		$this->ModelResult['action'] = true;		
