@@ -25,18 +25,18 @@
        $html = '';
 	   ob_start();
        
-	   if(is_file(_SYSTEM_ROOT_PATH.'mvc\\templates\\'.$template_filename)){
-	     include _SYSTEM_ROOT_PATH.'mvc\\templates\\'.$template_filename;
+	   if(is_file(_SYSTEM_ROOT_PATH.'mvc/templates/'.$template_filename)){
+	     include _SYSTEM_ROOT_PATH.'mvc/templates/'.$template_filename;
 	   }else{
 	     $this->vars['message'] = '找不到網頁，或瀏覽器版本不符'; 
-	     include _SYSTEM_ROOT_PATH.'mvc\\templates\\wrong.html5tpl.php';
+	     include _SYSTEM_ROOT_PATH.'mvc/templates/wrong.html5tpl.php';
 	   }
 	   $html = ob_get_contents();
        ob_end_clean();
        
 	    // 轉換翻譯
 	    $lang_pattern = array();
-	    $lang_conf = isset($_SESSION['language']) ? _SYSTEM_ROOT_PATH.'mvc\\lang\\'.$_SESSION['language'].'.conf' : _SYSTEM_ROOT_PATH.'mvc\\lang\\meta_eng.conf';
+	    $lang_conf = isset($_SESSION['language']) ? _SYSTEM_ROOT_PATH.'mvc/lang/'.$_SESSION['language'].'.conf' : _SYSTEM_ROOT_PATH.'mvc/lang/meta_eng.conf';
 	   
 	    if ($handle = fopen($lang_conf,'r')) {
 		  while (($buffer = fgets($handle, 4096)) !== false) {
