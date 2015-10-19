@@ -23,7 +23,7 @@
   }
  
   // 執行對應的動作
-  $controller = new Controller_WebSite();
+  $controller = new Controller_Website();
   $controller->setRouter(new Router,'_SITE');
   $controller->run();
 
