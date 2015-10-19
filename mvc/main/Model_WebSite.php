@@ -167,7 +167,7 @@
 	public function Contact_Message_SentToAdmin($MesgNo,$MesgData=array()){
 	  
 	// 設定信件內容
-	  require(_SYSTEM_ROOT_PATH.'mvc\\lib\\PHPMailer_5.2.4\\class.phpmailer.php');
+	  require(_SYSTEM_ROOT_PATH.'mvc/lib/PHPMailer_5.2.4/class.phpmailer.php');
 	  $system_message = array();
 	  
 	  $mail_content    = "<div style='margin-bottom:10px;'>有客戶[<span style='font-weight:bold;'>".$MesgData['company']."</span>]透過網站與我們聯繫</div>";
