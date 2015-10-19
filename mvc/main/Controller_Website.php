@@ -89,7 +89,9 @@
 	
 	// PAGE: 產品資訊
 	protected function product($targetProduct=''){
-	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language,$targetProduct) , $targetProduct?'website-product-item':'website-product');
+		
+	  $result = $this->Model->WebSite_Get_Product_List($this->Language,$targetProduct);	
+	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language,$targetProduct) , $targetProduct&&$result['data']['result'] ?'website-product-item':'website-product');
 	}
 	
 	// PAGE: 業務實績
