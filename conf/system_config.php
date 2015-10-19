@@ -23,7 +23,7 @@
   date_default_timezone_set('Asia/Taipei');
   mb_internal_encoding('UTF-8');
   mb_regex_encoding('UTF-8');
-  define('PATH_SEPARATOR',';');
+  //define('PATH_SEPARATOR',';');
   
   
  
