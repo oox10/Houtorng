@@ -200,7 +200,7 @@
 			<!-- begin 規格 -->
 			<?php if($result['specification']): ?>
 			<div class="one-half">
-				<h2 class="indent hmark">${Specification}</h2>
+				<h2 class="indent hmark">${Specifications}</h2>
 				<p>
 				<ul class="square indent">
                 <?php 

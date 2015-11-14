@@ -1,0 +1,5 @@
+conf/server_config.php
+program/*
+theme_resouse/*
+*.log
+*.gitignore

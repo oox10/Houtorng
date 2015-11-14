@@ -72,8 +72,8 @@
                         <li>
                             <img src="images/slider/slides/frontphoto-940x350.png" alt="Furnace">
                             <div class="flex-caption">
-                                <h2>${Welcome to HouTorng !}</h2>
-                                <p>${HOU TORNG ENGINEERING CO., LTD. is a manufacturer of standard & custom metal heat treating equipment.}<a href="index.php?act=aboutus">(see more)</a></p>
+                                <h2>Welcome to HouTorng !</h2>
+                                <p>HOU TORNG ENGINEERING CO., LTD. is a manufacturer of standard & custom metal heat treating equipment.<a href="index.php?act=aboutus">(see more)</a></p>
                             </div>
                         </li>
 						<li>
