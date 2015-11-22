@@ -36,7 +36,7 @@
 		    </div>
 			<div class='login_block '>
 		      <div class='login_title'>
-			    Han-Archive Customers Admin System   
+			    厚彤後台管理系統  v1.0   
 			  </div>
 			  <div class='login_element'>
 			    <input type='text' class='form_input'  id='dt_aduacct'   placeholder="Account"> 
