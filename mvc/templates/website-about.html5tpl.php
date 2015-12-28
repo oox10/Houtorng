@@ -67,11 +67,10 @@
         
         <!-- begin main content -->
         <div class="intro">
-            <p>內容還要改HOU TORNG ENGINEERING CO., LTD.had been established in 1994 
-			is professional design manufacture and sale for metal heat-treatment equipment.</p>
+            <p>${AboutUsDescrip}</p>
         </div>
         
-        <p>${AboutUsDescrip}<br><br>
+        <p><br><br>
 		
             <ul class="square">
                     <li>${Superintendent：Huang Yung Chun}</li>

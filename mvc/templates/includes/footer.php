@@ -16,7 +16,7 @@
 			
 			            <div class="one-fourth">
                 <div class="widget latest-posts">
-                    <h3>Latest Products</h3>
+                    <h3>${Latest Products}</h3>
                     <ul>
                         <li>
                             <a href="blog-post.php">Endothermic Gas Generator</a>
