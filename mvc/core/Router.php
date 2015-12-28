@@ -37,6 +37,13 @@
 		
 		case '_SITE':
 		  
+		  if(!isset($_SESSION['language'])){
+			$lang_detect = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2):'';  	
+		    switch($lang_detect){
+			  case 'zh':	$_SESSION['language'] = 'meta_cht'; break;
+              default:	$_SESSION['language'] = 'meta_eng';	break;	
+		    }  
+		  }
 		  break;
 		
 		case '_LOGIN':
