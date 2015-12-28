@@ -71,7 +71,7 @@
 			is professional design manufacture and sale for metal heat-treatment equipment.</p>
         </div>
         
-        <p>${內容還要修正與補充HOU TORNG ENGINEERING CO., LTD.had been established in 1994 is professional design manufacture and sale for metal heat-treatment equipment. We provide high quality & high efficiency & high production industrial furnace for carburizing quenching harden and tempering or annealing for metal.}<br><br>
+        <p>${AboutUsDescrip}<br><br>
 		
             <ul class="square">
                     <li>${Superintendent：Huang Yung Chun}</li>
