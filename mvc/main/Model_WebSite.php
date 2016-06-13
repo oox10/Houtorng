@@ -61,7 +61,8 @@
 		  }
 		}
 		ksort($product_show);
-		$this->ModelResult['action'] = true;		
+		$this->ModelResult['action'] = true;
+        $this->ModelResult['data']['newprot']   = 		
 		$this->ModelResult['data']['product']   = array_slice($product_show,0,10);	//用於建立首頁的產品卷軸	
 	    $this->ModelResult['data']['classlv']   = $product_class;	//用於建立nav bar的列表
         $this->ModelResult['data']['target']    = $product_target;  //用於建立產品清單focus

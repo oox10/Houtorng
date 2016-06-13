@@ -16,15 +16,15 @@
 			
 			            <div class="one-fourth">
                 <div class="widget latest-posts">
-                    <h3>${Latest Products}</h3>
+                    <h3>${_FOOTER_NEWS_TITLE}</h3>
                     <ul>
                         <li>
-                            <a href="blog-post.php">Endothermic Gas Generator</a>
-                            <span>October 20, 2015</span>
+                            <a href="blog-post.php">全新官方網站上線</a>
+                            <span>October 20, 2016</span>
                         </li>
                         <li>
-                            <a href="blog-post.php">Bell Type Annealing Furnace</a>
-                            <span>September 10, 2015</span>
+                            <a href="blog-post.php">臺灣金屬熱處理設備製造商</a>
+                            <span>September 10, 2016</span>
                         </li>
                     </ul>
                 </div>
