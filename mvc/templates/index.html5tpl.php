@@ -72,28 +72,28 @@
                         <li>
                             <img src="images/slider/slides/frontphoto-940x350.png" alt="Furnace">
                             <div class="flex-caption">
-                                <h2>Welcome to HouTorng !</h2>
+                                <h2>${_SLIDER_P01_TITLE}</h2>
                                 <p>HOU TORNG ENGINEERING CO., LTD. is a manufacturer of standard & custom metal heat treating equipment.<a href="index.php?act=aboutus">(see more)</a></p>
                             </div>
                         </li>
 						<li>
                             <img src="images/slider/slides/construction-940x350.png" alt="Construction">
                             <div class="flex-caption">
-                                <h2>Professional</h2>
+                                <h2>${_SLIDER_P02_TITLE}</h2>
                                 <p>There is no substitute for hard work and experience.</p>
                             </div>
                         </li>
 						<li>
                             <img src="images/slider/slides/NMHG2-940x350.png" alt="NMHG">
                             <div class="flex-caption">
-                                <h2>Stable and Dependable</h2>
+                                <h2>${_SLIDER_P03_TITLE}</h2>
                                 <p>We have over 20 years combined experience in the heat treating equipment industry.<a href="about-us.php">(see more)</a></p>
                             </div>
 						</li>	
                         <li>
                             <img src="images/slider/slides/wood-items-940x350.png" alt="WoodTools">
                             <div class="flex-caption">
-                                <h2>Easy to Customize</h2>
+                                <h2>${_SLIDER_P04_TITLE}</h2>
                                 <p>We have the ability to customize a furnace for any customer requirement.</p>
                             </div>
                         </li>
@@ -101,7 +101,7 @@
                         <li>
                             <img src="images/slider/slides/worker-940x350.png" alt="Worker">
                             <div class="flex-caption">
-                                <h2>Professional Services</h2>
+                                <h2>${_SLIDER_P05_TITLE}</h2>
                                 <p>Our world-wide technical support ensures customers a service they can depend on.</p>
                             </div>
                         </li>
