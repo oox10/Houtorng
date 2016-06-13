@@ -42,12 +42,7 @@
         </nav>
         <!-- end navigation -->
 
-        <!-- begin search form -->
-        <form id="search-form" action="search.php" method="get">
-            <input id="s" type="text" name="s" placeholder="Search &hellip;" style="display: none;">
-            <input id="search-submit" type="submit" name="search-submit" value="Search">
-        </form>
-        <!-- end search form -->
+        
     </section>
     <!-- end navigation bar -->
 

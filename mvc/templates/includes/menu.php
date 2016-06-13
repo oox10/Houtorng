@@ -24,6 +24,7 @@ $menu_def = '<?xml version="1.0" encoding="UTF-8"?>
   </menu_item>
   <menu_item href="index.php?act=business" label="${Business}"></menu_item>
   <menu_item href="index.php?act=contact" label="${Contact}"></menu_item>
+  <menu_item href="index.php?act=sitemap" label="${SiteMap}"></menu_item>
 </menu>';
 
 
