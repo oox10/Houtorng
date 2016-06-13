@@ -9,8 +9,8 @@
 			<div class="one-fourth">
                 <div class="widget">
                     <h3>${About Us}</h3>
-                    <p>${HOU TORNG ENGINEERING CO., LTD.had been established in 1994 is professional design manufacture and sale for metal heat-treatment equipment.}</p>
-                    <p>${We provide high quality & high efficiency & high production industrial furnace for carburizing quenching harden and tempering or annealing for metal.}</p>
+                    <p>${_FOOTER_ABOUTAS_P1}</p>
+                    <p>${_FOOTER_ABOUTAS_P1}</p>
                 </div>
             </div>
 			
