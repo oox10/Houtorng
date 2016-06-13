@@ -9,7 +9,6 @@
 			</div>
 		    <ul class='group_manuel'>
 			  <li> <span class='option func_activate' id='adstaff'>帳號管理</span> </li>
-			  <li> <span class='option func_activate func_undo' >系統紀錄</span> </li>
 			</ul>
 		  </li>
 		  <li>
