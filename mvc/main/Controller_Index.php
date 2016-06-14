@@ -93,7 +93,7 @@
 		}
 		$this->redirectTo('admain.php?act=adStaff');
 	  }else{
-	    self::data_output('html',$login_active,'index');
+	    self::data_output('html',$login_active,'admin_index');
 	  } 
 	}
 	
