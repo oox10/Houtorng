@@ -590,12 +590,12 @@ jQuery(document).ready(function ($) {
 						
 					  switch(response.data){
 						case 'meta_cht': 
-						  location.href = location.protocol+'//'+location.hostname.replace(/^eng\./,'tw.')+location.pathname+location.search.replace(/\/.*$/,'');
+						  window.location = location.protocol+'//'+location.hostname.replace(/^eng\./,'tw.')+location.pathname+location.search.replace(/\/.*$/,'');
 						  break;
 						
                         case 'meta_eng': 
 						default:
-                          location.href = location.protocol+'//'+location.hostname.replace(/^tw\./,'eng.')+location.pathname+location.search.replace(/\/.*$/,'');				
+                          window.location = location.protocol+'//'+location.hostname.replace(/^tw\./,'eng.')+location.pathname+location.search.replace(/\/.*$/,'');				
 						  break;  
 					  }
 					  
