@@ -586,21 +586,16 @@ jQuery(document).ready(function ($) {
 	                dataType:'html',
 	                data: {act:'act_lang/'+evt.selectedItem},
                     error: function(xhr, ajaxOptions, thrownError) { console.log(thrownError) },
-	                success: function(response) {
-		              
-					  console.log(location.href);
-					  console.log(location.hostname);
-					  console.log(location.pathname);
-					  
-					  
+	                success: function(response){
+						
 					  switch(response.data){
 						case 'meta_cht': 
-						  location.href = location.hostname.replace(/^eng\./,'tw.')+location.pathname+location.search.replace(/\/.*$/,''); 
+						  location.assign(location.hostname.replace(/^eng\./,'tw.')+location.pathname+location.search.replace(/\/.*$/,'')); 
 						  break;
 						
                         case 'meta_eng': 
 						default:
-                          location.href = location.hostname.replace(/^tw\./,'eng.')+location.pathname+location.search.replace(/\/.*$/,'');						
+                          location.assign(location.hostname.replace(/^tw\./,'eng.')+location.pathname+location.search.replace(/\/.*$/,''));						
 						  break;  
 					  }
 					  
