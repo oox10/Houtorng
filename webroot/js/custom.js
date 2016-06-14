@@ -583,25 +583,23 @@ jQuery(document).ready(function ($) {
                   $.ajax({
                     url: 'index.php',
 	                type:'POST',
-	                dataType:'html',
+	                dataType:'json',
 	                data: {act:'act_lang/'+evt.selectedItem},
                     error: function(xhr, ajaxOptions, thrownError) { console.log(thrownError) },
 	                success: function(response){
 						
-						
 					  location.search.replace(/\/.*$/,'');	
-						
+					  
 					  switch(response.data){
 						case 'meta_cht': 
-						  location = location.href.replace(/eng\./,'tw.'); 
+						  location.href = location.href.replace(/eng\./,'tw.'); 
 						  break;
 						
                         case 'meta_eng': 
 						default:
-                          location = location.href.replace(/tw\./,'eng.'); 					
+                          location.href = location.href.replace(/tw\./,'eng.'); 					
 						  break;  
 					  }
-					  
 					  
 					  //location.reload();
                     }
