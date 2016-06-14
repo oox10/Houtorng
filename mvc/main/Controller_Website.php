@@ -72,7 +72,8 @@
         default: $this->Language = 'meta_eng'; break; 		
 	  }
 	  $_SESSION['language'] = $this->Language;
-	  self::data_output('json', array('action'=>true),'');
+	  
+	  self::data_output('json', array('action'=>true,'data'=>$this->Language),'');
 	}
 	
 	

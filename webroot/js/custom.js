@@ -588,7 +588,18 @@ jQuery(document).ready(function ($) {
                     error: function(xhr, ajaxOptions, thrownError) { console.log(thrownError) },
 	                success: function(response) {
 		              
-					  location.href = location.pathname+location.search.replace(/\/.*$/,'');
+					  switch(response.data){
+						case 'meta_cht': 
+						  location.href = location.pathname.replace(/^eng\./,'tw\.')+location.search.replace(/\/.*$/,''); 
+						  break;
+						
+                        case 'meta_eng': 
+						default:
+                          location.href = location.pathname.replace(/^tw\./,'eng\.')+location.search.replace(/\/.*$/,'');						
+						  break;  
+					  }
+					  
+					  
 					  //location.reload();
                     }
                   });
