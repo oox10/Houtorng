@@ -166,7 +166,7 @@
                           <?php if(!$key): ?>
 						  <li><a class="fancybox index" data-fancybox-group="gallery-living-brown" href="<?php echo $pimg['acc_name'];?>" title="<?php echo $pd['title_product'];?>"><span class="overlay zoom"></span><img src="<?php echo $pimg['acc_name'];?>" alt=""></a></li>	
 						  <?php else:  ?>
-                          <li style="display: none;"><a class="fancybox index" data-fancybox-group="gallery-living-brown" href="<?php echo $pimg['acc_name'];?>" title="<?php echo $pd['title_product'];?>"><span class="overlay zoom"></span><img src="<?php echo $pimg['acc_name'];?>" alt=""></a></li>
+                          <!-- <li style="display: none;"><a class="fancybox index" data-fancybox-group="gallery-living-brown" href="<?php echo $pimg['acc_name'];?>" title="<?php echo $pd['title_product'];?>"><span class="overlay zoom"></span><img src="<?php echo $pimg['acc_name'];?>" alt=""></a></li> -->
 						  <?php endif; ?>	
 						<?php endforeach; ?>
 						</ul>
