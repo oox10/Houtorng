@@ -588,14 +588,17 @@ jQuery(document).ready(function ($) {
                     error: function(xhr, ajaxOptions, thrownError) { console.log(thrownError) },
 	                success: function(response){
 						
+						
+					  location.search.replace(/\/.*$/,'');	
+						
 					  switch(response.data){
 						case 'meta_cht': 
-						  location.assign(location.pathname.replace(/^eng\./,'tw.')+location.search.replace(/\/.*$/,'')); 
+						  location.assign(location.href.replace(/eng\./,'tw.')); 
 						  break;
 						
                         case 'meta_eng': 
 						default:
-                          location.assign(location.pathname.replace(/^tw\./,'eng.')+location.search.replace(/\/.*$/,''));						
+                          location.assign(location.href.replace(/tw\./,'eng.')); 					
 						  break;  
 					  }
 					  
