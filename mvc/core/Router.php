@@ -32,10 +32,19 @@
     
 	//-- 依據用途判別需要的條件
 	public function getAction( $mode = '_LOGIN'){    //取得解析後的 動作名稱              
-	  	  
+	  
 	  switch($mode){  
 		
 		case '_SITE':
+		  
+		  // 強制設定語言
+		  if(isset($_SERVER['HTTP_HOST'])){
+			if(preg_match('/^eng\./',$_SERVER['HTTP_HOST'])){
+			  $_SESSION['language'] = 'meta_eng';
+			}else if(preg_match('/^tw\./',$_SERVER['HTTP_HOST'])){
+			  $_SESSION['language'] = 'meta_cht';	
+			}  
+		  }
 		  
 		  if(!isset($_SESSION['language'])){
 			$lang_detect = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2):'';  	
@@ -44,6 +53,7 @@
               default:	$_SESSION['language'] = 'meta_eng';	break;	
 		    }  
 		  }
+		  
 		  break;
 		
 		case '_LOGIN':
