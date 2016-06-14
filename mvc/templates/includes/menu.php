@@ -13,6 +13,11 @@ if(count($classlv)){
   }	
 }
 
+
+echo "<div style='display:none;'>";
+var_dump($product_level);
+echo "</div>";
+
 $menu_def = '<?xml version="1.0" encoding="UTF-8"?>
 <menu>
   <menu_item href="index.php" label="${Home}">
@@ -26,7 +31,6 @@ $menu_def = '<?xml version="1.0" encoding="UTF-8"?>
   <menu_item href="index.php?act=contact" label="${Contact}"></menu_item>
   <menu_item href="index.php?act=sitemap" label="${SiteMap}"></menu_item>
 </menu>';
-
 
 $menu = simplexml_load_string($menu_def);
 
