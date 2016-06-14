@@ -592,12 +592,12 @@ jQuery(document).ready(function ($) {
 					  
 					  switch(response.data){
 						case 'meta_cht': 
-						  location = location.href.replace(/eng\./,'tw.'); 
+						  location = location.hostname.replace(/^eng\./,'tw.')+location.pathname+location.search.replace(/\/.*$/,'');
 						  break;
 						
                         case 'meta_eng': 
 						default:
-                          location = location.href.replace(/tw\./,'eng.'); 					
+                          location = location.hostname.replace(/^tw\./,'eng.')+location.pathname+location.search.replace(/\/.*$/,'');				
 						  break;  
 					  }
 					  
