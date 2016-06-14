@@ -588,6 +588,11 @@ jQuery(document).ready(function ($) {
                     error: function(xhr, ajaxOptions, thrownError) { console.log(thrownError) },
 	                success: function(response) {
 		              
+					  console.log(location.href);
+					  console.log(location.hostname);
+					  console.log(location.pathname);
+					  
+					  
 					  switch(response.data){
 						case 'meta_cht': 
 						  location.href = location.hostname.replace(/^eng\./,'tw.')+location.pathname+location.search.replace(/\/.*$/,''); 
