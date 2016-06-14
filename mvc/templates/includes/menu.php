@@ -13,6 +13,7 @@ if(count($classlv)){
   }	
 }
 
+$menu     = '';
 $menu_def = '<?xml version="1.0" encoding="UTF-8"?>
 <menu>
   <menu_item href="index.php" label="${Home}">
