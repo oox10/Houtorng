@@ -10,7 +10,7 @@
                 <div class="widget">
                     <h3>${About Us}</h3>
                     <p>${_FOOTER_ABOUTAS_P1}</p>
-                    <p>${_FOOTER_ABOUTAS_P1}</p>
+                    <p>${_FOOTER_ABOUTAS_P2}</p>
                 </div>
             </div>
 			
