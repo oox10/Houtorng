@@ -42,7 +42,7 @@
 			if(preg_match('/^eng\./',$_SERVER['HTTP_HOST'])){
 			  $_SESSION['language'] = 'meta_eng';
 			}else if(preg_match('/^tw\./',$_SERVER['HTTP_HOST'])){
-			  $_SESSION['language'] = 'meta_cht';	
+			  $_SESSION['language'] = 'meta_cht';
 			}  
 		  }
 		  

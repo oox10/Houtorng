@@ -10,7 +10,6 @@
 	//--  Class Initial
 	public function __construct(){
 	  $this->Model = new Model_WebSite;
-	  $this->Language = isset($_SESSION['language']) ? $_SESSION['language'] : 'meta_eng'; 
 	}
 	
 	//--  Class Destruct
@@ -61,6 +60,7 @@
 	
 	// PAGE: 系統首頁
 	protected function index(){
+	  $this->Language = isset($_SESSION['language']) ? $_SESSION['language'] : 'meta_eng'; 
 	  self::data_output('html', $this->Model->WebSite_Get_Product_List($this->Language),'index');
 	}
 	
@@ -90,13 +90,14 @@
 	
 	// PAGE: 產品資訊
 	protected function product($targetProduct=''){
-		
+	  $this->Language = isset($_SESSION['language']) ? $_SESSION['language'] : 'meta_eng'; 	
 	  $result = $this->Model->WebSite_Get_Product_List($this->Language,$targetProduct);	
 	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language,$targetProduct) , $targetProduct&&$result['data']['result'] ?'website-product-item':'website-product');
 	}
 	
 	// PAGE: 業務實績
 	protected function business(){
+	  $this->Language = isset($_SESSION['language']) ? $_SESSION['language'] : 'meta_eng'; 	
 	  $this->Model->WebSite_Get_Product_List($this->Language);
 	  self::data_output('html',$this->Model->WebSite_Get_Business_List(),'website-business');
 	}
@@ -104,17 +105,20 @@
 	
 	// PAGE: 關於我們
 	protected function aboutus($error_code=''){
+	  $this->Language = isset($_SESSION['language']) ? $_SESSION['language'] : 'meta_eng'; 	
 	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language),'website-about');
 	}
 	
 	// PAGE: 聯繫我們
 	protected function contact($error_code=''){
+	  $this->Language = isset($_SESSION['language']) ? $_SESSION['language'] : 'meta_eng'; 	
 	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language),'website-contact');
 	}
 	
 	
 	// PAGE: 網站地圖
 	protected function sitemap($error_code=''){
+	  $this->Language = isset($_SESSION['language']) ? $_SESSION['language'] : 'meta_eng'; 	
 	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language),'website-sitemap');
 	}
 	
