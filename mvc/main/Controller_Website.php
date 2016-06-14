@@ -112,6 +112,12 @@
 	}
 	
 	
+	// PAGE: 網站地圖
+	protected function sitemap($error_code=''){
+	  self::data_output('html',$this->Model->WebSite_Get_Product_List($this->Language),'website-sitemap');
+	}
+	
+	
 	// AJAX: 送出聯繫表單
 	protected function message(){
 	  $captcha_save = isset($_SESSION['turing_string']) ? $_SESSION['turing_string'] : false ;
