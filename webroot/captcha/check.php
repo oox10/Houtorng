@@ -240,8 +240,8 @@ switch ($noiset) {
   		$lw = mt_rand(0,3);
   		if ($lx > $image_width) {
     		  $lx -= $image_width;
-    		  ImageFilledRectangle($im, 0, $lx, $image_width-1, $lx+$lw, $c );
-  		   } else ImageFilledRectangle($im, $lx, 0, $lx+$lw, $image_height-1, $c );
+    		  ImageFilledRectangle($im, 0, $lx, $image_width-1, $lx+$lw, ${$c} );
+  		   } else ImageFilledRectangle($im, $lx, 0, $lx+$lw, $image_height-1, ${$c} );
   		}; break;
 	} // end switch  
 

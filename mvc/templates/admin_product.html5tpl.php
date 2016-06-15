@@ -6,38 +6,34 @@
 	<title><?php echo defined('_SYSTEM_HTML_TITLE') ? _SYSTEM_HTML_TITLE : 'RCDH System'; ?></title>
 	
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="theme/css/css_default.css" />
-	<link rel="stylesheet" type="text/css" href="theme/css/css_admin_main.css" />
-	<link rel="stylesheet" type="text/css" href="theme/css/css_admin_product.css" />
 	<link type="text/css" href="tool/jquery-ui-1.11.2.custom/jquery-ui.structure.min.css" rel="stylesheet" />
 	<link type="text/css" href="tool/jquery-ui-1.11.2.custom/jquery-ui.theme.min.css" rel="stylesheet" />
+	<link type="text/css" href="tool/font-awesome-4.6.2/css/font-awesome.min.css" rel="stylesheet" />
 	
 	<!-- JS -->
-	<script type="text/javascript" src="tool/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="tool/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="tool/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="tool/canvasloader-min.js"></script>	
+    <script type="text/javascript" src="tool/html2canvas.js"></script>	  
+	
+	<!-- Self -->
+	<link rel="stylesheet" type="text/css" href="theme/css/css_default.css" />
+	<link rel="stylesheet" type="text/css" href="theme/css/css_main.css" />
+	<link rel="stylesheet" type="text/css" href="theme/css/css_product_admin.css" />
+	
 	<script type="text/javascript" src="js_library.js"></script>
 	<script type="text/javascript" src="js_admin.js"></script>
-	<script type="text/javascript" src="js_product.js"></script>
+	<script type="text/javascript" src="js_product_admin.js"></script>
 	
-	<!-- Upload main CSS file -->
-	<link href="tool/mini-upload-form/assets/css/style.css" rel="stylesheet" />
-	<script src="tool/mini-upload-form/assets/js/jquery.knob.js"></script>
-    <!-- jQuery File Upload Dependencies -->
-	<script src="tool/mini-upload-form/assets/js/jquery.ui.widget.js"></script>
-	<script src="tool/mini-upload-form/assets/js/jquery.iframe-transport.js"></script>
-	<script src="tool/mini-upload-form/assets/js/jquery.fileupload.js"></script>
-	<!-- Upload JS file -->
-	<script src="tool/mini-upload-form/assets/js/script.js"></script>
 	
 	<!-- PHP -->
 	<?php
-	$user_account = isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : 'Anonymous';
-	$data_lang = isset($this->vars['system_data']['data']['lang']) ? $this->vars['system_data']['data']['lang'] : array();  
-	$data_list = isset($this->vars['system_data']['data']['record']) ? $this->vars['system_data']['data']['record'] : array();  
-	$page_info = isset($this->vars['system_data']['info']) ? $this->vars['system_data']['info'] : '';  
+	$user_info 		= isset($this->vars['server']['data']['user']) 		? $this->vars['server']['data']['user'] 	: array('user'=>array('user_name'=>'Anonymous'),'group'=>array());
+	$data_lang  	= isset($this->vars['server']['data']['lang']) 		? $this->vars['server']['data']['lang'] 	: array();  
+	$data_list  	= isset($this->vars['server']['data']['products']) 	? $this->vars['server']['data']['products'] : array();  
+	$data_count 	= count($data_list);
 	
-	$list_count= count($data_list) ? count($data_list) : 0 ;
+	$page_info 		= isset($this->vars['server']['info']) ? $this->vars['server']['info'] : '';  
 	
 	?>
   </head>
@@ -48,37 +44,58 @@
 	  </div>
 	  <div class='system_content_area'>
         <div class='tool_banner' >
-		  <span class='system_alert'></span>
-		  <span class='system_setting'></span>
+		  <ol id='system_breadcrumbs' typeof="BreadcrumbList" >
+		  </ol>
 		  <span class='account_option tool_right'>
 		    <div class='account_info'>
 			  <span id='acc_mark'><i class='m_head'></i><i class='m_body'></i></span>
-			  <span id='acc_string'> <?php echo $user_account; ?> </span>
+			  <span id='acc_string'> 
+			    <i class='acc_name'><?php echo $user_info['user']['user_name']; ?></i>
+			    <i class='acc_group'><?php echo $user_info['user']['user_group']; ?></i>
+			  </span>
 			  <span id='acc_option'><a class='mark16 pic_more'></a> </span>
 			</div>
 		    <div class='account_control arrow_box'>
 			  <ul class='acc_option_list'>
-			    <li>  </li>
+			    <li >
+				  <label title='目前群組'> <i class="fa fa-university" aria-hidden="true"></i> 群組 </label>
+				  <select id='acc_group_select'>
+				    <?php foreach($user_info['group'] as $gset): ?>  
+				    <option value='<?php echo $gset['id']?>' <?php echo $gset['now']?'selected':'' ?> > <?php echo $gset['name']; ?></option>
+				    <?php endforeach; ?>
+				  </select>
+				</li>
+				<li> 
+				  <label> <i class="fa fa-user-secret" aria-hidden="true"></i> 角色 </label>
+				  <span>
+				    <?php foreach($user_info['group'] as $gid => $gset): ?>  
+				    <?php if($gset['now']) echo join(',',$gset['roles']); ?>
+				    <?php endforeach; ?>
+				  </span> 
+				</li>
+				<li>
+				  <label> <i class="fa fa-clock-o" aria-hidden="true"></i> 登入</label>
+				  <span> <?php echo $user_info['login']; ?></span>
+				</li>
 			  </ul>
 			  <div class='acc_option_final'>
 			    <span id='acc_logout'> 登出 </span>
 			  </div>
 		    </div>
 		  </span>
-		  <span class='system_search ' > SS </span>
 		</div>
-		<div class='topic_banner tr_like'>
+		
+		<div class='topic_banner'>
 		  <div class='topic_header'> 
-		    <div class='topic_title'> 產品管理 </div>
-			<div class='topic_descrip'>  產品資料管理與顯示設定</div>
+		    <div class='topic_title'> 群組帳號管理 </div>
+			<div class='topic_descrip'> 群組內之帳號審核、設定與管理 </div>
 		  </div>
-		  <div class='system_footprint'>
-		    <ol class='footprint'> 
-			  <li class='option'> Home </li>  
-			  <li class='option nowat'>  </li>  <!-- 內容由 javascript insert -->
-			</ol>
-		  </div> 
+		  <div class='lunch_option'> 
+		    
+		  </div>
 		</div>
+		
+		
 		<div class='main_content' >
 		  <!-- 資料列表區 -->
 		  <div class='data_record_block' id='record_selecter' >
@@ -130,12 +147,12 @@
 			  </table>
 			  <div class='record_control'>
 			    <span class='record_result'>  
-			      顯示 <span> 1 </span> - <span> 10 </span> /  共 <span> <?php echo $list_count; ?></span>  筆
+			      顯示 <span> 1 </span> - <span> 10 </span> /  共 <span> <?php echo count($data_count); ?></span>  筆
 			    </span>
 				<span class='record_pages'>
 				  <a class='page_tap page_to' page='prev' > &#171; </a>
 				  <span class='page_select'>
-				  <?php for($p=1 ; $p<=( $list_count/10 + (($list_count%10)?1:0) ) ; $p++) : ?>  
+				  <?php for($p=1 ; $p<=( count($data_list)/10 + ((count($data_list)%10)?1:0) ) ; $p++) : ?>  
 			        <a class='page_tap <?php echo $p==1? 'page_now':'page_to';?>' page=<?php echo $p; ?> ><?php echo $p; ?></a>
 				  <?php endfor; ?>
 				  </span>
@@ -144,6 +161,7 @@
 			  </div>
 		    </div>
 		  </div>
+		  
 		  <div class='data_record_block' id='record_editor'>
 		    <div class='record_header'>
 			  <span class='record_name'>產品資料</span>
@@ -241,31 +259,47 @@
 	  <div class='message_block'>
 		<div id='message_container'>
 		  <div class='msg_title'></div>
-		  <div class='msg_info'><?php echo $page_info;?></div>
+		  <div class='msg_info'></div>
 		</div>
 		<div id='area_close'></div>
       </div>
 	</div> 
-	
-	<!-- 系統檔案上傳 -->
-	<div class='system_upload_area'>
-	  <div id='order_upload'>
-		<div class='cont_block'>
-		  <form id="upload" method="post" action="?act=act_upload_pdobj" enctype="multipart/form-data">
-		    <input type='hidden' id='record_num' name='record_num' value=''  />
-			<div class='upload_banner'><span class='block_title'> <i id='upload_record_no'></i>    圖片上傳 : </span></div> 
-			<div class='upload_option'><a class='mark16 pic_close' id='act_close_upload'></a></div> 
-			<div id="drop">
-			  將檔案拖曳到此 或
-			  <a>選擇檔案</a>
-			  <input type="file" name="upl" multiple />
-			</div>
-			<ul class='_relative'> <!-- The file uploads will be shown here --> </ul>
-		  </form>
-		</div>
-	  </div>
-	</div>
-	
+	<!-- 系統report -->
+      <div class='system_feedback_area'>
+        <div class='feedback_block'>
+        <div class='feedback_header tr_like' >
+          <span class='fbh_title'> 系統回報 </span>
+          <a class='fbh_option' id='act_feedback_close' title='關閉' ><i class='mark16 pic_close'></i></a>
+        </div>
+        <div class='feedback_body' >
+          <div class='fb_imgload'> 建立預覽中..</div>
+          <div class='fb_preview'></div>
+          <div class='fb_areasel'>
+            <span>回報頁面:</span>
+            <input type='radio' class='feedback_area_sel' name='feedback_area' value='system_body_block'>全頁面
+            <input type='radio' class='feedback_area_sel' name='feedback_area' value='system_content_area'>中版面
+            <input type='radio' class='feedback_area_sel' name='feedback_area' value='system_edit_area'>右版面
+            <input type='radio' class='feedback_upload_sel' name='feedback_area' value='user_upload'><input type='file'  id='feedback_img_upload' >
+          </div>
+          <div class='fb_descrip'>
+            <div class=''>
+              <span class='fbd_title'>回報類型:</span>
+              <input type='checkbox' class='feedback_type' name='fbd_type' value='資料問題' ><span >資料問題</span>，
+              <input type='checkbox' class='feedback_type' name='fbd_type' value='系統問題' ><span >系統問題</span>，
+              <input type='checkbox' class='feedback_type' name='fbd_type' value='使用問題' ><span >使用問題</span>，
+              <input type='checkbox' class='feedback_type' name='fbd_type' value='建議回饋' ><span >建議回饋</span>，
+              <input type='checkbox' class='feedback_type' name='fbd_type' value='其他' >其他:<input type='text' class='fbd_type_other' name='fbd_type_other' value='' >
+            </div>
+            <div class='fbd_title'>回報描述:</div>
+            <textarea  class='feedback_content'  name='fbd_content'></textarea>
+          </div>
+        </div>
+        <div class='feedback_bottom tr_like' >
+          <a class='sysbtn btn_feedback' id='act_feedback_cancel' > <i class='mark16 pic_account_off'></i> 取 消 </a>
+          <a class='sysbtn btn_feedback' id='act_feedback_submit' > <i class='mark16 pic_account_on'></i> 送 出 </a>		
+        </div>
+        </div>
+      </div>      
 	<!-- 系統Loading -->
     <div class='system_loading_area'>
 	  <div class='loading_block' >

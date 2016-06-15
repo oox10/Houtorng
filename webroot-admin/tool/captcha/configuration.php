@@ -1,11 +1,11 @@
 <?php
 $CSize = 0;
-$CSizeWidth = 145;
-$CSizeHeight = 35;
+$CSizeWidth = 90;
+$CSizeHeight = 30;
 $CSrc = 'cdefghijkmnpstwx34578';
 $CType = 0;
-$CMinSize = 5;
-$CMaxSize = 6;
+$CMinSize = 4;
+$CMaxSize = 4;
 $CBackgroundType = 0;
 $CBackgroundColor = '#FFFFFF';
 $CBackgroundFile = 'backgrounds/bluecircles.gif';
@@ -20,7 +20,7 @@ $CFontSizeMin = 15;
 $CFontSizeMax = 20;
 $CFontRotMin = -15;
 $CFontRotMax = 15;
-$CFontPadding = 2;
+$CFontPadding = 0;
 $CNoise = 0;
 $CNoiseType = 0;
 $CNoiseColor = '#FFFFFF';

@@ -101,69 +101,6 @@
 	
 	
 	
-	/******************************************
-	*******  Admin Staff Control Set  *********
-	******************************************/
-	
-	
-	// PAGE: 員工管理介面
-	protected function adstaff(){
-	  $this->Model = new Model_AdStaff;
-	  $active_module = $this->Model->ADStaff_Get_Staff_List(); 
-	  self::data_output('html',$active_module,'admin_staff');
-	}
-	
-	
-	// AJAX: 取得員工資料
-	protected function act_staff_read(){
-	  $this->Model = new Model_AdStaff;
-	  $staff_no = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';
-	  self::data_output('json',$this->Model->ADStaff_Get_Staff_Data($staff_no),'');
-	}
-	
-	
-	// AJAX: 儲存員工資料
-	protected function act_staff_save(){
-	  $this->Model = new Model_AdStaff;
-	  $staff_no   = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';
-	  $staff_data = isset($_REQUEST['data']) ? $_REQUEST['data'] : '';
-	    
-	  if($staff_no=='_addnew'){
-	    $act_result = $this->Model->ADStaff_Newa_Staff_Data($staff_data);
-	  }else{
-	    $act_result = $this->Model->ADStaff_Save_Staff_Data($staff_no,$staff_data);
-	  }
-	  
-	  if($act_result['action']){
-	    self::data_output('json',$this->Model->ADStaff_Get_Staff_Data($act_result['data']),'');
-	  }else{
-	    self::data_output('json',$act_result,''); 
-	  }
-	}
-	
-    // AJAX: 刪除員工帳號
-	protected function act_staff_del(){
-	  $this->Model = new Model_AdStaff;
-	  $staff_no = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';
-	  self::data_output('json',$this->Model->ADStaff_Del_Staff_Data($staff_no),'');
-	}
-    
-	// AJAX: 寄發帳號開通通知信
-	protected function act_staff_mail_accept(){
-	  $this->Model = new Model_AdStaff;
-	  $staff_no = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';
-	  self::data_output('json',$this->Model->ADStaff_Staff_Account_Accept_Mail($staff_no),'');
-	}
-	
-	// AJAX: 發送員工密碼設定信
-	protected function act_staff_mail_repw(){
-	  $this->Model = new Model_AdStaff;
-	  $staff_no = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';
-	  self::data_output('json',$this->Model->ADStaff_Account_Reset_Pass($staff_no),'');
-	}
-	
-	
-    
 	
 	/******************************************
 	*******  Admin Producted Control Set  *********
@@ -255,17 +192,6 @@
 	  self::data_output('json',$this->Model->ADProduct_ReSort_Relate_Object( $data_no ,$obj_sort,$_SESSION['USER_ID']));
 	}
 	
-	/********************************************
-	*******  Admin Business Control Set  *********
-	******************************************/
-	 
-	// PAGE: 產品管理
-	protected function business(){
-	  $this->Model = new Model_AdProduct;
-	  $result = array('action'=>true,'data'=>array());
-	  $result['data']['record'] = $this->Model->ADProduct_Get_Business_List()['data'];
-	  self::data_output('html',$result,'admin_business');
-	}
 	
 	
 	

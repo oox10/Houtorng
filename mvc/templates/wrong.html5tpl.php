@@ -6,79 +6,73 @@
 	<title><?php echo defined('_SYSTEM_HTML_TITLE') ? _SYSTEM_HTML_TITLE : 'RCDH System'; ?></title>
 	
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="<?php echo _SYSTEM_SERVER_ADDRESS;?>theme/css/css_default.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo _SYSTEM_SERVER_ADDRESS;?>theme/css/css_login.css" />
-    <link type="text/css" href="<?php echo _SYSTEM_SERVER_ADDRESS;?>tool/jScrollPane/jScrollPane.css" rel="stylesheet" media="all" />
+	<link rel="stylesheet" type="text/css" href="theme/css/css_default.css" />
+	<link rel="stylesheet" type="text/css" href="theme/css/css_main.css" />
+	<link rel="stylesheet" type="text/css" href="theme/css/css_account.css" />
 	
 	<!-- JS -->
-	<script type="text/javascript" src="<?php echo _SYSTEM_SERVER_ADDRESS;?>tool/jquery-2.1.3.min.js"></script>
-	<script type="text/javascript" src="<?php echo _SYSTEM_SERVER_ADDRESS;?>js_library.js"></script>
-	<script type="text/javascript" src="<?php echo _SYSTEM_SERVER_ADDRESS;?>js_login.js"></script>
+	<script type="text/javascript" src="tool/jquery-2.1.4.min.js"></script>
 	
 	<!-- PHP -->
 	<?php 
-	$page_element  = isset($this->vars['system_data']['data']) ? $this->vars['system_data']['data'] : '';
-	$alert_message = isset($this->vars['system_data']['info']) ? $this->vars['system_data']['info'] : '';
+	
+	$page_element  = isset($this->vars['server']['data']) ? $this->vars['server']['data'] : '';
+	$alert_message = isset($this->vars['server']['info']) ? $this->vars['server']['info'] : '';
 	?>
 	
 	
   </head>
   <body>
-	<div class='system_main_area'>
-	  <div class='system_header_area'>
-	  </div>
-	  <div class='system_body_area'>
-	    <div class='system_login_block'>
-		  
-		  <div class='login_header'>
-		    <div class='login_title'>
-			  <div class='archive_name' style='text-align:center;'>   <?php echo isset($page_element['archive']['archive_name']) ? $page_element['archive']['archive_name'] : '連結發生錯誤'; ?> </div>
-			  <div class='archive_handle'> <?php if(isset($page_element['archive']['archive_handle'])) echo ' © '.$page_element['archive']['archive_handle']; ?> </div>
-		    </div>
-		  </div>
-		  
-		  <!-- 帳號登入 -->
-		  <div class='login_block '>
-		      <div class='login_element'>
-			    <div class='field_name'> 系通發生錯誤 : <span style='color:red;font-weight:600;'> <?php echo $alert_message; ?></span> </div>
-			  </div>
-              <div class='login_element'>
-                <div class='field_name'>若有任何問題請聯繫 [ <?php echo _SYSTEM_MAIL_CONTACT;?> ] </div>
-			  </div> 			   
-			</div>
-			<div class='login_option'>
-			  <div class='tr_like'>
-			    <button  type='button' class='form_submit' id=''>回到登入頁面</button>   
-			  </div>
-			</div>
-		</div>
+    <div class='system_main_area '>
+	  <!-- 系統TITLE BANNER -->
+	  
+	  <div class='system_body_area has_footer'>
+	    <div class='system_body_block'>
+		  <div class='ad_login_block tr_like' >
 		
-	  </div> 
-	  <div class='system_footer_area'></div>
-	</div>
-	
-	<!-- 框架外結構  -->
-	<div class='system_message_area'>
-	  <div class='message_block'>
-		<div id='message_container'>
-		  <div class='msg_title'></div>
-		  <div class='msg_info'><?php echo $alert_message; ?></div>
+			  <div class='system_descrip_block'>
+				<div class='desc_border'>相關資訊</div>
+				  <p class='format_desc'>
+					<ol class='test_list'>
+					  <li><span class='test_title'>外交部國際傳播司</span>:<a href='http://www.mofa.gov.tw/Organization.aspx?n=2997758C3CAF3A58&sms=F685A0BE8BCF5188#hashA3013EA380D20271' target='_blank'> http://www.mofa.gov.tw/ </a></li>
+					</ol>
+				  </p>
+				<div class='desc_border'>系統需求</div>
+				  <p class='format_desc'>
+					本系統使用 HTML5 , CSS3 網頁標準製作，請使用支援此標準的瀏覽器，並請勿關閉瀏覽器的 Javascript 支援，以得到最好的體驗。本系統支援瀏覽器清單如下: 				
+				  </p>
+				  <div class='support_browser tr_like'>
+					<div class='support_item' ><a class='mark30 pic_chrome' title='前往下載 Chrome 瀏覽器' href='http://www.google.com/intl/zh-TW/chrome/' target='_blank' ></a></div>
+					<div class='support_item' ><a class='mark30 pic_firefox' title='前往下載 Firefox 瀏覽器' href='http://mozilla.com.tw/firefox/new/' target='_blank' ></a></div>
+					<div class='support_item' ><a class='mark30 pic_safari' title='前往下載 Safari 瀏覽器' href='http://www.apple.com/tw/safari/' target='_blank' ></a></div>
+					<div class='support_item' ><a class='mark30 pic_opera' title='前往下載 Opera 瀏覽器' href='http://www.opera.com/zh-tw' target='_blank' ></a></div>
+					<div class='support_item' ><a class='mark30 pic_explorer' href='http://windows.microsoft.com/zh-tw/internet-explorer/ie-9-worldwide-languages' target='_blank' ></a><span> 11 以上版本</span></div>
+				  </div>
+				  
+				  <div class='desc_border'>連絡我們</div>
+				  <table class='contact_table'>
+					<tr> <td> 藍星球資訊股份有限公司 </td></tr>
+					<tr> <td >（02）8978-7198#28</td> </tr>
+					<tr> <td ><a href='mailto:<?php echo _SYSTEM_MAIL_CONTACT;?>' ><?php echo _SYSTEM_MAIL_CONTACT;?></a></td></tr>
+				  </table>
+			  </div>
+			  <div class='system_login_area'>
+				<div class='signin_header'> <h1>連結發生錯誤</h1> </div>
+				<div class='alert_form'>			
+				  <div class='login_element'>
+			        <div class='field_name'> 錯誤訊息 : <span style='color:red;font-weight:600;'> <?php echo $alert_message; ?></span> </div>
+			      </div>
+				</div>
+				<div class='register_borad'>
+				  <a href="javascript: void(0)"   onclick="window.history.go(-1);" >回到上一頁</a>
+				</div>			
+			  </div>
+			
+		  </div>
 		</div>
-		<div id='area_close'></div>
-      </div>
-	</div> 
-	
-	<!-- 系統Loading -->
-    <div class='system_loading_area'>
-	  <div class='loading_block' >
-	    <div class='loading_string'> 系統處理中 </div>
-		<div class='loading_image' id='sysloader'></div>
-	    <div class='loading_info'>
-		  <span >如果系統過久無回應，請按[ Esc ] 關閉 loading 版面，並重新操作剛才的動作.</span>
-	    </div>
 	  </div>
 	</div>
-	
+	<?php include("area_admin_footer.php"); ?>
 	
   </body>
 </html>

@@ -6,13 +6,29 @@
 */
  
   /**************************************   
-	    HAN-Archive Admin System     
+	    TLCDA-Archive Admin System     
   **************************************/
+	
+  var data_orl = {};	
+	
 	
   $(window).load(function () {   //  || $(document).ready(function() {	
 	
 	
 	/* [ System Work Function Set ] */
+	
+	
+	// manual display switch
+	
+	$('.system_mark').click(function(){
+	  if($('.system_content_area').hasClass('wide_mode')){
+		$('.system_content_area').removeClass('wide_mode');  
+	  }else{
+		$('.system_content_area').addClass('wide_mode');  
+	  }
+	  $(window).trigger('resize');
+	});
+	
 	
 	
 	//-- page initial alert
@@ -25,20 +41,23 @@
 	  if($(this).hasClass('func_undo')){
 	    alert("尚未開放");
 	  }else{
-	    location.href='admain.php?act='+$(this).attr('id');
+	    location.href='index.php?act='+$(this).attr('id');
 	  }
 	});
 	
 	//-- system manual heightline & footpring insert
 	var act_name = location.search.replace(/^\?act=/,'');
-	if($('#'+act_name).length){
-	  $('#'+act_name).parent().addClass('atthis');	
-	  var action_name = $('#'+act_name).html();
+	var reference = act_name.split('/');
+	
+	if($('#'+reference[0]).length){
+	  $('#'+reference[0]).addClass('inthis');	
+	  var action_name = $('#'+reference[0]).html();
 	}
 	
 	if($('.footprint li.nowat').length){
 	  $('.footprint li.nowat').html(action_name);
 	}
+	
 	
 	
 	//-- 系統loading 版面設定
@@ -99,6 +118,7 @@
 	  }
 	}
 	
+    
 	
 	/* [ Admin Account Function Set ] */
 	
@@ -111,11 +131,250 @@
 	  }		
 	});
 	
-	$('#acc_logout').click(function(){
-	  location.href = 'admain.php?act=logout' 	;  
+	
+	// 群組變換
+	$('#acc_group_select').change(function(){
+	  
+	  if(!$(this).val() || !$(this).find("option[value='"+$(this).val()+"']").length ){
+		system_message_alert('error','錯誤的群組');
+	    return false;
+	  }
+	  
+	  var group_code = $(this).val();
+	  
+      $.ajax({
+          url: 'index.php',
+	      type:'POST',
+	      dataType:'json',
+	      data: {act:'Admin/gpswitch/'+group_code},
+		  beforeSend: 	function(){ system_loading();},
+          error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
+	      success: 		function(response) {
+			
+			if(response.action){
+			  location.hash = '';	
+              location.reload(true);
+			}else{
+			  system_message_alert('',response.info);
+			}
+	      },
+		  complete:	function(){ }
+	  }).done(function() {  });   
 	});
 	
 	
+	
+	// 登出
+	$('#acc_logout').click(function(){
+	  location.href = 'index.php?act=Account/logout' 	;  
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/* [System Breadcrumbs] 系統麵包屑 */
+	
+	// location.pathname  // /MtDoc/editer/Project/DocNo
+	
+    var breadcrumbs = {};    
+	var action_mode = 'get';
+	function built_system_Breadcrumbs(){
+		
+	  var system_location = location.search;
+	  var action_level    = system_location.replace(/\?act=/,'').split('/');
+  	  $Index = $('<li/>').addClass('breadcrumb').append("<a href='index.php?act=Main'>首頁</a>");
+	  $("#system_breadcrumbs").empty().append($Index);
+	  $.each(action_level,function(i,act){
+		switch(i.toString()){
+		  case '0': 
+		    if(act != 'Main'){ 
+			  var $crumb = $Index.clone();
+		      $crumb.children('a').attr('href' , 'index.php?act='+act).html($('#'+act).attr('title'));
+	          $crumb.appendTo("#system_breadcrumbs");
+	        }
+			break;
+			
+		}
+	  });
+	  
+	  if($('#search_breadcrumbs').length){
+		var search_queue = JSON.parse($('#search_breadcrumbs').html());
+	    $.each(search_queue,function(i,act){
+		  var $crumb = $Index.clone(); 
+		  $crumb.children('a').attr('href' , act['link']).html(act['type']+':'+ act['term']+' ('+act['result']+')' );
+	      $crumb.appendTo("#system_breadcrumbs");  
+		});
+	  }
+	  
+	}
+	
+	if($('#system_breadcrumbs').length){
+	  built_system_Breadcrumbs();
+	}
+	
+	
+	//-- 麵包屑綁定回到上一頁標示
+	window.addEventListener('popstate', function(event){
+	  if(document.location.hash.match(/^#.+/)){
+	    $target = $("td[field='user_id']:contains("+location.hash.replace(/^#/,'')+")").parents('tr._data_read ');
+        if(!$target.hasClass( '_target' )){
+		  $target.trigger('click');  
+	    }
+	  }else if(document.location.hash=='#' || document.location.hash==''){
+	    $('._return_list').trigger('click'); 	
+	  }
+    });
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    /* [System Breadcrumbs] 錯誤回報 */
+    
+    //-- feedback area initial
+	$('#user_feedback').click(function(){
+      $('.system_feedback_area').show('slow',function(){
+	    $(".feedback_area_sel[value='system_body_block']").trigger('click');
+	  });  
+    });
+	
+    //-- report function open/close
+	if($('.system_feedback_area').length){
+	  $('.system_feedback_area').draggable({ disabled: false });
+	}
+	
+	/*  Admin feedback Function Set */
+	
+	//-- reset feedback
+	function feedback_reset(){
+	  $('.fb_preview').empty();
+	  $('input.feedback_area_sel:checked').prop('checked',false);
+	  $('input.feedback_type:checked').prop('checked',false);
+	  $('input.fbd_type_other , textarea.feedback_content').val('');
+	}
+	
+	//-- feedback area close
+	$('#act_feedback_close').click(function(){
+	  $('.system_feedback_area').hide('slow',feedback_reset());
+	});
+	
+	
+	//-- feedback image area select
+	$('.feedback_area_sel').click(function(){
+	  $('#feedback_img_upload').val('');
+	  $('.fb_preview').empty();
+	  $('.fb_imgload').show();
+	  var area_name = $(this).val();
+	  html2canvas($('.system_main_area'), {   
+        onrendered: function(canvas){
+          var img = canvas.toDataURL();
+		  $('.fb_preview').append("<img src='"+img+"' class='fp_img'>").prev().hide();  
+		}
+      });
+	});
+	
+	
+	//-- feedback image upload
+	
+	$('#feedback_img_upload').click(function(){
+	  $('input.feedback_upload_sel').prop('checked',true);
+	  $('.fb_preview').empty();
+	}).change(function(event){
+	
+	  if(event.target.files.length > 0 && $(this).val().match(/(jpg|gif|png)$/) ){	    
+		$('.fb_imgload').show();
+		var file   = event.target.files[0];
+		var reader = new FileReader();
+		reader.onload = (function () {
+		  $('.fb_preview').append("<img src='"+this.result+"' class='fp_img'>").prev().hide();
+		});
+		reader.readAsDataURL(file);
+	  }else{
+	    $(this).val('');
+		alert("格式錯誤，請上傳影像檔");
+	  }
+	});
+
+	
+	//-- feedback type selecter
+	$('input.feedback_type').click(function(){  
+	  var fbtype = $(this).val();
+	  var new_fbcont = '';
+	  if( $(this).prop('checked')  &&   !$('textarea.feedback_content').val().match(fbtype)){
+		if($('textarea.feedback_content').val() ){
+		  
+		  if($('input.feedback_type:checked').length==1){
+		    new_fbcont  = "["+fbtype+"]:\n"+$('textarea.feedback_content').val();
+		  }else{
+		    new_fbcont  = $('textarea.feedback_content').val()+"\n"+"["+fbtype+"]:\n";
+		  }
+		}else{
+		  new_fbcont = "["+fbtype+"]:\n";
+		}
+		$('textarea.feedback_content').val(new_fbcont);
+	  }
+	});
+	
+	//-- feedback cancal
+	$('#act_feedback_cancel').click(function(){
+	  if(confirm(" 確定要放棄回報內容 ? ")){
+        feedback_reset();
+	  }
+	});
+	
+	
+	//-- feedback submit
+	
+	$('#act_feedback_submit').click(function(){
+	  var system_name = $('title').length ? $('title').html() : $(location).attr('hostname');
+	  if(!$('input.feedback_type:checked').length){
+		alert("請選擇回報類型"); 		
+	  }else{  
+		var feedback_info = {};
+	    feedback_info.url = document.URL;
+	    feedback_info.preview = $('img.fp_img').attr('src');     	
+	    feedback_info.type 	= $('input.feedback_type:checked').map(function(){ return ($(this).val()=='其他') ? '其他:'+$('input.fbd_type_other').val() : $(this).val(); }).get().join(','); 
+        feedback_info.content = $('textarea.feedback_content').val();
+	  
+		$.ajax({
+          url: 'index.php',
+	      type:'POST',
+	      dataType:'json',
+	      data: {act:'Report/submit/'+system_name+'/'+encodeURIComponent(JSON.stringify(feedback_info))},
+		  beforeSend: 	function(){ system_loading();},
+          error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
+	      success: 		function(response) {
+			if(response.action){
+			  $('#system_message').html("回報送出，請靜待處理").dialog({title:"System Info" });
+			  $('#act_feedback_close').trigger('click');
+			}else{
+			  system_message_alert('',response.info);
+			}
+	      },
+		  complete:	function(){ }
+		}).done(function() {  
+		  system_loading();
+		});        
+	  }	
+	});
 	
 	/*--------------------------------------------------------------------------------------------------------*/
 	/*--------------------------------------------------------------------------------------------------------*/
@@ -125,15 +384,15 @@
 	
 	/* [ Admin Work Function Set ] */
 	
-	var data_orl = {};
-	
 	
 	//-- check editor value modify
+	
 	$('._variable').on('keyup change blur',function(){
+	  
 	  var field_name = $(this).attr('id');
 	  var form_value = $(this).val();
 	  
-	  if(data_orl[field_name] == undefined ){
+	  if(typeof data_orl[field_name] == 'undefined' ){
 		data_orl[field_name] = '';  
 	  }
 	  
@@ -184,8 +443,7 @@
 		  return false;
 		}
 	  }
-	  
-	  $('._variable').val('').removeClass("_modify").prop('disabled',false).prop('readonly',false);  // 欄位重設
+	  initial_record_editer();
 	  $('._reset').val('');  // 動作重設
 	  $('._target').removeClass('_target'); // 移除目標資料標註
 	  $('._relative').empty(); // 關連資料需清空
@@ -202,7 +460,6 @@
 	  if($("tr.data_record[no='_addnew']").length){ $("tr.data_record[no='_addnew']").remove(); }
 	  
 	});
-	
 	
 	
 	/* { GROUP } Data Split 、 Select & Page Tap */
@@ -310,923 +567,7 @@
       }	
 	}
 	
-	
-	
 	$('.record_view').trigger('change');
-	
-	/*--------------------------------------------------------------------------------------------------------*/
-	/*--------------------------------------------------------------------------------------------------------*/
-	
-	
-	
-	/* [ Admin Staff Function Set ] */
-	
-	
-	//-- datepicker initial
-	$("#date_open,#date_access").datepicker({
-	    dateFormat: 'yy-mm-dd',
-	    onClose: function(dateText, inst) { 
-	      if(/\d{4}-\d{2}-\d{2}$/.test(dateText)){
-		    $(this).val(dateText+' 00:00:01');
-		  }
-	    } 
-	});
-	
-	
-	//-- admin staff get user data
-	
-	$(document).on('click','._staff_read',function(){
-	  
-      // initial	  
-	  $('._target').removeClass('_target');
-	  $('._variable').val('');
-	  
-	  // get value
-	  var user_no    = $(this).attr('no');
-	  var dom_record = $(this);
-	  
-	  // active ajax
-	  if( ! user_no ){
-	    system_message_alert('',"資料錯誤");
-		return false;
-	  }
-	  
-	  
-	  if( user_no=='_addnew' ){  
-	  
-	    dom_record.addClass('_target');
-		data_orl = {};
-		$("._variable").each(function(){
-		  
-		  if( $(this).attr('id') == 'user_status'){
-		    $(this).val('4');
-		    data_orl[$(this).attr('id')] = '4';
-			$(this).prop('disabled',true);
-		  }else{
-		    $(this).val('');
-		    data_orl[$(this).attr('id')] = '';
-		  }
-		  
-		  
-		});
-		$dom = dom_record.clone().removeClass('_staff_read');
-	    $('#record_selecter').find('.record_control').hide();
-		$('#record_selecter').find('.record_list').children('.data_result').hide();
-		$('#record_selecter').find('.record_list').children('.data_target').empty().append( $dom).show();
-		$('#record_editor').find('a.view_switch').trigger('click');
-		active_header_footprint_option('record_selecter','新增員工帳戶','_return_list');
-	  
-	  }else{
-	    
-		$.ajax({
-          url: 'admain.php',
-	      type:'POST',
-	      dataType:'json',
-	      data: {act:'act_staff_read',target:user_no},
-		  beforeSend: 	function(){ system_loading();  },
-          error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	      success: 		function(response) {
-		    
-			if(response.action){  
-			  dom_record.addClass('_target');
-			  data_orl = response.data;
-			  $.each(response.data,function(field,meta){
-				if(  $("._variable[id='"+field+"']").length ){
-				  $("._variable[id='"+field+"']").val(meta);
-				}
-			  });
-			  
-			  $dom = dom_record.clone().removeClass('_staff_read');
-			  $('#record_selecter').find('.record_control').hide();
-			  $('#record_selecter').find('.record_list').children('.data_result').hide();
-			  $('#record_selecter').find('.record_list').children('.data_target').empty().append( $dom).show();
-			  $('#record_editor').find('a.view_switch').trigger('click');
-			  
-			  active_header_footprint_option('record_selecter',response.data.user_name,'_return_list');
-			  
-		    }else{
-			  system_message_alert('',response.info);
-		    }
-	      },
-		  complete:		function(){   }
-	    }).done(function() { system_loading();   });
-	  
-	  }
-	
-	});
-	
-	
-	
-	//-- save data modify
-	$('#act_staff_save').click(function(){
-	  
-      // initial	  
-	  var staff_no   =  $('._target').length? $('._target').attr('no') : '';
-	  var modify_data = {};
-	  var dom_record = $('._target');
-	  var act_object = $(this);
-	  
-	  // get value
-	  $('._variable').each(function(){
-	    var field_name  = $(this).attr('id');
-	    var field_value = $(this).val();
-		if( data_orl[field_name] !== field_value){
-		  modify_data[field_name]  =  field_value;
-	    }
-	  });
-	  
-	  // encode data
-	  var passer_data = encodeURIComponent(Base64.encode(JSON.stringify(modify_data)));
-	  
-	  // check process data
-	  if( !staff_no.length ){
-	    system_message_alert('',"尚未選擇資料");
-	    return false;
-	  }  
-	  
-	  // activa switch checked
-	  if( act_object.prop('disabled') ){
-	    return false;
-	  }
-	  
-	  
-      // active ajax
-      $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:'act_staff_save',target:staff_no,data:passer_data},
-		beforeSend: function(){  active_loading(act_object,'initial'); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			$.each(response.data,function(field,meta){ 
-			  if( $("._variable[id='"+field+"']").length ){
-				$("._variable[id='"+field+"']").val(meta).removeClass('_modify');
-			  }
-			  if( dom_record.children("td[field='"+field+"']").length ){
-			    dom_record.children("td[field='"+field+"']").html(meta);
-			  }
-			});
-			data_orl = response.data;
-		    if( staff_no == '_addnew'){  dom_record.attr('no',response.data.uno) }
-		  
-		  }else{
-			system_message_alert('',response.info);
-	      }
-	    },
-		complete:	function(){  }
-      }).done(function(r) {  active_loading(act_object , r.action );  });
-	});
-	
-	
-	//-- create new staff data
-	$('#act_staff_new').click(function(){
-	    
-	  // initial page
-	  $('#editor_reform').trigger('click');
-	  
-	  // create new record
-	  $tr = $("<tr/>").addClass('data_record _staff_read').attr('no','_addnew');
-	  $tr.append(" <td field='user_idno'  > - </td>");
-	  $tr.append(" <td field='user_id'  ></td>");
-	  $tr.append(" <td field='user_name'  > </td>");
-	  $tr.append(" <td field='user_staff'  ></td>");
-	  $tr.append(" <td field='user_mail'  ></td>");
-	  $tr.append(" <td field='user_tel'  ></td>");
-	  $tr.append(" <td ></td>");
-		
-	  // inseart to record table	
-	  if(!$("tr.data_record[no='_addnew']").length){
-	    $tr.prependTo('tbody.data_result').trigger('click');
-	  }	
-	});
-	
-	
-	
-	//-- iterm function execute
-	$('#act_func_execute').click(function(){
-	  
-	  var staff_no     =  $('._target').length? $('._target').attr('no') : '';
-	  var execute_func =  $('#execute_function_selecter').length ? $('#execute_function_selecter').val() : '';
-	  
-	  // check process target
-	  if( !staff_no.length ){
-	    system_message_alert('',"尚未選擇資料");
-	    return false;
-	  }  
-	  
-	  // check process action
-	  if( !execute_func.length ){
-	    system_message_alert('',"尚未選擇執行功能");
-	    return false;
-	  }  
-	  
-	  // confirm to admin
-	  if(!confirm("確定要對資料執行 [ "+$("option[value='"+execute_func+"']").html()+" ] ?")){
-	    return false;  
-	  }
-	  
-	  
-	   // active ajax
-      $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:execute_func,target:staff_no},
-		beforeSend: function(){  system_loading(); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			switch(execute_func){
-			  case 'act_staff_del' : act_staff_del_after(response.data);break;
-			  case 'act_staff_mail_accept': alert("已成功寄出帳號開通信件 TO: "+response.data.user_id+" "); break;
-			}
-			
-		  }else{
-			system_message_alert('',response.info);
-	      }
-		  
-	    },
-		complete:	function(){  }
-      }).done(function(r) {  system_loading(); });
-	  
-	});
-	
-	// 執行帳號刪除後的動作
-	function act_staff_del_after(StaffNo){
-	  $("tr._target[no='"+StaffNo+"']").remove();
-	  $('#editor_reform').trigger('click');
-	}
-	
-	/*--------------------------------------------------------------------------------------------------------*/
-	/*--------------------------------------------------------------------------------------------------------*/
-	
-	
-	/* [ Admin SellB2B Function Set ] */
-	
-	
-	//-- create new customer data
-	$('#act_customer_new_b2b').click(function(){
-	    
-	  // initial page
-	  $('#editor_reform').trigger('click');
-	  
-	  // create new record
-	  $tr = $("<tr/>").addClass('data_record _customer_read').attr('no','_addnew');
-	  $tr.append(" <td field='system_cid'    > - </td>");
-	  $tr.append(" <td field='company_name'  > 新增客戶 </td>");
-	  $tr.append(" <td field='contact_person'> </td>");
-	  $tr.append(" <td field='contact_phone' > </td>");
-	  $tr.append(" <td field='user_name'     > </td>");
-	  $tr.append(" <td field='sell_status'   > </td>");
-	  $tr.append(" <td field='update_time'   > NOW </td>");
-		
-	  // inseart to record table	
-	  if(!$("tr.data_record[no='_addnew']").length){
-	    $tr.prependTo('tbody.data_result').trigger('click');
-	  }	
-	});
-	
-	//-- create new customer data
-	$('#act_customer_new_b2c').click(function(){
-	    
-	  // initial page
-	  $('#editor_reform').trigger('click');
-	  
-	  // create new record
-	  $tr = $("<tr/>").addClass('data_record _customer_read').attr('no','_addnew');
-	  $tr.append(" <td field='system_cid'    > - </td>");
-	  $tr.append(" <td field='contact_person'  > 新增客戶 </td>");
-	  $tr.append(" <td field='contact_phone'> </td>");
-	  $tr.append(" <td field='contact_mail' > </td>");
-	  $tr.append(" <td field='user_name'     > </td>");
-	  $tr.append(" <td field='sell_status'   > </td>");
-	  $tr.append(" <td field='update_time'   > NOW </td>");
-		
-	  // inseart to record table	
-	  if(!$("tr.data_record[no='_addnew']").length){
-	    $tr.prependTo('tbody.data_result').trigger('click');
-	  }	
-	});
-	
-	
-	
-	//-- admin sell get customer data & order list
-	$(document).on('click','._customer_read',function(){
-	  
-      // initial	  
-	  $('._target').removeClass('_target');
-	  $('._variable').val('');
-	  
-	  // get value
-	  var target_no    = $(this).attr('no');
-	  var dom_record = $(this);
-	  
-	  // active ajax
-	  if( ! target_no ){
-	    system_message_alert('',"資料錯誤");
-		return false;
-	  }
-	  
-	  
-	  if( target_no=='_addnew' ){  
-	  
-	    dom_record.addClass('_target');
-		data_orl = {};
-		$("._variable").each(function(){
-		  $(this).val('');
-		  data_orl[$(this).attr('id')] = '';
-		});
-		$dom = dom_record.clone().removeClass('_customer_read');
-	    $('#record_selecter').find('.record_control').hide();
-		$('#record_selecter').find('.record_list').children('.data_result').hide();
-		$('#record_selecter').find('.record_list').children('.data_target').empty().append( $dom).show();
-		$('#record_editor').find('a.view_switch').trigger('click');
-		active_header_footprint_option('record_selecter','新增客戶資料','_return_list');
-	  
-	  }else{
-	    
-		$.ajax({
-          url: 'admain.php',
-	      type:'POST',
-	      dataType:'json',
-	      data: {act:'act_customer_read',target:target_no},
-		  beforeSend: 	function(){ system_loading();  },
-          error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	      success: 		function(response) {
-		    
-			if(response.action){  
-			  dom_record.addClass('_target');
-			  
-			  var customer_data = response.data.customer ? response.data.customer : {};
-			  data_orl = customer_data;
-			  var customer_orders= response.data.orders   ? response.data.orders : {};
-			  
-			  $.each(customer_data,function(field,meta){
-				if(  $("._variable[id='"+field+"']").length ){
-				  $("._variable[id='"+field+"']").val(meta);
-				}
-			  });
-			  
-			  // insert order data
-			  if($('#order_list').length && response.data.orders){
-				$.each(customer_orders,function( num , order ){
-				  var $column = $("<tr/>").addClass('_order_read').attr('no',order.number);
-				  $column.append("<td>??</td>");
-				  $column.append("<td>"+order.number+"</td>");
-				  $column.append("<td>"+order.date_start.substr(0,10)+' ~ '+order.date_end.substr(0,10)+"</td>");
-				  $column.append("<td>"+order.order_type+"</td>");
-				  $column.append("<td><span class='mark16 _order_status_"+order.order_status+"'></span></td>");
-				  $column.appendTo("#order_list");
-			    });
-			  }
-			  
-			  $dom = dom_record.clone().removeClass('_customer_read');
-			  $('#record_selecter').find('.record_control').hide();
-			  $('#record_selecter').find('.record_list').children('.data_result').hide();
-			  $('#record_selecter').find('.record_list').children('.data_target').empty().append( $dom).show();
-			  $('#record_editor').find('a.view_switch').trigger('click');
-			  
-			  
-			  var target_term = customer_data.company_name && customer_data.company_name !='NULL' ? customer_data.company_name : customer_data.contact_person;
-			  active_header_footprint_option('record_selecter',target_term,'_return_list');
-			  
-		    }else{
-			  system_message_alert('',response.info);
-		    }
-	      },
-		  complete:		function(){   }
-	    }).done(function() { system_loading();   });
-	  }
-	});
-	
-	
-	//-- save costomers data modify
-	$('#act_customer_save').click(function(){
-	  
-      // initial	  
-	  var target_no   =  $('._target').length? $('._target').attr('no') : '';
-	  var modify_data = {};
-	  var dom_record = $('._target');
-	  var act_object = $(this);
-	  var checked = true;
-	  // get value
-	  $('._variable').each(function(){
-	    var field_name  = $(this).attr('id');
-	    var field_value = $(this).val();
-		if( data_orl[field_name] !== field_value){
-		  modify_data[field_name]  =  field_value;
-	    }
-		
-		if( $(this).parent().prev().hasClass('_necessary') && field_value==''  ){
-		  system_message_alert('',"請填寫必要欄位 ( * 標示)");
-		  checked = false;
-		  return false;
-		}
-	  });
-	  
-	  if(!checked){
-		return false;  
-	  }
-	  
-	  
-	  // encode data
-	  var passer_data = encodeURIComponent(Base64.encode(JSON.stringify(modify_data)));
-	  
-	  // check process data
-	  if( !target_no.length ){
-	    system_message_alert('',"尚未選擇資料");
-	    return false;
-	  }  
-	  
-	  // activa switch checked
-	  if( act_object.prop('disabled') ){
-	    return false;
-	  }
-	  
-      // active ajax
-      $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:'act_customer_save',target:target_no,refer:window.location.href,data:passer_data},
-		beforeSend: function(){  active_loading(act_object,'initial'); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			$.each(response.data,function(field,meta){ 
-			  if( $("._variable[id='"+field+"']").length ){
-				$("._variable[id='"+field+"']").val(meta).removeClass('_modify');
-			  }
-			  if( dom_record.children("td[field='"+field+"']").length ){
-			    dom_record.children("td[field='"+field+"']").html(meta);
-			  }
-			});
-			data_orl = response.data;
-			if( target_no == '_addnew'){  $('._target').attr('no',response.data.system_cid) }
-		    
-		  }else{
-			system_message_alert('',response.info);
-	      }
-	    },
-		complete:	function(){  }
-      }).done(function(r) {  active_loading(act_object , r.action );  });
-	});
-	
-	
-	// reset lv2 form data
-	function reset_order_data(){
-	  $("._variable2").each(function(){		
-		if($(this).is(':checkbox') || $(this).is(':radio')){
-		  $(this).prop('checked',false);
-		}else{
-		  $(this).val('');	
-		}
-		$(this).removeClass('_modify2')
-	  }); 
-	  $('._relative2').empty();
-	  $('._reset').val('');
-      data_orl2 = {};	  
-	}
-	
-	
-	//-- order data read And Open Order Data Div
-	$(document).on('click','._order_read',function(){
-	  
-	  var customers = $('tr._target').attr('no');
-	  var order_no  = $(this).attr('no');
-	   
-	  if( !order_no ){
-		alert("訂單續號錯誤");  
-		return false;  
-	  }
-	  reset_order_data();
-	    
-	    $.ajax({
-          url: 'admain.php',
-	      type:'POST',
-	      dataType:'json',
-	      data: {act:'act_order_read',target:order_no,refer:customers},
-		  beforeSend: 	function(){ system_loading();  },
-          error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	      success: 		function(response) {
-		    
-			if(response.action){  
-			  
-			  
-			  var order_data = response.data.order ? response.data.order : {};
-			  data_orl2 = order_data;
-			  
-			  $.each(order_data,function(field,meta){
-				if(  $("._variable2[id='"+field+"']").length ){
-				  if( $("._variable2[id='"+field+"']:checkbox").length){
-					var selected = parseInt(meta) ? true : false ;
-					$("._variable2[id='"+field+"']:checkbox").prop('checked',selected);
-				  }else{
-					$("._variable2[id='"+field+"']").val(meta);	  
-				  }
-				}else if($("._variable2[name='"+field+"']:radio").length ){
-				  $("._variable2[name='"+field+"'][value='"+meta+"']").prop('checked',true);	
-				}
-			  });   
-			  
-			  
-			  // insert order archive
-			  if($('#order_archive').length && response.data.archives){
-				$.each(response.data.archives,function( num , archive ){
-				  var $column = $("<tr/>").addClass('relate_element').attr('no',archive.ano);
-	              $column.append("<td><div class='element_status'><span class='mark16 pic_delete act_archive_delete act_option'></span></div></td>");
-	              $column.append("<td>"+archive.archive_name+"</td>");
-	              $column.append("<td><div class='_update limit_iprange' contenteditable='true'>"+archive.limit_iprange+"</div></td>");
-	              $column.append("<td><div class='_update limit_online'  contenteditable='true'>"+archive.limit_online+"</div></td>");
-				  $column.append("<td><div class='act_archive_account' title='管理登入帳號' ><a class='mark16 pic_db_account'></a></div></td>");
-	              $column.appendTo("#order_archive");
-			    });
-			  }
-			  
-			  
-			  // insert order contract
-			  if($('#order_contract').length && response.data.contract){
-				$.each(response.data.contract,function( num , contract ){
-				  var $column = $("<tr/>").addClass('relate_element').attr('no',contract.acc_name);
-				  $column.append("<td ><span class='act_option act_contract_del'><a class='mark16 pic_delete'></a></span></td>");
-				  $column.append("<td class='act_contract_read'>"+contract.file_name+"</td>");
-				  $column.append("<td><span title='"+contract.time_upload+"'>"+ contract.user_name+"</span> 上傳</td>");
-				  $column.appendTo("#order_contract");
-			    });
-			  }
-			  
-			  
-			  /*
-			  dom_record.addClass('_target');
-			  
-			  var customer_data = response.data.customer ? response.data.customer : {};
-			  data_orl = customer_data;
-			  var customer_orders= response.data.orders   ? response.data.orders : {};
-			  
-			  $.each(customer_data,function(field,meta){
-				if(  $("._variable[id='"+field+"']").length ){
-				  $("._variable[id='"+field+"']").val(meta);
-				}
-			  });
-			  
-			  // insert order archive
-			  if($('#order_list').length && response.data.orders){
-				$.each(customer_orders,function( num , order ){
-				  var $column = $("<tr/>").addClass('_order_read').attr('no',order.number);
-				  $column.append("<td>"+order.number+"</td>");
-				  $column.append("<td>"+order.date_start.substr(0,10)+' ~ '+order.date_end.substr(0,10)+"</td>");
-				  $column.append("<td>"+order.order_type+"</td>");
-				  $column.append("<td>"+order.order_status+"</td>");
-				  $column.append("<td>??</td>");
-				  $column.appendTo("#order_archive");
-			    });
-			  }
-			  
-			  $dom = dom_record.clone().removeClass('_customer_read');
-			  $('#record_selecter').find('.record_control').hide();
-			  $('#record_selecter').find('.record_list').children('.data_result').hide();
-			  $('#record_selecter').find('.record_list').children('.data_target').empty().append( $dom).show();
-			  $('#record_editor').find('a.view_switch').trigger('click');
-			  */	  
-			  
-			  
-			  active_header_footprint_option('record_editor','合約:<i class="_target_order" no="'+order_no+'">'+order_no+"</a>",'_return_form');
-			  $('.focus_block').show();
-	  
-		    }else{
-			  system_message_alert('',response.info);
-		    }
-	      },
-		  complete:		function(){   }
-	    }).done(function() { system_loading();   });
-	  
-	});
-	
-	
-	//-- new customers order data
-    $('#act_order_new').click(function(){
-		
-      var customers   = $('tr._target').attr('no'); 		
-	  if(customers == '_addnew'){
-		system_message_alert('',"客戶資料尚未儲存，新增訂單前請先儲存客戶資料!!");
-		return false;
-	  }	
-		
-	  reset_order_data();
-	  active_header_footprint_option('record_editor','合約:<i class="_target_order" no="_addnew">新增合約</a>','_return_form');
-	  $('.focus_block').show();
-	});	
-	
-	
-	//-- save costomers order data modify
-	$('#act_order_save').click(function(){
-	  
-      // initial	  
-	  var customers   = $('tr._target').attr('no');
-	  var order_no   =  $('._target_order').length? $('._target_order').attr('no') : '';
-	  
-	  var modify_data = {};
-	  var act_object  = $(this);
-	  
-	  // get value
-	  $('._variable2').each(function(){
-		if( $(this).attr('name')=='order_status' ){
-		  var field_name  = 'order_status';
-		  var field_value = $('._variable2[name="order_status"]:checked').val();   
-		}else if($(this).attr('id')=='paid'){
-		  var field_name  = $(this).attr('id');
-		  var field_value = $(this).prop('checked') ? "1":"0";
-		}else{
-		  var field_name  = $(this).attr('id');
-	      var field_value = $(this).val();
-		}
-		if( data_orl2[field_name] !== field_value){
-		  modify_data[field_name]  =  field_value;
-	    }
-	  });
-	  
-	  // encode data
-	  var passer_data = encodeURIComponent(Base64.encode(JSON.stringify(modify_data)));
-	  
-	  // check process data
-	  if( !order_no.length ){
-	    system_message_alert('',"尚未選擇資料");
-	    return false;
-	  }  
-	  
-      // active ajax
-      $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:'act_order_save',target:order_no,refer:customers,data:passer_data},
-		beforeSend: function(){  active_loading(act_object,'initial'); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			if(order_no != response.data){
-			   $('._target_order').attr('no',response.data).html(response.data); 
-			}
-			$('._modify2').removeClass('_modify2');
-		  }else{
-			system_message_alert('',response.info);
-	      }
-	    },
-		complete:	function(){  }
-      }).done(function(r) {  active_loading(act_object , r.action );  });
-	});
-	
-	
-	// 新增訂單資料庫
-	$('#act_order_archive_add').change(function(){
-		
-	  var order_no   =  $('._target_order').length? $('._target_order').attr('no') : '';		
-	  if(order_no == '_addnew'){
-		$(this).val('');
-		system_message_alert('',"訂單資料尚未儲存，新增標的前請先儲存訂單資料!!");
-		return false;
-	  }		
-		
-	  var archive_id = $(this).val();
-	  var archive_name = $('.archive[value="'+archive_id+'"]').html();
-	  
-	  if(!$('tr.relate_element[no="'+archive_id+'"]').length){
-	    var $column = $("<tr/>").addClass('relate_element').attr('no',archive_id);
-	    $column.append("<td><div class='element_status'><span class='act_include_archive mark16 pic_save '></span></div></td>");
-	    $column.append("<td>"+archive_name+"</td>");
-	    $column.append("<td><div class='_update limit_iprange' contenteditable='true'>0.0.0.0</div></td>");
-	    $column.append("<td><div class='_update limit_online'  contenteditable='true'>0</div></td>");
-		$column.append("<td><div class='act_archive_account' title='管理登入帳號' ><a class='mark16 pic_db_account' style='display:none;'></a></div></td>");
-	    $column.appendTo("#order_archive");
-	  }else{
-		system_message_alert('','資料庫已經存在');  
-	  }
-	  $(this).val('');
-	  
-	});
-	
-	// 儲存訂單標的資料 
-	$(document).on('click','.act_include_archive',function(){
-	  
-	  var record = {};
-	  
-	  var order_no   =  $('._target_order').length? $('._target_order').attr('no') : '';
-	  if(!order_no){
-		system_message_alert('','尚未選擇訂單');    
-	    return false;
-	  }
-	  
-	  var archive    = $(this).parents('tr');
-	  var archive_no = archive.attr('no');
-	  if(!archive_no){
-		system_message_alert('','尚未選擇資料庫');    
-		return false;
-	  }
-	  
-	  var limit_iprange   = archive.find('.limit_iprange').html();
-	  if(!limit_iprange){
-	    system_message_alert('','IP存取範圍未填寫'); 
-        return false;		
-	  }
-	  
-	  var limit_online   = archive.find('.limit_online').html();
-	  if(!limit_online){
-	    system_message_alert('','同時在線人數未填寫');  
-        return false;		
-	  }
-	  
-	  record['cid']  = $('tr._target').attr('no');
-	  record['o_no'] = order_no;
-	  record['a_no'] = archive_no;
-	  record['limit_online']  = limit_online;
-	  record['limit_iprange'] = limit_iprange;
-	  
-	  var passer_data = encodeURIComponent(Base64.encode(JSON.stringify(record)));
-	  // active ajax
-      $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:'act_order_archive_update',data:passer_data},
-		beforeSend: function(){  system_loading(); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			archive.find('.element_status').html("<span class='mark16 pic_delete act_archive_delete act_option'></span>");  
-			archive.find('.pic_db_account').show(); 
-		  }else{
-			system_message_alert('',response.info);
-	      }
-	    },
-		complete:	function(){  }
-      }).done(function(r) { system_loading();  });
-	  
-	});
-	
-	//-- 修改訂單標的內容
-	$(document).on('keyup','._update',function(){
-	  var archive    = $(this).parents('tr');
-      archive.find('.element_status').html("<span class='act_include_archive mark16 pic_save '></span>");   	    
-	});
-
-	
-	//-- 刪除訂單標的資料庫
-	$(document).on('click','.act_archive_delete',function(){
-	  var order_no   =  $('._target_order').length? $('._target_order').attr('no') : '';	
-	  var ach_no   = $(this).parents('tr.relate_element').attr('no');
-	  var ach_name = $(this).parents('td').next().html();
-	  
-	  
-	  if(!order_no){ system_message_alert('error','尚未選擇合約資料'); return false; }	
-	  if(!ach_no){ system_message_alert('error','尚未選擇標的') ; return false; }
-	  if(!confirm('確定要刪除 "'+ach_name+'" 此標的?')){ return false; }
-	  
-      $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:'act_order_archive_delete',target:order_no,refer:ach_no},
-		beforeSend: function(){  system_loading(); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			$("tr.relate_element[no='"+ach_no+"']").empty().remove();
-			system_message_alert('',ach_name+' : 標的已被刪除');
-		  }else{
-			system_message_alert('',response.info);
-	      }
-	    },
-		complete:	function(){  }
-      }).done(function(r) { system_loading();  });	
-		
-	});
-	
-	
-	//-- 開啟資料庫帳號管理介面
-	$(document).on('click','.act_archive_account',function(){
-		
-      var order_no   =  $('._target_order').length? $('._target_order').attr('no') : '';
-	  var ach_no     =  $(this).parents('tr.relate_element').attr('no');
-	  
-	  if(!order_no){ system_message_alert('error','尚未選擇合約資料'); return false; }	
-	  if(!ach_no){ system_message_alert('error','尚未選擇標的') ; return false; }
-	  
-	  $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:'act_order_archive_accounts',target:order_no,refer:ach_no},
-		beforeSend: function(){  system_loading(); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			
-			$('#admin_archive_name').attr('no',response.data.archive.order).html(response.data.archive.name);
-			
-			$.each(response.data.account , function(k,user){
-			  var $column = $("<tr/>").addClass('archive_account').attr('no',user.index);
-	          $column.append("<td>"+user.account+"</td>");
-	          $column.append("<td><span title='"+user.register_date+"'>"+user.register_date.substr(0,10)+"</span></td>");
-	          $column.append("<td>"+user.count+"</td>");
-	          $column.append("<td><span class='active_option act_account_active' pass='"+user.pass+"'><i class='active_switch'></i></span></td>");
-		      $column.appendTo("#account_pool");		
-			});
-			
-			$('.system_assist_area').show();	
-			
-			
-		  }else{
-			system_message_alert('',response.info);
-	      }
-	    },
-		complete:	function(){  }
-      }).done(function(r) { system_loading();  });
-	    
-	});
-	
-	
-	//-- 關閉資料庫帳號管理介面
-	$('#act_close_area').click(function(){
-	  $(this).parents('.system_assist_area').hide();  
-	  // 清空區塊資料 
-      $('#admin_archive_name').html('').attr('no','');
-	  $('#account_pool').empty();
-	});
-	
-	
-	//-- 開關資料庫帳號
-	$(document).on('click','.act_account_active',function(){
-	  
-	  var option = $(this);
-	  var act_string  = $(this).parents('tr.archive_account').attr('no');
-	  var act_newpass = parseInt($(this).attr('pass')) ? 0 : 1 ;
-	  
-	  $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:'act_order_archive_account_active',target:act_string,refer:act_newpass},
-		beforeSend: function(){  system_loading(); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			option.attr('pass',response.data);
-		  }else{
-			system_message_alert('',response.info);
-	      }
-	    },
-		complete:	function(){  }
-      }).done(function(r) { system_loading();  });
-	  
-	});
-	
-	//-- 開啟新增資料庫帳號介面	
-	$('#act_order_archive_account_add').click(function(){
-	  var dt = new Date(); 	
-	  if($('#account_pool').length){
-		var $column = $("<tr/>").addClass('archive_account').attr('no','_addnew');
-	    $column.append("<td><div class='new_account_input' contenteditable='true'></div></td>");
-	    $column.append("<td>"+dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate()+"</td>");
-	    $column.append("<td>0</td>");
-	    $column.append("<td><i class='mark16 pic_save act_account_save'></i></td>");
-		$column.appendTo("#account_pool");
-	  }
-	});
-	
-	
-	//-- 儲存資料庫帳號	
-	$(document).on('click','.act_account_save',function(){
-	  
-	  var order_archive_id   =   $('#admin_archive_name').attr('no');	
-	  var new_account        =   $(this).parents('tr.archive_account').find('.new_account_input').html();
-	  var account_dom        =   $(this).parents('tr.archive_account');
-	  
-	  if(!order_archive_id){ system_message_alert('error','尚未選擇合約資料'); return false; }	
-	  if(!new_account){ system_message_alert('error','尚未填寫帳號') ; return false; }
-	  
-	  $.ajax({
-        url: 'admain.php',
-	    type:'POST',
-	    dataType:'json',
-	    data: {act:'act_order_archive_account_save',target:new_account,refer:order_archive_id},
-		beforeSend: function(){  system_loading(); },
-        error: 		function(xhr, ajaxOptions, thrownError) {  console.log( ajaxOptions+" / "+thrownError);},
-	    success: 	function(response) {
-		  if(response.action){
-			account_dom.attr('no',response.data);
-		  }else{
-			system_message_alert('',response.info);
-	      }
-	    },
-		complete:	function(){  }
-      }).done(function(r) { system_loading();  });
-	  
-	});
-	
-	
-	
 	
 	
   
@@ -1249,9 +590,6 @@
 		}
 	  }
   }
-  
-  
-  
   
 
    /* [ System Work Function Set ] */
@@ -1277,6 +615,29 @@
 	});
 	
   }
+  
+  //-- 重新設定編及區域
+	function initial_record_editer(){
+	  $('._variable').each(function(){
+		
+		var tagDom = $(this)[0].tagName;
+		
+		if( tagDom == 'INPUT' && ( $(this).attr('type')=='checkbox' || $(this).attr('type')=='radio' ) ){
+		  $(this).prop('checked',false);	
+		}else if( tagDom=='INPUT' || tagDom=="TEXTAREA" || tagDom=='SELECT' ){
+		  $(this).val('');
+		}else{
+		  $(this).html('');
+		}
+		
+		$(this).removeClass("_modify").prop('disabled',false);
+		
+		if($(this).attr('default')=='readonly'){
+		  $(this).prop('readonly',true);
+		}
+		
+	  });	
+	};
   
   
   //-- System loading   # All Page Mask Loading
@@ -1308,8 +669,8 @@
 	  var processing = domObject.prev().attr('id');
 	}	
 	switch(status){
-	  case false   : domObject.prop('disabled',false);  $('#'+processing).html("<img src='theme/image/act_mark_fail.png' />").finish().animate({'opacity':0},4000,function(){  $('._actprocess').remove(); }); break;
-	  case true    : domObject.prop('disabled',false);  $('#'+processing).html("<img src='theme/image/act_mark_done.png' />").finish().animate({'opacity':0},4000,function(){  $('._actprocess').remove(); }); break;
+	  case false   : case 0   : domObject.prop('disabled',false);  $('#'+processing).html("<img src='theme/image/act_mark_fail.png' />").finish().animate({'opacity':0},4000,function(){  $('._actprocess').remove(); }); break;
+	  case true    : case 1   : domObject.prop('disabled',false);  $('#'+processing).html("<img src='theme/image/act_mark_done.png' />").finish().animate({'opacity':0},4000,function(){  $('._actprocess').remove(); }); break;
 	  case 'initial': $('#'+processing).html("<img src='theme/image/act_mark_process.gif' />"); domObject.prop('disabled','true'); break; 
 	}
   }
@@ -1330,11 +691,64 @@
   }
   
   
+  //-- sse event regist
+  var TaskEvent = {};
+  function system_event_regist(even_type,task_no){
+	  
+	if(!parseInt(task_no)){
+	  return false;	
+	}
+	
+	TaskEvent[task_no] = new EventSource("event.php?task="+task_no);
+    TaskEvent[task_no].onmessage = function(event) { console.log(event.data); };
+    
+	switch(even_type){
+	  case 'package':
+        system_event_alert({"task":task_no, "info":"資料匯出打包中.."},'load');
+		TaskEvent[task_no].addEventListener('_PROCESSING', function(e) {
+		  var data = JSON.parse(e.data);
+          $("li[task='"+data.task+"']").find('.progress').html(data.progress);
+        }, false);
+	    
+		TaskEvent[task_no].addEventListener('_PHO_EXPORT', function(e) {
+	      var data = JSON.parse(e.data);
+		  system_event_alert(data,'link');
+		  TaskEvent[task_no].close();
+        }, false);
+	    
+		break;
+	  
+	  case 'import':
+        system_event_alert({"task":task_no, "info":"資料上傳已經完成，檔案轉置中 "},'load');
+		TaskEvent[task_no].addEventListener('_PROCESSING', function(e) {
+	      var data = JSON.parse(e.data);
+          $("li[task='"+data.task+"']").find('.progress').html(data.progress);
+		}, false);
+	    
+		TaskEvent[task_no].addEventListener('_PHO_IMPORT', function(e) {
+	      var data = JSON.parse(e.data);
+		  system_event_alert(data,'done');
+		  TaskEvent[task_no].close();
+        }, false);
+	    
+		break;
+	  default:break;	  
+	}
+	
+  }
   
   
+  //-- alert event message
+  function system_event_alert(data,type){
+	type = type!='' ? type : 'alert'; 
+	
+	var DOM = $("<li/>");
+	switch(type){
+	  case 'load'  : DOM.attr('task',data.task).html(data.info+" <span class='progress'>0 / 0</span>"); break;
+	  case 'link'  : DOM.addClass('download_link').attr('data-href',data.href).html("資料打包完成，請點選下載 ("+data.count+")"); break;  
+	  case 'done'  : DOM.html("上載資料已匯入系統 ("+data.count+")"); break;  
+	  default: DOM.html(data.info); break;
+	}
+	$('#task_info').find('li').hide().end().prepend(DOM);
+  }
   
-  
-  
-  
-
-
