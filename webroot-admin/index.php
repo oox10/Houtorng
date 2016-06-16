@@ -5,9 +5,7 @@
   require_once "../conf/system_config.php";
   require_once('../mvc/lib/PHPMailer_5.2.4/class.phpmailer.php');
   
-  echo "<pre>";
-  var_dump($_SESSION);
-  exit(1);
+  
   $include_path = array (); 
   $include_path[] = get_include_path();
 
@@ -26,9 +24,14 @@
   });
   
   try{
+	  
+	echo "<pre>";
+    var_dump($_SERVER);
+    exit(1);  
+	  
+	  
 	$router = new ADRouter();
 	$router->route(new Request_url);
-    
   }catch(Exception $e){
 	$controller = new Error_Controller();
 	$controller->error($e->getMessage());
