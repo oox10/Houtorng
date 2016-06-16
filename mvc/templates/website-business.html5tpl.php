@@ -121,12 +121,16 @@
             <h2>${Our Clients}</h2>
             <div class="client-wrap " style='border-top:0px #FFFFFF solid;'>
                 <ul class="clients clearfix">
-                   <li><a target="_blank" href="http://temp.net-pro.com.tw/profile.htm"><img src="images/client-logos/client001.png" alt="ITW" title="ITW"></li>
+				    <li><a target="_blank" href="http://www.seec.com.tw"><img src="images/client-logos/client_seec.jpg" alt="士林電機" title="士林電機"></a></li>
+					<li><a target="_blank" href="http://www.ch-forging.com.tw"><img src="images/client-logos/client_chf.jpg" alt="江興鍛壓工業" title="江興鍛壓工業"></a></li>
+					<li><a target="_blank" href="http://www.kingduan.com.tw/"><img src="images/client-logos/client_kingduan.jpg" alt="金鍛工業" title="金鍛工業"></a></li>
+                    <li><a target="_blank" href="http://temp.net-pro.com.tw/profile.htm"><img src="images/client-logos/client001.png" alt="ITW" title="ITW"></li>
                     <li><a target="_blank" href="http://www.greatknives.com.tw/index.html"><img src="images/client-logos/client002.png" alt="Great Knives" title="Great Knives"></a></li>
                     <li><a target="_blank" href="http://tsubakimoto.com.tw/"><img src="images/client-logos/client003.png" alt="台灣椿本" title="台灣椿本"></a></li>
                     <li><a target="_blank" href="http://www.chunyu.com.tw/TW/index.aspx"><img src="images/client-logos/client004.png" alt="春雨工業" title="春雨工業"></a></li>
 					<li><a target="_blank" href="http://www.fu-chuan.com.tw/en/index.php"><img src="images/client-logos/client005.png" alt="福泉鋼業" title="福泉鋼業"></a></li>
 				</ul>
+				
             </div>
         </section>
         <!-- end clients -->
