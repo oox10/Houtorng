@@ -2,11 +2,26 @@
 <!--[if IE 8]> <html class="ie8 no-js"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
+	
+	<!-- php variable-->
+	<?php
+	$products = isset($this->vars['system_data']['data']['product']) ?  $this->vars['system_data']['data']['product'] : array();
+	$classlv  = isset($this->vars['system_data']['data']['classlv']) ?  $this->vars['system_data']['data']['classlv'] : array();
+	$target   = isset($this->vars['system_data']['data']['target'])  ?  $this->vars['system_data']['data']['target'] : '';
+	$result   = isset($this->vars['system_data']['data']['result'])  ?  $this->vars['system_data']['data']['result'] : array();
+	
+	$product_index = $target ? '':'current-menu-item';
+	
+	?>
+	
+	
+	<title>${HOU TORNG - Products} : <?php echo $result['title_product']; ?></title>
+	
 	<!-- begin meta -->
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=10">
-	<meta name="description" content="HOU TORNG is a professional metal heat treating equipment manufacturer.">
-	<meta name="keywords" content="HOU TORNG, HOUTORNG, metal heat treating equipment, heat treatment, furnace, continuous mesh belt, chain conveyor furnace, atmosphere generator, thermal processing equipment">
+	<meta name="description" content="<?php echo preg_replace('/(‧|\n)+/','',$result['useto']);?>.">
+	<meta name="keywords"    content="<?php echo $result['title_product']; ?>, HOU TORNG, HOUTORNG, metal heat treating equipment, heat treatment, furnace, continuous mesh belt, chain conveyor furnace, atmosphere generator, thermal processing equipment">
 	<meta name="author" content="Doraho">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- end meta -->
@@ -51,19 +66,10 @@
 	
     <!-- end JS -->
 	
-	<!-- php variable-->
-	<?php
-	$products = isset($this->vars['system_data']['data']['product']) ?  $this->vars['system_data']['data']['product'] : array();
-	$classlv  = isset($this->vars['system_data']['data']['classlv']) ?  $this->vars['system_data']['data']['classlv'] : array();
-	$target   = isset($this->vars['system_data']['data']['target'])  ?  $this->vars['system_data']['data']['target'] : '';
-	$result   = isset($this->vars['system_data']['data']['result'])  ?  $this->vars['system_data']['data']['result'] : array();
-	
-	$product_index = $target ? '':'current-menu-item';
-	
-	?>
 	
 	
-	<title>${HOU TORNG - Products}</title>
+	
+	
 </head>
 
 <body>
