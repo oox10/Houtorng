@@ -21,7 +21,7 @@
 			  <i class="fa fa-database" aria-hidden="true"></i> <span>資料管理</span>
 			</div>
 		    <ul class='group_manuel'>
-			  <li  title='檔案目錄'	 class='option func_activate'	id='Products'	><i class="fa fa-shopping-basket" aria-hidden="true"></i> <span >產品管理</span> </li>
+			  <li  title='產品管理'	 class='option func_activate'	id='Products'	><i class="fa fa-shopping-basket" aria-hidden="true"></i> <span >產品管理</span> </li>
 			  <li  title='業務實績'	 class='option func_activate'	id='Business'	><i class="fa fa-line-chart" aria-hidden="true"></i> <span >業務實績</span> </li>
 			</ul>
 		  </li>
