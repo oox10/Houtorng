@@ -5,7 +5,9 @@
   require_once "../conf/system_config.php";
   require_once('../mvc/lib/PHPMailer_5.2.4/class.phpmailer.php');
   
-  
+  echo "<pre>";
+  var_dump($_SESSION);
+  exit(1);
   $include_path = array (); 
   $include_path[] = get_include_path();
 
