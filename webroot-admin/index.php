@@ -10,12 +10,12 @@
   $include_path[] = get_include_path();
 
   // 目前專案所需要的 include_path
-  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc\core';
-  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc\main';
-  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc\templates';
-  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc\lib';
-  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc\dbsql';
-  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc\helper';
+  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc/core';
+  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc/main';
+  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc/templates';
+  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc/lib';
+  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc/dbsql';
+  $include_path[] = _SYSTEM_ROOT_PATH . 'mvc/helper';
  
   set_include_path(join(PATH_SEPARATOR, $include_path));
   
