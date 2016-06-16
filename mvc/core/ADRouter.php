@@ -15,7 +15,7 @@
 	  
 	  try{
 		
-		
+		var_dump($controller.'/'.$action);
 		self::priority($controller,$action);  // 檢查權限			
 		
 	    $this->nowController = $this->nowController.'_Controller';  

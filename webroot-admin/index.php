@@ -24,12 +24,6 @@
   });
   
   try{
-	  
-	echo "<pre>";
-    var_dump($_SERVER);
-    exit(1);  
-	  
-	  
 	$router = new ADRouter();
 	$router->route(new Request_url);
   }catch(Exception $e){
