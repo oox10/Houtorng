@@ -14,7 +14,6 @@
       $this->nowArgs  = $request->getArgs();
 	  
 	  try{
-		echo "12";
 		self::priority($controller,$action);  // 檢查權限			
 		
 	    $this->nowController = $this->nowController.'_Controller';  
