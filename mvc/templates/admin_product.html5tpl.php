@@ -91,8 +91,8 @@
 		
 		<div class='topic_banner'>
 		  <div class='topic_header'> 
-		    <div class='topic_title'> 群組帳號管理 </div>
-			<div class='topic_descrip'> 群組內之帳號審核、設定與管理 </div>
+		    <div class='topic_title'> 產品資料管理 </div>
+			<div class='topic_descrip'> 產品資料設定與影像管理 </div>
 		  </div>
 		  <div class='lunch_option'> 
 		    
