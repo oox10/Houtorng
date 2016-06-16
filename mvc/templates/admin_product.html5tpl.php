@@ -16,6 +16,10 @@
 	<script type="text/javascript" src="tool/canvasloader-min.js"></script>	
     <script type="text/javascript" src="tool/html2canvas.js"></script>	  
 	
+	<!-- dropzone file uoloader -->
+	<script type="text/javascript" src="tool/dropzone-4.2.0/dropzone.min.js"></script>
+	
+	
 	<!-- Self -->
 	<link rel="stylesheet" type="text/css" href="theme/css/css_default.css" />
 	<link rel="stylesheet" type="text/css" href="theme/css/css_main.css" />
@@ -147,7 +151,7 @@
 			  </table>
 			  <div class='record_control'>
 			    <span class='record_result'>  
-			      顯示 <span> 1 </span> - <span> 10 </span> /  共 <span> <?php echo count($data_count); ?></span>  筆
+			      顯示 <span> 1 </span> - <span> 10 </span> /  共 <span> <?php echo $data_count; ?></span>  筆
 			    </span>
 				<span class='record_pages'>
 				  <a class='page_tap page_to' page='prev' > &#171; </a>
@@ -223,14 +227,19 @@
 				  <div class='data_col'> 
  				    <div style='table-column'>
 				      <span class='data_field'> 上傳照片: </span>
-				      <span class='data_value'> <span class='sysbtn' id='act_open_upload' title='開啟上傳'  ><a class='mark16 pic_upload'></a></span></span>
-					  <span class='data_value' > ( 拖曳可改變影像顯示排序 ) </span>
+				      <span class='data_value'><i class='sysbtn btn_activate' id='act_open_upload'> 開啟 </i></span>
+					  
 					</div >
 					<div style='table-column'>
 					  <ul class='object-pool tr_like _relative' id='product_display_object'>
 					    
-					  </ul> 
+					  </ul>
+                      				  
 					</div>
+					<div style='table-column'>
+				      <span class='data_field'> tips 排序: </span>
+				      <span class='data_value'> <span class='data_value' > 拖曳照片可改變影像顯示順序 </span> </span>
+					</div >
 				  </div>
 				 
 				  <div class='data_col tr_like action_col'> 
@@ -239,7 +248,7 @@
 				      <select class='staff_function _reset' id='execute_function_selecter' >
 					    <option value=''> - </option>
 					    <optgroup class='_attention' label='[ 產品管理 ]' >
-					      <option value='act_customers_del'> - 刪除產品資料 </option>
+					      <option value='pdel'> - 刪除產品資料 </option>
 					    </optgroup>
 					  </select> 
 				      <i class='sysbtn btn_activate' id='act_func_execute'> 執行 </i>
@@ -253,6 +262,40 @@
 		</div>
 	  </div>
 	</div>
+	
+	
+	<!-- 檔案上傳區塊  -->
+	<div class='upload_area'>
+      <div class='header_border'>
+	    <h1> 檔案上傳 </h1>
+	    <span id='progress_info'>
+		  <span id='num_of_upload' >0</span> -
+		  <span id='num_of_queue' >0</span> /
+		  <span id='execute_timer' >0</span>
+		  <span id='complete_time' > _ </span>
+		</span>
+		<div class='area_option'>
+		  <i class='mark16 pci_area_mini option' ></i>
+		  <i class='mark16 pci_area_close_x option' id='act_upload_close' ></i>
+		</div>
+	  </div>
+	  <div class='upload_setting'>
+	    <div class='upload_config'>
+		  <div class='field_set'>
+			<label>處理結果</label>
+			<textarea class='' id='upl_process_result' disabled=true ></textarea>
+		  </div> 
+		</div>
+		<div class='upload_action'>
+		  <button type='button' class='select' id='act_select_file'> 新增檔案 </button>
+		  <button type='button' class='active' id='act_active_upload' disabled=true  data-folder=''> 上傳 </button>
+		  <button type='button' class='cancel' id='act_clean_upload'> 清空 </button>
+		</div>
+	  </div>
+	  <div class='upload_list ' id='upload_dropzone'></div>
+	</div>
+	
+	
 	
 	<!-- 框架外結構  -->
 	<div class='system_message_area'>

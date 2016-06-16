@@ -73,11 +73,9 @@
 		// login filter
 		case 'Main':
 		case 'Staff':
-		case 'Classify':
-		case 'Record':
-		case 'Report':
-		case 'Task':  
-		case 'Archive':  
+		case 'Products':
+		case 'Business':
+		case 'Report': 
 		default:
 		  
 		  try{

@@ -68,6 +68,17 @@
 	}
 	
 	
+	//-- Admin Product : Set Product Order
+	public static function ADMIN_PRODUCT_DELETE_PRODUCT(){
+	  $SQL_String = "UPDATE products SET _keep=0 WHERE pid=:pid; ";
+	  return $SQL_String;
+	}
+	
+	
+	
+	
+	
+	
 	//-- Admin Product : Get Product Relate Files
 	public static function ADMIN_PRODUCT_SELECT_PRODUCT_DISPLAY(){
 	  $SQL_String = "SELECT att_no,acc_name,file_size,time_upload FROM product_obj WHERE pno =:pno AND file_keep=1 ORDER BY display_order ASC,att_no ASC";
@@ -83,7 +94,7 @@
 	
 	//-- Admin Product : Delete Product attachment data
 	public static function ADMIN_PRODUCT_DELETE_ATTACHMENT(){
-	  $SQL_String = "UPDATE product_obj SET file_keep=0 WHERE att_no=:att_no AND handler=:handler;";
+	  $SQL_String = "UPDATE product_obj SET file_keep=0 WHERE att_no=:att_no;";
 	  return $SQL_String;
 	}
 	

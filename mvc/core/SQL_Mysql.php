@@ -25,7 +25,7 @@
 	
 	//-- Web Site Index : Get Product Data
 	public static function WEBSITE_INDEX_GET_PRODUCT_LISR($lang = 'meta_cht'){
-	  $SQL_String = "SELECT * FROM products LEFT JOIN ".$lang." ON pid=pno WHERE products._keep=1 ORDER BY view_order ASC,pid ASC;";
+	  $SQL_String = "SELECT * FROM products LEFT JOIN ".$lang." ON pid=pno WHERE products._keep=1 AND products._view=1 ORDER BY view_order ASC,pid ASC;";
 	  return $SQL_String;
 	}
 	
