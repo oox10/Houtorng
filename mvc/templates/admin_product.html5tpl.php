@@ -201,7 +201,6 @@
 				</div>
 				<div class='form_element' id='products' >
 				  <div class='data_col tr_like'> <span class='data_field '> 產品型號 </span> <span class='data_value'> <input type='text' class='_variable' id='product_id' readonly /> </span> </div>
-				  <div class='data_col tr_like'> <span class='data_field'> 購買客戶 </span> <span class='data_value'> <input type='text'  class='_variable' id='clients'  /> </span> </div>
 				  <div class='data_col tr_like'> 
 				    <span class='data_field'> 產品排序 </span> 
 				    <span class='data_value'>
@@ -241,6 +240,8 @@
 				      <span class='data_value'> <span class='data_value' > 拖曳照片可改變影像顯示順序 </span> </span>
 					</div >
 				  </div>
+				  <div class='data_col tr_like'> <span class='data_field'> 影片多媒體 </span> <span class='data_value'> <input type='text'  class='_variable' id='media'  /> </span> </div>
+				  
 				 
 				  <div class='data_col tr_like action_col'> 
 				    <span class='data_field' > 其他功能 </span>

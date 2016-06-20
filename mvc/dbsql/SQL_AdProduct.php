@@ -45,7 +45,7 @@
 	
 	//-- Admin Product : Insert Products Table
 	public static function ADMIN_PRODUCT_CREATC_NEW_PRODUCT(){
-	  $SQL_String = "INSERT INTO products VALUES(NULL,'',:client,:view_order,:view_index,NULL,:_view,1); ";
+	  $SQL_String = "INSERT INTO products VALUES(NULL,'',:media,:view_order,:view_index,NULL,:_view,1); ";
 	  return $SQL_String;
 	}
 	

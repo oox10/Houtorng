@@ -159,7 +159,7 @@
 		}
 		
 		$DB_INSERT  = $this->DBLink->prepare(SQL_AdProduct::ADMIN_PRODUCT_CREATC_NEW_PRODUCT());
-		$DB_INSERT->bindValue(':client'  	, isset($data_newa['products']['client']) ?  trim($data_newa['products']['client']) : '');
+		$DB_INSERT->bindValue(':media'  	, isset($data_newa['products']['media']) ?  trim($data_newa['products']['media']) : '');
 		$DB_INSERT->bindValue(':view_order'	, isset($data_newa['products']['view_order']) ?  intval($data_newa['products']['view_order']) : 99 );
 		$DB_INSERT->bindValue(':view_index' , isset($data_newa['products']['view_index']) ?  intval($data_newa['products']['view_index'])  : 0 );
 		$DB_INSERT->bindValue(':_view'		, isset($data_newa['products']['_view'])  ? intval($data_newa['products']['_view'])  : 1 );
