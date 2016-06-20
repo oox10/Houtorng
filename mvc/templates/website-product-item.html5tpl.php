@@ -134,7 +134,7 @@
 			    <h2 style='margin:50px 0;'>點選方塊<br>可以檢視流程影片</h2>
 			  </div>	
 			  <div class="two-thirds column-last">
-			    <img id='product_chart' src="product/chart.gif" width="550" height="169" border="0" usemap="#Map">
+			    <img id='product_chart' src="product/chart.gif"  border="0" usemap="#Map">
 			    <map name="Map" id="Map">
                   <area shape="rect" coords="26,127,94,160" 	 href="#IdewM6otyhg"   alt="REVERSING MACHINE">
                   <area shape="rect" coords="88,6,160,48"		 href="#sReCYRs1tbk"   alt="MAGNETIC FEEDING MACHINE">
