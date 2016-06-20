@@ -19,6 +19,7 @@
 	$('tbody.data_result').sortable({
 	  placeholder: "ui-state-highlight",
 	  update: function( event, ui ) {
+		/*  
         var element_order = $( ".data_record" ).map(function(){ return $(this).attr('no'); }).get().join(','); 
 		$.ajax({
             url: 'index.php',
@@ -36,6 +37,7 @@
 	        },
 		    complete:	function(){  }
         }).done(function(r) { system_loading();  });
+	    */
 	  }
 	});
 	
