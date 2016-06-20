@@ -27,7 +27,7 @@
 		$result['data'] = $DB_OBJ->fetchAll(PDO::FETCH_ASSOC);		
 	  
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result;
 	}
@@ -55,7 +55,7 @@
 		$result['data']   = $products_list;		
 	  
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result;
 	}
@@ -103,7 +103,7 @@
 		$result['action'] = true;
 		
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result;
 	}
@@ -134,7 +134,7 @@
 		$result['action'] = true;
   
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result;  
 	}
@@ -191,7 +191,7 @@
 		$result['action'] = true;
     	
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result;  
 	}
@@ -236,7 +236,7 @@
 		$result['action'] = true;
     	
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result;  
 	}
@@ -299,7 +299,7 @@
 		$result['action'] = true;
     	
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result;  
 	}
@@ -342,7 +342,7 @@
 		$result ['action'] = true;
     	
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result ;  
 	}
@@ -369,7 +369,7 @@
 		$result['action'] = true;
     	
 	  } catch (Exception $e) {
-        $this->ModelResult['message'][] = $e->getMessage();
+        $result['message'][] = $e->getMessage();
       }
 	  return $result;  
 	}

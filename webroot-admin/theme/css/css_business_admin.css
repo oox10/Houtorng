@@ -136,191 +136,25 @@
 			
 			
 			tr.data_record:nth-child(odd){ background-color:#f9f9f9; }
-			tr.data_record td{ cursor:pointer; }
+			tr.data_record td{  }
 			tr.data_record td:nth-child(1){  width:100px;  }
 			tr.data_record td:nth-child(2){  width:230px  }
 			tr.data_record td:nth-child(3){  width:70px }
 			tr.data_record td:nth-child(4){  width:50px; }
 			tr.data_record td:nth-child(5){  width:50px; }
 			tr.data_record td:nth-child(6){  }
-			tr.data_record td:nth-child(7){ text-align:center; width:30px;}
+			tr.data_record td:nth-child(7){ text-align:center; width:30px; cursor:pointer;}
 			tr._target td:nth-child(1){background-color:#84b9cb;color:#FFFFFF;}
 			
 			
 			
-		  div#record_form_block{
-		    color:#979898; 
-			display:none;
-			position:relative;
-		  }	
-			div.form_block{
-			  float:left;
-			  margin-right:10px;
+		    tr.data_editer > td > input{
+			  width:100%;
+              color:#007bbb;			  
 			}
-			
-			
-			  div.form_border{ position:relative; line-height:40px;  margin-top:5px;}
-			  div.form_border h1{ display:inline-block; font-weight:bold; }
-			  div.form_border ul{ display:inline-block; position:absolute; right:0px;}
-			    li.langsel{
-				  display:block;
-				  width:80px;
-			      border:1px #CDCDCD solid;
-				  border-bottom:0px;
-				  float:left;
-				  text-align:center;
-				  margin-left:-1px;
-			      cursor:pointer;
-				  opacity:0.7;
-			    } 
-			    li.current{background-color:#f3f3f2;opacity:1; cursor:default;}
-			    
-
-			  
-			  div.form_element {border:1px #CDCDCD solid; }
-			  div.meta_lang{display:none;}
-			  div.meta_lang:nth-child(2){display:block;}
-			
-			div#meta_input{ }  
-			
-			  div.data_col{
-			    display: table;
-				width:99%;
-			    border-bottom:1px #e4e4e4 solid;
-			    padding:15px 0;
-				position:relative;
-			  }
-			    
-			  div.data_col:nth-last-child(1){border-bottom:0px #e4e4e4 solid;}	
-				
-				span.data_field{  display:block;  display: table-cell; vertical-align: middle;  width:90px; padding:0 20px; text-align:right;}
-				span.data_value{  display:block;  display: table-cell; vertical-align: middle; } 
-			    span.data_value input[type="text"]{color:#2792c3; border-width:0; width:99%; border:1px #e4e4e4 solid; padding:8px 0 8px 8px;}
-			    span.data_value input[type="text"]:focus{  outline: 0; border-color:#aacf53;}
-			    span.data_value select{color:#2792c3; border-width:0; width:99%; border:1px #e4e4e4 solid; height:33px; padding:0 8px;}
-			    span.data_value select:focus{  outline: 0; }
-			    span.data_value input.datetime{ width:42%; }
-			    span.data_value textarea{ color:#2792c3; border-width:0; width:99%; border:1px #e4e4e4 solid; padding:8px 0 8px 8px; height:6em;}
-				
-				span.data_value input[type="file"]{color:#2792c3; border-width:0; width:99%;  padding:8px 0 8px 8px;}
-				
-				span.data_value input:disabled , span.data_value select:disabled{ background-color:#e4e4e4;} 
-				._modify,._modify2{background-color:#fdeff2;}
-			    ._necessary:before{
-				  content:" * ";
-				  color:red;
-				}
-				
-				
-				
-              div.action_col{ background-color:#fef4f4;font-weight:bold;}
-				span.data_value select.staff_function{width:80%;}
-				optgroup._attention{ color:#752100; opacity:0.8;}
 	
-			  
-			div#relative_list{ } 	
-				
-				span.data_subtitle{
-				  display:block;  padding:9px 20px; font-weight:bold;
-				}
-	              			
-				table.relate_list{width:99%;  margin:10px 20px;}
-				table.relate_list td{   padding:10px;  border:1px #dcdddd solid; border-left:0px; border-right:0px; border-top:0px; }
-				
-				
-                  tr.relate_field{color:#333333; }
-	              tr.relate_field td:nth-child(1){ width:50px; text-align:center;}
-	              tr.relate_field td:nth-child(2){ width:80px; }
-	              tr.relate_field td:nth-child(3){ min-width:130px; }
-	              tr.relate_field td:nth-child(4){ width:70px; }
-	              tr.relate_field td:nth-child(5){ width:70px;  }
-	              tr.relate_field td:nth-child(n+4){ text-align:center; }
-                  tbody#order_list tr td:nth-child(n+4){ text-align:center; }
-                  tr._order_read{cursor:pointer;}
-				  tr._order_read:hover{background-color:#e0ebaf;}
-				  
-				  tr._order_read td:nth-child(1){text-align:center;}
-		         
-		    /* record inter display block */
-		    div.focus_block{
-		      position:absolute;
-			  top:0; 
-		      bottom:0;
-              left:0;
-              right:0;
-			  display:none;
-		    }
-		     
-			  div.focus_block_container{
-			    position:relative;
-				height:100%;
-				background-color:#fbfaf5;
-				border-radius:10px;
-				box-shadow:-3px -3px 7px -2px rgba(66,66,66,0.5);
-			  } 
-		        div.option_overwrite{
-				  position:absolute;
-				  right:0;
-				  top:-50px;
-				  left:50%;
-				  height:50px;
-				  line-height:50px;
-				  padding:0 10px 0 0;
-				  background-color:#fbfaf5; 
-				  border-radius:10px 0 0 0;
-				  box-shadow:-2px -3px 7px -2px rgba(66,66,66,0.5);
-				}
-			    
-                div#order_input{   border-right:1px #CDCDCD solid;}  
-                div#order_element{  } 
-			    div.col1{ width:99%; }
-				div.col2{ width:49%; min-width:400px; }
-				
-				  
-			      div.object-pool{
-					margin:10px 0px 10px 40px;
-				  }
-			        div.relate_element{
-					  float:left;
-					  margin:5px;
-					  position:relative;
-					  border:2px #FFFFFF solid;	
-					}
-					div.delete_flag{
-					  border:2px red dashed;		
-					}
-					
-                      div.redisplay{ height:80px;}
-					  div.redisplay img{height:99%;}
-					  div.reoption{ 
-					    position:absolute;
-						width:100%;
-						bottom:0px;
-						color:#ffffff;
-						background-color:rgba(0,0,0,0.5);  
-					    line-height:25px;
-						font-size:13px;
-					  }
-					  
-				
-			          .act_reobj_del a{position:relative; top:-3px;left:5px;}
-				      .info_size{position:absolute;right:5px;}
-					  
-				    div.limit_online{text-align:center;}
-					div.act_archive_account{text-align:center;}
-					div.act_archive_account a{position:relative; top:-2px; cursor:pointer;}
-				    
-					span.act_option{ cursor:pointer; opacity:0.7;}
-					span.act_option:hover{ cursor:pointer; opacity:0.9;}
-					span.act_option:active{ background-color:#f3f3f2;}
-					
-					.act_contract_read{cursor:pointer;}
-					.act_contract_read:hover{text-decoration:underline;}
-				    
-					#order_function_selecter{width:85%;}
-	
-	
-	
+	        
+			
 	        span.active_option{
 			  display:inline-block;
 			  width:40px;

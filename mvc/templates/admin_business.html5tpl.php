@@ -23,7 +23,7 @@
 	
 	<script type="text/javascript" src="js_library.js"></script>
 	<script type="text/javascript" src="js_admin.js"></script>
-	<script type="text/javascript" src="js_product_admin.js"></script>
+	<script type="text/javascript" src="js_business_admin.js"></script>
 	
 	<!-- PHP -->
 	<?php
@@ -120,14 +120,16 @@
 			    </tr>
 			    <tbody class='data_result'>
 			    <?php foreach($product_set as $data): ?>  
-			      <tr class='data_record ' no='<?php echo $data['bin']?>' >
+			      <tr class='data_record ' no='<?php echo $data['bid']?>' >
                     <td field='product_type' ><?php echo $data['product_type']; ?></td>
 			        <td field='company'  	 ><?php echo $data['company']; ?></td>
 				    <td field='location'  	 ><?php echo $data['location']; ?></td>
 				    <td field='output'		 ><?php echo $data['output']; ?></td>
 					<td field='sellCount'	 ><?php echo $data['sellCount']; ?></td>
 					<td field='useTo'		 ><?php echo $data['useTo']; ?></td>
-					<td ><i class='_status_option mark24 <?php echo $data['_show'] ? 'pic_status_start':'pic_status_stop'; ?>' title='' ></i></td>
+					<td >
+					  <span class='business_editer'><i class="fa fa-pencil" aria-hidden="true"></i></span>
+					</td>
 				  </tr> 
 			    <?php endforeach; ?>
 			      <tr class='data_field'>
@@ -137,7 +139,7 @@
 				    <td title='產量'		> 產量</td>
 				    <td title='數量'		> 數量  </td>
 				    <td title='用途'		> 用途  </td>
-				    <td style='text-align:center;' ><i class='sysbtn btn_plus' id='act_product_new' title='新增資料'> + </i> </td>
+				    <td style='text-align:center;' ><i class='sysbtn btn_plus act_business_new' title='新增資料'> + </i> </td>
 			      </tr> 
 				</tbody>
 				<tbody class='data_target'></tbody>
