@@ -116,7 +116,7 @@
 				  <td title='產量'		> 產量</td>
 				  <td title='數量'		> 數量  </td>
 				  <td title='用途'		> 用途  </td>
-				  <td title='顯示'		> 顯示  </td>
+				  <td title='顯示'		> 編輯  </td>
 			    </tr>
 			    <tbody class='data_result'>
 			    <?php foreach($product_set as $data): ?>  
