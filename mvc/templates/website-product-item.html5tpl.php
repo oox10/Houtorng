@@ -153,20 +153,33 @@
 		  <?php else: ?>
 		   
 			<!-- begin  產品照片slider-->
-                <div class="entry-slider">
-                    <ul>
-						<?php foreach($result['images'] as $key => $pimg): ?>
-                          <?php if(!$key): ?>
-						  <li><a class="fancybox" data-fancybox-group="gallery-living-brown" href="<?php echo $pimg['acc_name'];?>" title="<?php echo $result['title_product'];?>"><span class="overlay zoom"></span><img src="<?php echo $pimg['acc_name'];?>" alt=""></a></li>	
-						  <?php else:  ?>
-                          <li style="display: none;"><a class="fancybox" data-fancybox-group="gallery-living-brown" href="<?php echo $pimg['acc_name'];?>" title="<?php echo $result['title_product'];?>"><span class="overlay zoom"></span><img src="<?php echo $pimg['acc_name'];?>" alt=""></a></li>
-						  <?php endif; ?>	
-						<?php endforeach; ?>
-					</ul>
-                </div>
-            
+			<div class="entry-slider">
+				<ul>
+					<?php foreach($result['images'] as $key => $pimg): ?>
+					  <?php if(!$key): ?>
+					  <li><a class="fancybox" data-fancybox-group="gallery-living-brown" href="<?php echo $pimg['acc_name'];?>" title="<?php echo $result['title_product'];?>"><span class="overlay zoom"></span><img src="<?php echo $pimg['acc_name'];?>" alt=""></a></li>	
+					  <?php else:  ?>
+					  <li style="display: none;"><a class="fancybox" data-fancybox-group="gallery-living-brown" href="<?php echo $pimg['acc_name'];?>" title="<?php echo $result['title_product'];?>"><span class="overlay zoom"></span><img src="<?php echo $pimg['acc_name'];?>" alt=""></a></li>
+					  <?php endif; ?>	
+					<?php endforeach; ?>
+				</ul>
+			</div>
             <!-- end 產品照片slider-->
-
+            
+			<!-- begin  media  (youtube) -->
+			<?php if($result['media']): ?>
+			<?php   foreach(explode(',',$result['media']) as $media ): ?>
+			<?php     if(preg_match('/https:\/\/www.youtube.com\/embed\/[\w\d]+/',$media,$match)): ?>
+			<div class="entry-video">
+              <iframe id='flowvideo' width="700" height="394" src="<?php echo $match[0];?>" frameborder="0" allowfullscreen></iframe>
+            </div>
+			<?php     endif; ?>	
+			<?php   endforeach; ?>
+			<?php endif; ?>	
+			<!-- end media-->
+            
+			
+			
 			<!-- begin 特色 -->
 			<?php if($result['design']): ?>
 			<div class="one-half">
@@ -220,6 +233,8 @@
 			</div>
 			<?php endif;?>
 			<!-- end 規格 -->
+			
+			
 			<div class="clear"></div>
 		  
 		  <?php endif ;?>	
